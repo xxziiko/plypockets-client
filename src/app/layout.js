@@ -1,20 +1,24 @@
-"use client";
-
-import StyledComponentsRegistry from "@/lib/registry";
-import GlobalStyles from "@/styles/GlobalStyle";
-import styled from "styled-components";
+'use client'
+import styled, { ThemeProvider } from 'styled-components'
+import StyledComponentsRegistry from '@/lib/registry'
+import GlobalStyles from '@/styles/GlobalStyle'
+import theme from '@/styles/theme'
 
 export default function RootLayout({ children }) {
   return (
-    <html>
-      <GlobalStyles />
-      <StyledComponentsRegistry>
-        <Layout suppressHydrationWarning={true}>{children}</Layout>
-      </StyledComponentsRegistry>
-    </html>
-  );
+    <StyledComponentsRegistry>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <html>
+          <Body suppressHydrationWarning={true}>{children}</Body>
+        </html>
+      </ThemeProvider>
+    </StyledComponentsRegistry>
+  )
 }
 
-const Layout = styled.body`
-  /* border: 1px solid red; */
-`;
+const Body = styled.body`
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+`

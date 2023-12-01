@@ -1,38 +1,28 @@
-import { DefaultTheme, keyframes } from "styled-components";
+import { DefaultTheme, keyframes } from 'styled-components'
 
 export const pageStyles = {
-  maxWidth: "752px",
-  minHeight: "664px",
-};
+  maxWidth: '752px',
+  minHeight: '664px',
+}
 
 export const colors = {
-  primary: "#2B7CB7",
-  secondary: "#34C5EF",
-  error: "#D54463",
-  white: "#fefefe",
-  gray: "#AFAFAF",
-  darkgray: "#6C6C6C",
-  black: "#000000",
-  lightblue: "#e3f1fb",
-  cornflowerblue: "#4DACF1",
-  lavenderpink: "#EFCCFF",
-  softAqua: "#ECF7FF",
-  mintCream: "#D3FFCC",
-  purpleheart: "#A94DF1",
-  olivedrab: "#549F31",
-  darkMatter: "#353535",
-  navy: "#21608D",
-};
+  subGreen: 'var(--sub_green, #00C496)',
+  red: 'var(--mainred, #F84A68)',
+  white: ' var(--main_white, var(--White, #FFF))',
+  grey: '#CCCCCC',
+  pink: '#FFB7B7',
+  brown: 'var(--bg_brown, #3C2929)',
+}
 
 export const fontSize = {
-  h1: "60px",
-};
+  h1: '60px',
+}
 
 export const shadow = {
-  default: "0px 2px 4px 0px rgba(0, 0, 0, 0.15)",
-  page: "0px 0px 8px 4px rgba(0, 0, 0, 0.05)",
-  input: "inset 0px 0px 4px 0px rgba(0, 0, 0, 0.15)",
-};
+  default: '0px 2px 4px 0px rgba(0, 0, 0, 0.15)',
+  page: '0px 0px 8px 4px rgba(0, 0, 0, 0.05)',
+  input: 'inset 0px 0px 4px 0px rgba(0, 0, 0, 0.15)',
+}
 
 export const animation = {
   fadeIn: keyframes`from { opacity: 0 } to { opacity: 1 }`,
@@ -40,7 +30,7 @@ export const animation = {
   bounceUp: keyframes`0% { transform: translateY(0) } 50% { transform: translateY(-20px) } 100% { transform: translateY(0) }`,
   // snowMotion
   // giftBoxMotionzx
-};
+}
 
 const theme = {
   pageStyles,
@@ -48,6 +38,6 @@ const theme = {
   fontSize,
   shadow,
   animation,
-};
+}
 
-export default theme;
+export default theme
