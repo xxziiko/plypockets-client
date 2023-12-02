@@ -21,3 +21,8 @@ export const flexDirection = css`
   display: flex;
   flex-direction: column;
 `
+
+export const flexStart = css`
+  display: flex;
+  align-items: flex-start;
+`

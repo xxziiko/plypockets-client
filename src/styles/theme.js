@@ -15,6 +15,7 @@ export const fontSize = {
   medium: '20px',
   large: '32px',
   h1: '40px',
+  h2: '36px',
 }
 
 export const fontWeight = {
