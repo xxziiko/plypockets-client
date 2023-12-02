@@ -1,0 +1,8 @@
+export { default as Snowflack } from '@/components/Snowflake'
+export { default as Footer } from '@/components/Footer'
+export { default as Typography } from '@/components/Typography'
+export { default as CircleButton } from '@/components/CircleButton'
+export { default as RoundInput } from '@/components/RoundInput'
+export { default as MainHeader } from '@/components/MainHeader'
+export { default as GiftBundle } from '@/components/GiftBundle'
+export { default as InputForm } from '@/components/InputForm'
