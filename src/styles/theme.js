@@ -1,9 +1,4 @@
-import { DefaultTheme, keyframes } from 'styled-components'
-
-export const pageStyles = {
-  maxWidth: '752px',
-  minHeight: '664px',
-}
+import { keyframes } from 'styled-components'
 
 export const colors = {
   subGreen: 'var(--sub_green, #00C496)',
@@ -12,10 +7,20 @@ export const colors = {
   grey: '#CCCCCC',
   pink: '#FFB7B7',
   brown: 'var(--bg_brown, #3C2929)',
+  letterPink: '#FFDDDD',
 }
 
 export const fontSize = {
-  h1: '60px',
+  small: '16px',
+  medium: '20px',
+  large: '32px',
+  h1: '40px',
+}
+
+export const fontWeight = {
+  small: 500,
+  medium: 600,
+  large: 700,
 }
 
 export const shadow = {
@@ -33,11 +38,11 @@ export const animation = {
 }
 
 const theme = {
-  pageStyles,
   colors,
-  fontSize,
   shadow,
   animation,
+  fontSize,
+  fontWeight,
 }
 
 export default theme
