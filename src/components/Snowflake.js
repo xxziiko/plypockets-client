@@ -1,12 +1,12 @@
+import Image from 'next/image'
 import styled, { keyframes, css } from 'styled-components'
-import { ReactComponent as SnowflackIcon } from '@/assets/snowflake.svg'
 
-export default function Snowflack(props) {
+export default function Snowflake(props) {
   const { animationDelay, width = 40, height = 38 } = props
 
   return (
     <ImageBox animationDelay={animationDelay}>
-      <SnowflackIcon width={width} height={height} />
+      <Image src={'/assets/Snowflake.svg'} width={width} height={height} />
     </ImageBox>
   )
 }
