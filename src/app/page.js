@@ -1,5 +1,5 @@
 'use client'
-import styled, { StyleSheetManager } from 'styled-components'
+import styled from 'styled-components'
 import { Footer, Typography } from '@/components'
 import { flexDirection } from '@/styles/common'
 
@@ -16,7 +16,7 @@ export default function Home() {
   //   return arr.map((el, i) => {
   //     animationDelay = `${(Math.random() * 3).toFixed(2)}s` // 0~16 사이에서 소수점 2번째 자리수까지의 랜덤숫자
 
-  //     return <Snowflack key={i} animationDelay={animationDelay} />
+  //     return <Snowflake key={i} animationDelay={animationDelay} />
   //   })
   // }
   return (

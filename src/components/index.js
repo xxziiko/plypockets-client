@@ -1,4 +1,4 @@
-export { default as Snowflack } from '@/components/Snowflake'
+export { default as Snowflake } from '@/components/Snowflake'
 export { default as Footer } from '@/components/Footer'
 export { default as Typography } from '@/components/Typography'
 export { default as CircleButton } from '@/components/CircleButton'
