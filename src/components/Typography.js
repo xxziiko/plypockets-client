@@ -9,12 +9,12 @@ export default function Typography(props) {
   )
 }
 
-const Text = styled.span`
+const Text = styled.text`
   font-size: ${(props) => props.size};
   font-style: normal;
   font-weight: ${(props) => props.weight};
   line-height: normal;
-  letter-spacing: ${(props) => props.spacing};
+  letter-spacing: ${(props) => props.spacing}px;
   color: ${(props) => props.color};
 
   .green-color {

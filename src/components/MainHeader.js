@@ -1,20 +1,83 @@
 'use client'
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import Typography from './Typography'
-import { flexStart } from '@/styles/common'
 import Image from 'next/image'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import styled from 'styled-components'
+import { useHeaderStore } from '@/stores/headers'
+import { flexStart } from '@/styles/common'
+import Typography from './Typography'
+import { useRouter } from 'next/navigation'
 
-export default function MainHeader(props) {
-  const { pageType, width = 48, height = 48 } = props
+export default function MainHeader() {
+  const {
+    isShowInputTools,
+    isShowTextButtons,
+    isShowGiftList,
+    setIsShowInputTools,
+    setIsCopyClipboard,
+    setIsTextButtons,
+  } = useHeaderStore()
+  const router = useRouter()
 
-  const switchImgUrl = (pageType) => {
-    switch (pageType) {
-      case 'goToBundle':
-        return '/assets/GoBackButtonIcon.svg'
-      default:
-        return '/assets/ShareButtonIcon.svg'
+  const renderIcons = () => {
+    if (isShowTextButtons) {
+      return (
+        <CopyToClipboard
+          text="copy 테스트입니당"
+          onCopy={() => setIsCopyClipboard(true)}
+        >
+          <IconButton as="button">
+            <Image
+              src={'/assets/ShareButtonIcon.svg'}
+              alt="header-icons"
+              width={48}
+              height={48}
+              onClick={() => handleAction()}
+            />
+          </IconButton>
+        </CopyToClipboard>
+      )
     }
+
+    if (isShowInputTools || isShowGiftList)
+      return (
+        <IconBox>
+          <IconButton as="button">
+            <Image
+              src={'/assets/GoBackButtonIcon.svg'}
+              alt="header-icons"
+              width={26}
+              height={22}
+              onClick={() => handleAction()}
+            />
+          </IconButton>
+          {isShowGiftList && (
+            <div>
+              <Typography
+                color={({ theme }) => theme.colors.strokeGrey}
+                size={({ theme }) => theme.fontSize.small}
+                weight={({ theme }) => theme.fontWeight.large}
+                spacing={-0.64}
+              >
+                전체보기
+              </Typography>
+            </div>
+          )}
+        </IconBox>
+      )
+  }
+
+  const handleAction = () => {
+    if (isShowInputTools && !isShowGiftList) {
+      setIsShowInputTools(false)
+
+      setIsTextButtons(true)
+      return
+    }
+    if (isShowGiftList) {
+      router.replace('/gift-list')
+      return
+    }
+    if (isShowTextButtons) setIsCopyClipboard(true)
   }
 
   return (
@@ -30,14 +93,7 @@ export default function MainHeader(props) {
         플리 보따리
       </Typography>
 
-      <IconBox>
-        <Image
-          src={switchImgUrl(pageType)}
-          alt="share-button"
-          width={width}
-          height={height}
-        />
-      </IconBox>
+      {renderIcons()}
     </Header>
   )
 }
@@ -50,7 +106,11 @@ const Header = styled.header`
   ${flexStart}
 `
 
-const IconBox = styled.div`
+const IconButton = styled.div`
+  padding: 0;
   cursor: pointer;
-  /* border: 1px solid red; */
+`
+
+const IconBox = styled.div`
+  text-align: right;
 `
