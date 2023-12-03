@@ -6,7 +6,12 @@ export default function Snowflake(props) {
 
   return (
     <ImageBox animationDelay={animationDelay}>
-      <Image src={'/assets/Snowflake.svg'} width={width} height={height} />
+      <Image
+        src={'/assets/Snowflake.svg'}
+        width={width}
+        height={height}
+        alt="snow-flake"
+      />
     </ImageBox>
   )
 }
