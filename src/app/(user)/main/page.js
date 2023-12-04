@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
-
 import { Typography, InputForm, TextButton } from '@/components'
 import { flexDirection } from '@/styles/common'
 import { useHeaderStore } from '@/stores/headers'
@@ -14,6 +14,7 @@ export default function Main() {
     setIsTextButtons,
     setIsShowGiftList,
   } = useHeaderStore()
+  const router = useRouter()
 
   const goToMyPack = () => {
     setIsShowInputTools(true)
@@ -21,7 +22,9 @@ export default function Main() {
     setIsShowGiftList(false)
   }
 
-  const sendGiftToUser = () => {}
+  const goToPlaylist = () => {
+    router.push('/playlist')
+  }
 
   useEffect(() => {
     setIsTextButtons(true)
@@ -32,15 +35,24 @@ export default function Main() {
       {isShowTextButtons && (
         <ButtonBox>
           <TextButton
-            color={({ theme }) => theme.colors.white}
-            colorType="grey"
+            color="#fff"
+            size={({ theme }) => theme.fontSize.medium}
+            weight={({ theme }) => theme.fontWeight.medium}
+            spacing={-0.8}
             buttonCommand="내 보따리 보러가기"
             buttonAction={goToMyPack}
+            height="24"
+            width="35"
           />
           <TextButton
-            color={({ theme }) => theme.colors.red}
+            color="#F84A68"
+            size={({ theme }) => theme.fontSize.medium}
+            weight={({ theme }) => theme.fontWeight.medium}
+            spacing={-0.8}
             buttonCommand="샌디에게 선물하러 가기"
-            colorType="red"
+            buttonAction={goToPlaylist}
+            height="24"
+            width="35"
           />
         </ButtonBox>
       )}
