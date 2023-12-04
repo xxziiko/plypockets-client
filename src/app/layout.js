@@ -32,6 +32,5 @@ const Body = styled.body`
   animation: ${({ theme }) => css`
     ${theme.animation.slideInFromBottom} 1s
   `};
-
   ${flexAlign};
 `

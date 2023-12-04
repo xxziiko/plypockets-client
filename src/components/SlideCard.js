@@ -1,21 +1,18 @@
-'use client'
 import styled from 'styled-components'
 import { flexCenter, flexSpaceBetween } from '@/styles/common'
-import Image from 'next/image'
+import ProgressIcon from '@/icons/ProgressIcon'
 
 export default function SlideCard(props) {
   const { list } = props
   return (
     <Card>
       <Content>{list.nickname}</Content>
-      <ImgBox>
-        <Image
-          src="/assets/TreeIcon.svg"
-          width={15}
-          height={39}
-          alt="tree-icon"
-        />
-      </ImgBox>
+
+      <ProgressIcon
+        firstStep="#00916F"
+        secondStep="#00916F"
+        lastStep="#F84A68"
+      />
     </Card>
   )
 }
@@ -35,11 +32,4 @@ const Content = styled.div`
   gap: 10px;
   height: 100%;
   ${flexCenter}
-`
-
-const ImgBox = styled.div`
-  display: fixed;
-  bottom: 0;
-  width: 15px;
-  height: 39px;
 `
