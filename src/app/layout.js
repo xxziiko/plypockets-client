@@ -34,5 +34,4 @@ const Body = styled.body`
   `};
 
   ${flexAlign};
-  border: 1px solid red;
 `

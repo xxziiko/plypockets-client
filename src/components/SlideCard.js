@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import { flexCenter, flexSpaceBetween } from '@/styles/common'
 import Image from 'next/image'
 
-export default function SlideCard() {
+export default function SlideCard(props) {
+  const { list } = props
   return (
     <Card>
-      <Content>dddd</Content>
+      <Content>{list.nickname}</Content>
       <ImgBox>
         <Image
           src="/assets/TreeIcon.svg"
@@ -22,10 +23,10 @@ export default function SlideCard() {
 const Card = styled.div`
   flex-direction: column;
   width: 310px;
-  height: 90%;
+  height: 100%;
   padding: 28px 18px 16px 22px;
   border-radius: 4px;
-  background: ${({ theme }) => theme.colors.pink};
+  background-color: ${({ theme }) => theme.colors.pink};
 
   ${flexSpaceBetween}
 `
