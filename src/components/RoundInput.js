@@ -1,16 +1,12 @@
-import { useState } from 'react'
 import styled from 'styled-components'
+import { useHeaderStore } from '@/stores/headers'
 
 export default function RoundInput(props) {
-  const [open, setOpen] = useState(false)
   const { width = '229px', placeholder, isReadOnly = false } = props
-
-  const openModal = () => {
-    if (isReadOnly) setOpen(true)
-  }
+  const { setModalOpen } = useHeaderStore()
 
   return (
-    <InputBox width={width} onClick={() => openModal()}>
+    <InputBox width={width} onClick={() => setModalOpen(true)}>
       <Input placeholder={placeholder} readOnly={isReadOnly} />
     </InputBox>
   )
@@ -29,7 +25,7 @@ const Input = styled.input`
   width: 100%;
   height: 40px;
   flex-shrink: 0;
-  cursor: text;
+  cursor: ${(props) => (props.readOnly ? 'pointer' : 'text')};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey};

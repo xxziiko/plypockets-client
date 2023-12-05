@@ -1,33 +1,27 @@
 'use client'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { AlbumImage, RoundInput, TextButton, Typography } from '@/components'
 import { flexAlign, flexDirection, flexSpaceBetween } from '@/styles/common'
+import { useEffect } from 'react'
+import { getTodayHot100 } from '@/api/services'
 
 export default function PlaylistPage() {
-  const goToWriteLetter = () => {}
+  const [data, setData] = useState([])
+  const [selectedSong, setSelectedSong] = useState({})
+  const goToWriteLetter = (title) => {
+    const selectedItem = data.filter((list) => list.title === title)
+    setSelectedSong(...selectedItem)
 
-  const MOCK = [
-    {
-      id: 0,
-      artistName: 'Jack Harlow',
-      title: 'Lovin On Me',
-      albumName: 'Lovin On Me',
-      imageUrl:
-        'https://i.scdn.co/image/ab67616d0000b273fcf4adae77baba5d0169e8e8',
-      previewUrl:
-        'https://p.scdn.co/mp3-preview/eeeb6151d0049367b3ad3db0389e9e3b116c0774?cid=9aa067b28e444056ab123c76058ca7ab',
-    },
-    {
-      id: 1,
-      artistName: 'Tate McRae',
-      title: 'greedy',
-      albumName: 'greedy',
-      imageUrl:
-        'https://i.scdn.co/image/ab67616d0000b27322fd802bc61db666c7c81aa8',
-      previewUrl:
-        'https://p.scdn.co/mp3-preview/ca7bdcb691fb64a5af8a3253b89356390664fcf1?cid=9aa067b28e444056ab123c76058ca7ab',
-    },
-  ]
+    console.log('song', selectedSong)
+  }
+
+  useEffect(() => {
+    getTodayHot100().then((data) => {
+      console.log(data)
+      setData(data)
+    })
+  }, [])
 
   return (
     <Box>
@@ -62,8 +56,11 @@ export default function PlaylistPage() {
           Top 50 인기차트
         </Typography>
         <ListBox>
-          {MOCK.map((list) => (
-            <div key={list.id}>
+          {data.map((list) => (
+            <AlbumBox
+              key={list.id}
+              onClick={() => goToWriteLetter(list?.title)}
+            >
               <AlbumImage imgUrl={list.imageUrl} width={144} height={144} />
               <AlbumInfo>
                 <Typography
@@ -83,7 +80,7 @@ export default function PlaylistPage() {
                   {list.artistName}
                 </Typography>
               </AlbumInfo>
-            </div>
+            </AlbumBox>
           ))}
         </ListBox>
       </Section>
@@ -104,6 +101,7 @@ const ButtonBox = styled.div`
 
 const Section = styled.section`
   padding-top: 18px;
+  height: 100%;
 `
 
 const ListBox = styled.div`
@@ -113,7 +111,11 @@ const ListBox = styled.div`
 
   ${flexSpaceBetween}
 `
+const AlbumBox = styled.div`
+  cursor: pointer;
+`
 
 const AlbumInfo = styled.div`
+  width: 144px;
   ${flexDirection}
 `

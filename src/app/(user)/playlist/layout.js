@@ -1,10 +1,13 @@
 'use client'
 import styled, { css } from 'styled-components'
-import { flexDirection } from '@/styles/common'
-import { PlaylistHeader } from '@/components'
 import { useRouter } from 'next/navigation'
+import { useHeaderStore } from '@/stores/headers'
+import { flexDirection } from '@/styles/common'
+import { PlaylistHeader, SearchModal } from '@/components'
 
 export default function PlaylistLayout({ children }) {
+  const { modalOpen } = useHeaderStore()
+
   const router = useRouter()
   const goToBack = () => {
     router.replace('/main')
@@ -18,6 +21,7 @@ export default function PlaylistLayout({ children }) {
         buttonAction={goToBack}
       />
       <Main>{children}</Main>
+      {modalOpen && <SearchModal />}
     </Box>
   )
 }

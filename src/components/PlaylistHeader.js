@@ -52,7 +52,7 @@ export default function PlaylistHeader(props) {
 
 const Box = styled.div`
   width: 100%;
-  min-height: 110px;
+  max-height: 100%;
   padding: 48px 32px 12px;
   background-color: ${(props) => props.color};
 
