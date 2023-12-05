@@ -6,6 +6,7 @@ import { useHeaderStore } from '@/stores/headers'
 import { flexStart } from '@/styles/common'
 import Typography from './Typography'
 import { useRouter } from 'next/navigation'
+import GoBackIcon from '@/icons/GoBackIcon'
 
 export default function MainHeader() {
   const {
@@ -40,16 +41,8 @@ export default function MainHeader() {
 
     if (isShowInputTools || isShowGiftList)
       return (
-        <IconBox>
-          <IconButton as="button">
-            <Image
-              src={'/assets/GoBackButtonIcon.svg'}
-              alt="header-icons"
-              width={26}
-              height={22}
-              onClick={() => handleAction()}
-            />
-          </IconButton>
+        <IconBox as="button" onClick={() => handleAction()}>
+          <GoBackIcon color="#ECECEC" />
           {isShowGiftList && (
             <div>
               <Typography
@@ -113,4 +106,5 @@ const IconButton = styled.div`
 
 const IconBox = styled.div`
   text-align: right;
+  cursor: pointer;
 `

@@ -2,8 +2,10 @@ import { keyframes } from 'styled-components'
 
 export const colors = {
   subGreen: 'var(--sub_green, #00C496)',
+  green: '#00916F',
   red: 'var(--mainred, #F84A68)',
   white: ' var(--main_white, var(--White, #FFF))',
+  black: '#111',
   grey: '#CCCCCC',
   fieldGrey: 'var(--field_grey, #F9F9F9)',
   strokeGrey: 'var(--stroke_grey, #ECECEC)',
@@ -14,6 +16,7 @@ export const colors = {
 }
 
 export const fontSize = {
+  xsmall: '12px',
   small: '16px',
   medium: '20px',
   large: '32px',

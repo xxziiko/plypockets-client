@@ -1,11 +1,9 @@
-'use client'
-
+import { useEffect } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import Image from 'next/image'
-import Typography from './Typography'
 import { flexCenter } from '@/styles/common'
 import { useHeaderStore } from '@/stores/headers'
-import { useEffect } from 'react'
+import Typography from './Typography'
 
 export default function SnackBar() {
   const { isCopyClipboard, setIsCopyClipboard } = useHeaderStore()
@@ -25,6 +23,7 @@ export default function SnackBar() {
           <ImgBox>
             <Image src={'/assets/CheckIcon.svg'} width={24} height={24} />
           </ImgBox>
+
           <Typography
             size={({ theme }) => theme.fontSize.medium}
             weight={({ theme }) => theme.fontWeight.medium}

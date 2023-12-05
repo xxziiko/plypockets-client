@@ -75,10 +75,11 @@ export default function Home() {
 
 const Background = styled.div`
   justify-content: space-between;
+  width: 100%;
   height: 100%;
   background-image: url('/img/background.jpg');
-  background-size: 100%;
-
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
   ${flexDirection}
 `
 
