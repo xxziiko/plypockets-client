@@ -1,61 +1,63 @@
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
+import { RoundBox, Typography } from '@/components'
 import { useHeaderStore } from '@/stores/headers'
-import { flexStart } from '@/styles/common'
+import { flexAlign, flexDirection, flexSpaceBetween } from '@/styles/common'
 
 export default function InputForm(props) {
-  const { inputValue, onChange } = props
+  const { inputValue, onChange, label, placeholder, errorMessage } = props
   const { setIsShowGiftList, setIsShowInputTools, setIsTextButtons } =
     useHeaderStore()
   const router = useRouter()
+
+  console.log('errorMessage', errorMessage)
 
   const handleButton = () => {
     setIsShowGiftList(true)
     setIsShowInputTools(false)
     setIsTextButtons(false)
-    router.push('/gift-list')
+    router.push('/gift-list', undefined, { shallow: true })
   }
 
   return (
-    <InputBox>
-      <Input
-        placeholder="쉿! 들키지 않게 조심"
-        value={inputValue}
-        onChange={() => onChange()}
-      />
-      <Button onClick={() => handleButton()}>확인</Button>
-    </InputBox>
+    <InputLayout>
+      <div>
+        <Typography
+          size={({ theme }) => theme.fontSize.small}
+          weight={({ theme }) => theme.fontWeight.medium}
+          spacing={-0.64}
+        >
+          {label}
+        </Typography>
+        <Typography color={({ theme }) => theme.colors.red}> *</Typography>
+      </div>
+      <InputBox>
+        <RoundBox
+          placeholder={placeholder}
+          value={inputValue}
+          name={label}
+          onChange={onChange}
+          errorMessage={errorMessage}
+        />
+        <Typography
+          size={({ theme }) => theme.fontSize.xsmall}
+          weight={({ theme }) => theme.fontWeight.small}
+          color="#000"
+          spacing={-0.64}
+        >
+          {errorMessage?.text}
+        </Typography>
+      </InputBox>
+    </InputLayout>
   )
 }
 
+const InputLayout = styled.div`
+  width: 100%;
+
+  ${flexSpaceBetween}
+`
 const InputBox = styled.div`
-  gap: 9px;
-  ${flexStart}
-`
-
-const Input = styled.input`
-  flex-shrink: 0;
-  width: 222px;
-  height: 40px;
-  padding: 10px 22px;
-  border: ${({ theme }) => theme.border};
-  background-color: ${({ theme }) => theme.colors.fieldGrey};
-  cursor: text;
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.grey};
-    font-size: ${({ theme }) => theme.fontSize.small};
-    font-weight: ${({ theme }) => theme.fontWeight.medium};
-  }
-`
-
-const Button = styled.button`
-  width: 71px;
-  height: 40px;
-  flex-shrink: 0;
-  background-color: ${({ theme }) => theme.colors.subGreen};
-  color: ${({ theme }) => theme.colors.white};
-  font-size: ${({ theme }) => theme.fontSize.small};
-  font-weight: ${({ theme }) => theme.fontWeight.medium};
-  letter-spacing: -0.64px;
+  text-align: right;
+  ${flexDirection}
 `

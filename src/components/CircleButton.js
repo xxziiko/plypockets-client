@@ -14,7 +14,7 @@ export default function CircleButton(props) {
       backgroundColor={
         buttonDisable ? ({ theme }) => theme.colors.grey : backgroundColor
       }
-      onClick={() => router.push(nextUrl)}
+      onClick={() => router.push(nextUrl, undefined, { shallow: true })}
       disabled={buttonDisable}
     >
       <Typography

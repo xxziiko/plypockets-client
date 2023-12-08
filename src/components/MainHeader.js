@@ -1,77 +1,14 @@
 'use client'
-import Image from 'next/image'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 import styled from 'styled-components'
-import { useHeaderStore } from '@/stores/headers'
 import { flexStart } from '@/styles/common'
 import Typography from './Typography'
 import { useRouter } from 'next/navigation'
 import GoBackIcon from '@/icons/GoBackIcon'
 
 export default function MainHeader() {
-  const {
-    isShowInputTools,
-    isShowTextButtons,
-    isShowGiftList,
-    setIsShowInputTools,
-    setIsCopyClipboard,
-    setIsTextButtons,
-  } = useHeaderStore()
   const router = useRouter()
 
-  const renderIcons = () => {
-    if (isShowTextButtons) {
-      return (
-        <CopyToClipboard
-          text="copy 테스트입니당"
-          onCopy={() => setIsCopyClipboard(true)}
-        >
-          <IconButton as="button">
-            <Image
-              src={'/assets/ShareButtonIcon.svg'}
-              alt="header-icons"
-              width={48}
-              height={48}
-              onClick={() => handleAction()}
-            />
-          </IconButton>
-        </CopyToClipboard>
-      )
-    }
-
-    if (isShowInputTools || isShowGiftList)
-      return (
-        <IconBox as="button" onClick={() => handleAction()}>
-          <GoBackIcon color="#ECECEC" />
-          {isShowGiftList && (
-            <div>
-              <Typography
-                color={({ theme }) => theme.colors.strokeGrey}
-                size={({ theme }) => theme.fontSize.small}
-                weight={({ theme }) => theme.fontWeight.large}
-                spacing={-0.64}
-              >
-                전체보기
-              </Typography>
-            </div>
-          )}
-        </IconBox>
-      )
-  }
-
-  const handleAction = () => {
-    if (isShowInputTools && !isShowGiftList) {
-      setIsShowInputTools(false)
-
-      setIsTextButtons(true)
-      return
-    }
-    if (isShowGiftList) {
-      router.replace('/gift-list')
-      return
-    }
-    if (isShowTextButtons) setIsCopyClipboard(true)
-  }
+  const handleAction = () => {}
 
   return (
     <Header>
@@ -86,7 +23,9 @@ export default function MainHeader() {
         플리 보따리
       </Typography>
 
-      {renderIcons()}
+      <IconBox as="button" onClick={() => handleAction()}>
+        <GoBackIcon color="#ECECEC" />
+      </IconBox>
     </Header>
   )
 }
@@ -94,7 +33,7 @@ export default function MainHeader() {
 const Header = styled.header`
   justify-content: space-between;
   width: 100%;
-  padding: 32px;
+  padding: 32px 32px 40px;
 
   ${flexStart}
 `

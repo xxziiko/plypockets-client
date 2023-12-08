@@ -1,6 +1,6 @@
 'use client'
 import styled, { css } from 'styled-components'
-import { Footer, Typography } from '@/components'
+import { RoundButtonFooter, Typography } from '@/components'
 import { flexStart } from '@/styles/common'
 
 export default function LoginLayout({ children }) {
@@ -27,7 +27,7 @@ export default function LoginLayout({ children }) {
 
       <Main>{children}</Main>
 
-      <Footer
+      <RoundButtonFooter
         nextUrl={'/main'}
         styles={styles}
         buttonCommand="네"
@@ -39,7 +39,7 @@ export default function LoginLayout({ children }) {
 
 const Header = styled.header`
   width: 100%;
-  padding: 48px 32px;
+  padding: 27px 32px;
   gap: 105px;
 
   ${flexStart}

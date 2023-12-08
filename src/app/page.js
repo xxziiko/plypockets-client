@@ -1,24 +1,11 @@
 'use client'
+import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
-import { Footer, Typography } from '@/components'
+import { DefaultButton, RoundBox, Typography } from '@/components'
 import { flexDirection } from '@/styles/common'
 
 export default function Home() {
-  const styles = {
-    color: ({ theme }) => theme.colors.white,
-    buttonBackgroundColor: ({ theme }) => theme.colors.red,
-  }
-
-  // const makeSnowFlakes = () => {
-  //   let animationDelay = '0s' // 기본 값은 0초이다.
-  //   const arr = Array.from('Christmas') // length가 15인 array가 생긴다.
-
-  //   return arr.map((el, i) => {
-  //     animationDelay = `${(Math.random() * 3).toFixed(2)}s` // 0~16 사이에서 소수점 2번째 자리수까지의 랜덤숫자
-
-  //     return <Snowflake key={i} animationDelay={animationDelay} />
-  //   })
-  // }
+  const router = useRouter()
   return (
     <Background>
       <Main>
@@ -36,39 +23,44 @@ export default function Home() {
             </Typography>
             로
           </Typography>
-        </section>
 
-        <section>
           <DescriptionBox>
             <Typography
-              size={({ theme }) => theme.fontSize.medium}
-              spacing={0.8}
+              size={({ theme }) => theme.fontSize.small}
+              spacing={-0.64}
             >
-              아주 빠르게 로그인하고 <br />
-              <Typography weight={({ theme }) => theme.fontWeight.large}>
-                친구들에게 음악을 선물 받으세요
-              </Typography>
+              아주 빠르게 로그인하고 음악을 선물해요
             </Typography>
 
             <Typography
-              size={({ theme }) => theme.fontSize.medium}
-              spacing={0.8}
+              size={({ theme }) => theme.fontSize.small}
+              weight={({ theme }) => theme.fontWeight.large}
+              spacing={-0.64}
             >
-              아주 빠르게 로그인하고 <br />
-              <Typography weight={({ theme }) => theme.fontWeight.large}>
-                친구들에게 편지를 선물 받으세요
-              </Typography>
+              친구들에게 편지를 선물 받으세요
             </Typography>
           </DescriptionBox>
         </section>
-      </Main>
 
-      <Footer
-        nextUrl="/login"
-        text="내 플리 보따리 만들러"
-        buttonCommand="가기"
-        styles={styles}
-      />
+        <Footer>
+          <RoundBox
+            as="button"
+            width="191px"
+            buttonCommand="내 보따리 방 보기"
+            IconColor="#00C496"
+            onClick={() => router.push('/login', undefined, { shallow: true })}
+          />
+          <Typography size="16px" weight={600} spacing={-0.64}>
+            아직 플리보따리가 없으시다면 새롭게 만들어보세요!
+          </Typography>
+          <DefaultButton
+            command="내 플리 보따리 만들기"
+            color={({ theme }) => theme.colors.white}
+            backgroundColor={({ theme }) => theme.colors.red}
+            onClick={() => router.push('/login', undefined, { shallow: true })}
+          />
+        </Footer>
+      </Main>
     </Background>
   )
 }
@@ -85,15 +77,23 @@ const Background = styled.div`
 
 const Main = styled.main`
   width: 100%;
-  padding: 58px 32px;
+  padding: 48px 32px 0;
   color: ${({ theme }) => theme.colors.white};
-  gap: 57px;
 
   ${flexDirection};
 `
 
 const DescriptionBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  padding-top: 32px;
+  gap: 8px;
+  ${flexDirection}
+`
+
+const Footer = styled.footer`
+  position: fixed;
+  align-items: center;
+  bottom: 0;
+  gap: 16px;
+  padding-bottom: 96px;
+  ${flexDirection}
 `

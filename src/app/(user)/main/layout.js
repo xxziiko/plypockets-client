@@ -1,5 +1,5 @@
 'use client'
-import { MainHeader, SnackBar, GiftBundle } from '@/components'
+import { MainHeader, ToastPopUp, GiftBundle } from '@/components'
 import styled, { css } from 'styled-components'
 import { flexDirection } from '@/styles/common'
 
@@ -9,7 +9,7 @@ export default function MainLayout({ children }) {
       <MainHeader />
       <Main>{children}</Main>
       <GiftBundle />
-      <SnackBar />
+      <ToastPopUp />
     </Box>
   )
 }
@@ -31,5 +31,5 @@ const Main = styled.main`
   `};
   width: 100%;
   height: 100%;
-  padding: 10px 32px 0;
+  padding: 0 32px;
 `

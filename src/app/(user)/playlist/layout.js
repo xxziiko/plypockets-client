@@ -10,7 +10,7 @@ export default function PlaylistLayout({ children }) {
 
   const router = useRouter()
   const goToBack = () => {
-    router.replace('/main')
+    router.push('/main', undefined, { shallow: true })
   }
 
   return (
