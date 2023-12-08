@@ -1,13 +1,11 @@
+import styled from 'styled-components'
 import {
   flexAlign,
   flexCenter,
   flexDirection,
   flexSpaceBetween,
 } from '@/styles/common'
-import styled from 'styled-components'
-import RoundInput from './RoundInput'
-import AlbumImage from './AlbumImage'
-import Typography from './Typography'
+import { RoundBox, AlbumImage, Typography } from '@/components'
 import { useHeaderStore } from '@/stores/headers'
 
 export default function SearchModal() {
@@ -41,7 +39,7 @@ export default function SearchModal() {
         <WhiteBar />
       </Header>
       <InputBox>
-        <RoundInput width="270px" placeholder="원하는 노래를 검색해보세요" />
+        <RoundBox width="270px" placeholder="원하는 노래를 검색해보세요" />
         <Button as="button" onClick={() => setModalOpen(false)}>
           닫기
         </Button>

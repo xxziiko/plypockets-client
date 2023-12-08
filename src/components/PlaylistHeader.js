@@ -17,7 +17,7 @@ export default function PlaylistHeader(props) {
         <Title>
           <Typography
             color={({ theme }) => theme.colors.black}
-            size={({ theme }) => theme.fontSize.large}
+            size={({ theme }) => theme.fontSize.h2}
             weight={({ theme }) => theme.fontWeight.large}
             spacing={-1.28}
           >
@@ -53,14 +53,14 @@ export default function PlaylistHeader(props) {
 const Box = styled.div`
   width: 100%;
   max-height: 100%;
-  padding: 48px 32px 12px;
+  padding: 32px;
   background-color: ${(props) => props.color};
 
   ${flexSpaceBetween}
 `
 
 const TitleBox = styled.div`
-  gap: 10px;
+  gap: 25px;
 
   ${flexDirection}
 `

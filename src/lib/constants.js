@@ -1,14 +1,49 @@
 export const ERROR_MESSAGE = {
   ID: {
-    // success: '비밀번호 요건이 충족되었어요:)',
-    invalid: '*한글, 영어로 된 3 ~ 16자 닉네임을 설정해주세요.',
+    default: {
+      message: '한글 혹은 영어로 된 3 ~ 8자 닉네임을 설정해주세요.',
+      color: '#595959',
+    },
+    success: {
+      message: '멋진 닉네임이네요!',
+      color: ({ theme }) => theme.colors.green,
+    },
+    invalid: {
+      message: '한글 혹은 영어로 된 3 ~ 16자 닉네임을 설정해주세요.',
+      color: ({ theme }) => theme.colors.red,
+    },
+    duplicated: {
+      message: '이미 존재하는 닉네임이예요.',
+      color: ({ theme }) => theme.colors.red,
+    },
   },
   PW: {
-    success: '비밀번호 요건이 충족되었어요:)',
-    invalid: '숫자, 영어로 8자 이상으로 입력해주세요',
+    default: {
+      text: '숫자, 영어로 된 8자 이상의 비밀번호를 입력해주세요.',
+      color: '#595959',
+    },
+    success: {
+      text: '안전한 비밀번호예요.',
+      color: ({ theme }) => theme.colors.green,
+    },
+    invalid: {
+      text: '숫자, 영어로 된 8자 이상의 비밀번호를 입력해주세요.',
+      color: ({ theme }) => theme.colors.red,
+    },
   },
 
-  PW_CONFORM: {
-    invalid: '비밀번호가 맞지 않아요. 다시 시도해보세요!',
+  EMAIL: {
+    default: {
+      text: '비밀번호 유실시 찾을 수 있는 이메일을 입력해주세요.',
+      color: '#595959',
+    },
+    success: {
+      text: '올바른 이메일 형식이예요.',
+      color: ({ theme }) => theme.colors.green,
+    },
+    invalid: {
+      text: '이메일 형식이 올바르지 않아요.',
+      color: ({ theme }) => theme.colors.red,
+    },
   },
 }

@@ -14,6 +14,7 @@ export default function AlbumImage(props) {
 const ImgBox = styled.div`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
+  z-index: 999;
 `
 const Img = styled(Image)`
   border-radius: 9.576px;

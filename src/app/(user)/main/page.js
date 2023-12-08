@@ -1,86 +1,65 @@
 'use client'
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
-import { Typography, InputForm, TextButton } from '@/components'
-import { flexDirection } from '@/styles/common'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { flexAlign, flexCenter } from '@/styles/common'
+import { Typography } from '@/components'
 import { useHeaderStore } from '@/stores/headers'
+import ShareIcon from '@/icons/ShareIcon'
 
 export default function Main() {
-  const {
-    isShowInputTools,
-    isShowTextButtons,
-    setIsShowInputTools,
-    setIsTextButtons,
-    setIsShowGiftList,
-  } = useHeaderStore()
-  const router = useRouter()
-
-  const goToMyPack = () => {
-    setIsShowInputTools(true)
-    setIsTextButtons(false)
-    setIsShowGiftList(false)
-  }
-
-  const goToPlaylist = () => {
-    router.push('/playlist')
-  }
-
-  useEffect(() => {
-    setIsTextButtons(true)
-  }, [])
-
+  const { setIsCopyClipboard } = useHeaderStore()
   return (
     <Box>
-      {isShowTextButtons && (
-        <ButtonBox>
-          <TextButton
-            color="#fff"
-            size={({ theme }) => theme.fontSize.medium}
-            weight={({ theme }) => theme.fontWeight.medium}
-            spacing={-0.8}
-            buttonCommand="내 보따리 보러가기"
-            buttonAction={goToMyPack}
-            height="24"
-            width="35"
-          />
-          <TextButton
-            color="#F84A68"
-            size={({ theme }) => theme.fontSize.medium}
-            weight={({ theme }) => theme.fontWeight.medium}
-            spacing={-0.8}
-            buttonCommand="샌디에게 선물하러 가기"
-            buttonAction={goToPlaylist}
-            height="24"
-            width="35"
-          />
-        </ButtonBox>
-      )}
+      <TextBox>
+        <Typography
+          size={({ theme }) => theme.fontSize.small}
+          weight={600}
+          spcing={-0.64}
+          color={({ theme }) => theme.colors.white}
+        >
+          플리 보따리 방에 담긴 선물
+        </Typography>
+        <Typography
+          size={({ theme }) => theme.fontSize.large}
+          weight={600}
+          spcing={-0.64}
+          color={({ theme }) => theme.colors.white}
+        >
+          {}개
+        </Typography>
+      </TextBox>
 
-      {isShowInputTools && (
-        <>
-          <Typography
-            size={({ theme }) => theme.fontSize.medium}
-            weight={({ theme }) => theme.fontWeight.medium}
-            color={({ theme }) => theme.colors.white}
-            spacing={-0.8}
-          >
-            샌디 님이신가요?
-            <br /> 비밀번호를 입력하고 확인해보세요
-          </Typography>
-
-          <InputForm />
-        </>
-      )}
+      <CopyToClipboard
+        text="copy 테스트입니당"
+        onCopy={() => setIsCopyClipboard(true)}
+      >
+        <ShareButton>
+          <p>친구에게 링크 공유</p>
+          <ShareIcon />
+        </ShareButton>
+      </CopyToClipboard>
     </Box>
   )
 }
 
 const Box = styled.div`
-  gap: 54px;
-  ${flexDirection}
+  flex-direction: column;
+  gap: 8px;
+  ${flexCenter}
 `
-const ButtonBox = styled.div`
-  gap: 11px;
-  ${flexDirection}
+const TextBox = styled.div`
+  display: flex;
+  gap: 8px;
+  ${flexAlign}
+`
+const ShareButton = styled.button`
+  gap: 8px;
+  width: 186px;
+  height: 40px;
+  border-radius: 64px;
+  background: #fff;
+  font-weight: 600;
+  letter-spacing: -0.64px;
+
+  ${flexCenter}
 `

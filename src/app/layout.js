@@ -33,4 +33,6 @@ const Body = styled.body`
     ${theme.animation.slideInFromBottom} 1s
   `};
   ${flexAlign};
+
+  border: 1px solid red;
 `

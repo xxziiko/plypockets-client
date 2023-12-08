@@ -2,9 +2,9 @@
 import { useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { useButtonStore } from '@/stores/buttons'
-import { RoundInput, Typography } from '@/components'
-import { flexSpaceBetween } from '@/styles/common'
+import { InputForm } from '@/components'
 import { useState } from 'react'
+import { ERROR_MESSAGE } from '@/lib/constants'
 
 export default function Login() {
   const [userInfo, setUserInfo] = useState({
@@ -13,6 +13,8 @@ export default function Login() {
   })
   const { setButtonDisable } = useButtonStore()
 
+  console.log('ERROR_MESSAGE.ID.default', ERROR_MESSAGE.ID.default)
+
   useEffect(() => {
     // setButtonDisable(true)
   }, [])
@@ -20,27 +22,13 @@ export default function Login() {
   return (
     <>
       <Section>
-        <InputLayout>
-          <Typography
-            size={({ theme }) => theme.fontSize.small}
-            weight={({ theme }) => theme.fontWeight.medium}
-            spacing={-0.64}
-          >
-            닉네임
-          </Typography>
-          <RoundInput placeholder="나의 닉네임은?" />
-        </InputLayout>
+        <InputForm
+          label="닉네임"
+          placeholder="나의 닉네임은?"
+          errorMessage={ERROR_MESSAGE.ID.default}
+        />
 
-        <InputLayout>
-          <Typography
-            size={({ theme }) => theme.fontSize.small}
-            weight={({ theme }) => theme.fontWeight.medium}
-            spacing={-0.64}
-          >
-            비밀번호
-          </Typography>
-          <RoundInput placeholder="쉿! 들키지 않게 조심" />
-        </InputLayout>
+        <InputForm label="비밀번호" placeholder="쉿! 들키지 않게 조심" />
       </Section>
     </>
   )
@@ -50,10 +38,4 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   gap: 16px;
-`
-
-const InputLayout = styled.div`
-  width: 100%;
-
-  ${flexSpaceBetween}
 `

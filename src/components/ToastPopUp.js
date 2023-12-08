@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import styled, { css, keyframes } from 'styled-components'
-import Image from 'next/image'
 import { flexCenter } from '@/styles/common'
 import { useHeaderStore } from '@/stores/headers'
-import Typography from './Typography'
+import CheckRoundIcon from '@/icons/CheckIcon'
+import { Typography } from '@/components'
 
-export default function SnackBar() {
+export default function ToastPopUp() {
   const { isCopyClipboard, setIsCopyClipboard } = useHeaderStore()
 
   useEffect(() => {
@@ -21,14 +21,14 @@ export default function SnackBar() {
       {isCopyClipboard && (
         <Card>
           <ImgBox>
-            <Image src={'/assets/CheckIcon.svg'} width={24} height={24} />
+            <CheckRoundIcon />
           </ImgBox>
 
           <Typography
             size={({ theme }) => theme.fontSize.medium}
             weight={({ theme }) => theme.fontWeight.medium}
             spacing={-0.8}
-            color={({ theme }) => theme.colors.highlight}
+            color={({ theme }) => theme.colors.green}
           >
             링크 복사 완료
           </Typography>
@@ -70,13 +70,11 @@ const Card = styled.div`
   border-radius: 13px;
   background: ${({ theme }) => theme.colors.white};
   backdrop-filter: blur(40px);
-  animation: ${css`
-    ${slideInFromBottom} 4s
-  `};
+  animation: ${slideInFromBottom} 4s;
   ${flexCenter};
 `
 
 const ImgBox = styled.div`
-  width: 24px;
-  height: 24px;
+  /* width: 24px; */
+  /* height: 24px; */
 `

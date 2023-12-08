@@ -9,6 +9,7 @@ export const colors = {
   grey: '#CCCCCC',
   fieldGrey: 'var(--field_grey, #F9F9F9)',
   strokeGrey: 'var(--stroke_grey, #ECECEC)',
+  subGrey: '#595959',
   pink: '#FFB7B7',
   brown: 'var(--bg_brown, #3C2929)',
   letterPink: '#FFDDDD',
