@@ -1,27 +1,48 @@
 'use client'
 import styled from 'styled-components'
-import { flexStart } from '@/styles/common'
-import Typography from './Typography'
 import { useRouter } from 'next/navigation'
+import { useHeaderStore } from '@/stores/headers'
+import { flexDirection, flexStart } from '@/styles/common'
+import Typography from './Typography'
 import GoBackIcon from '@/icons/GoBackIcon'
+import { useEffect } from 'react'
 
-export default function MainHeader() {
+export default function MainHeader(props) {
+  const { title } = props
   const router = useRouter()
+  const { hasToken, setHasToken } = useHeaderStore()
 
   const handleAction = () => {}
 
+  useEffect(() => {
+    // test
+    // setHasToken(true)
+  }, [])
+
   return (
     <Header>
-      <Typography
-        size={({ theme }) => theme.fontSize.h2}
-        weight={({ theme }) => theme.fontWeight.large}
-        spacing={-1.44}
-        color={({ theme }) => theme.colors.white}
-      >
-        샌디의
-        <br />
-        플리 보따리
-      </Typography>
+      <TextBox>
+        <Typography
+          size={({ theme }) => theme.fontSize.h2}
+          weight={({ theme }) => theme.fontWeight.large}
+          spacing={-1.28}
+          color={({ theme }) => theme.colors.white}
+        >
+          {title}
+        </Typography>
+
+        {/* token 없을 때 */}
+        {!hasToken && (
+          <Typography
+            size={({ theme }) => theme.fontSize.small}
+            weight={({ theme }) => theme.fontWeight.large}
+            spacing={-0.64}
+            color={({ theme }) => theme.colors.white}
+          >
+            친구들이 선물한 플리를 확인해보세요!
+          </Typography>
+        )}
+      </TextBox>
 
       <IconBox as="button" onClick={() => handleAction()}>
         <GoBackIcon color="#ECECEC" />
@@ -33,14 +54,16 @@ export default function MainHeader() {
 const Header = styled.header`
   justify-content: space-between;
   width: 100%;
+  min-height: 176px;
   padding: 32px 32px 40px;
-
+  /* border: 1px solid red; */
   ${flexStart}
 `
 
-const IconButton = styled.div`
-  padding: 0;
-  cursor: pointer;
+const TextBox = styled.div`
+  gap: 16px;
+
+  ${flexDirection}
 `
 
 const IconBox = styled.div`

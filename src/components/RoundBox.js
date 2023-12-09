@@ -26,7 +26,7 @@ export default function RoundBox(props) {
         <>
           <Typography
             size="14px"
-            wieght={600}
+            weight={600}
             color={({ theme }) => theme.colors.black}
           >
             {buttonCommand}

@@ -10,10 +10,10 @@ import {
 } from '@/styles/common'
 import { useEffect } from 'react'
 import { getTodayHot100 } from '@/api/services'
+import { useHeaderStore } from '@/stores/headers'
 
-// TODO: 앨범 이미지 서버사이드 렌더링으로 받기
 export default function PlaylistPage() {
-  // const {}
+  const { setOpenModal } = useHeaderStore()
   const [data, setData] = useState([])
   const [selectedSong, setSelectedSong] = useState({})
   const [isDetail, setIsDetail] = useState(false)
@@ -28,6 +28,8 @@ export default function PlaylistPage() {
     setIsDetail(true)
   }
 
+  const handleOpenModal = () => setOpenModal(true)
+
   useEffect(() => {
     getTodayHot100().then((data) => {
       console.log(data)
@@ -39,10 +41,10 @@ export default function PlaylistPage() {
     <Box>
       <div>
         <RoundBox
-          as="button"
           width="310px"
           placeholder="원하는 노래를 검색해보세요"
           isReadOnly={true}
+          onClick={handleOpenModal}
         />
         <ButtonBox>
           <TextButton
@@ -69,6 +71,8 @@ export default function PlaylistPage() {
           >
             Top 50 인기차트
           </Typography>
+
+          {/* TODO: 모달 리스트 view 랑 통일 */}
           <ListBox>
             {data.map((list) => (
               <AlbumBox key={list.id} onClick={() => goToDetail(list?.title)}>

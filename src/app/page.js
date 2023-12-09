@@ -42,14 +42,7 @@ export default function Home() {
           </DescriptionBox>
         </section>
 
-        <Footer>
-          <RoundBox
-            as="button"
-            width="191px"
-            buttonCommand="내 보따리 방 보기"
-            IconColor="#00C496"
-            onClick={() => router.push('/login', undefined, { shallow: true })}
-          />
+        <BottomBox>
           <Typography size="16px" weight={600} spacing={-0.64}>
             아직 플리보따리가 없으시다면 새롭게 만들어보세요!
           </Typography>
@@ -59,7 +52,7 @@ export default function Home() {
             backgroundColor={({ theme }) => theme.colors.red}
             onClick={() => router.push('/login', undefined, { shallow: true })}
           />
-        </Footer>
+        </BottomBox>
       </Main>
     </Background>
   )
@@ -89,7 +82,7 @@ const DescriptionBox = styled.div`
   ${flexDirection}
 `
 
-const Footer = styled.footer`
+const BottomBox = styled.div`
   position: fixed;
   align-items: center;
   bottom: 0;

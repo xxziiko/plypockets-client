@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { flexCenter } from '@/styles/common'
 import { useHeaderStore } from '@/stores/headers'
 import CheckRoundIcon from '@/icons/CheckIcon'
@@ -20,9 +20,9 @@ export default function ToastPopUp() {
     <Box>
       {isCopyClipboard && (
         <Card>
-          <ImgBox>
+          <div>
             <CheckRoundIcon />
-          </ImgBox>
+          </div>
 
           <Typography
             size={({ theme }) => theme.fontSize.medium}
@@ -72,9 +72,4 @@ const Card = styled.div`
   backdrop-filter: blur(40px);
   animation: ${slideInFromBottom} 4s;
   ${flexCenter};
-`
-
-const ImgBox = styled.div`
-  /* width: 24px; */
-  /* height: 24px; */
 `

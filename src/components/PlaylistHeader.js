@@ -4,6 +4,7 @@ import { flexAlign, flexDirection, flexSpaceBetween } from '@/styles/common'
 import GoBackIcon from '@/icons/GoBackIcon'
 import ProgressIcon from '@/icons/ProgressIcon'
 
+// TODO: main header 하나로 통일
 export default function PlaylistHeader(props) {
   const {
     backgroundColor = ({ theme }) => theme.colors.white,
