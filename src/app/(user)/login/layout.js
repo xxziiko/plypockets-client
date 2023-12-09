@@ -1,6 +1,6 @@
 'use client'
 import styled, { css } from 'styled-components'
-import { RoundButtonFooter, Typography } from '@/components'
+import { RoundButtonWithText, Typography } from '@/components'
 import { flexStart } from '@/styles/common'
 
 export default function LoginLayout({ children }) {
@@ -27,7 +27,7 @@ export default function LoginLayout({ children }) {
 
       <Main>{children}</Main>
 
-      <RoundButtonFooter
+      <RoundButtonWithText
         nextUrl={'/main'}
         styles={styles}
         buttonCommand="네"

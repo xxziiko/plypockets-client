@@ -4,9 +4,17 @@ import styled, { css } from 'styled-components'
 import { flexDirection } from '@/styles/common'
 
 export default function MainLayout({ children }) {
+  const title = (
+    <>
+      샌디의
+      <br />
+      플리 보따리
+    </>
+  )
+
   return (
     <Box>
-      <MainHeader />
+      <MainHeader title={title} />
       <Main>{children}</Main>
       <GiftBundle />
       <ToastPopUp />

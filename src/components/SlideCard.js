@@ -21,7 +21,7 @@ const Card = styled.div`
   flex-direction: column;
   width: 310px;
   height: 100%;
-  padding: 28px 18px 16px 22px;
+  padding: 32px 18px 24px;
   border-radius: 4px;
   background-color: ${({ theme }) => theme.colors.pink};
 

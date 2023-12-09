@@ -1,5 +1,5 @@
 export { default as Snowflake } from '@/components/Snowflake'
-export { default as RoundButtonFooter } from '@/components/RoundButtonFooter'
+export { default as RoundButtonWithText } from '@/components/RoundButtonWithText'
 export { default as Typography } from '@/components/Typography'
 export { default as CircleButton } from '@/components/CircleButton'
 export { default as RoundBox } from '@/components/RoundBox'

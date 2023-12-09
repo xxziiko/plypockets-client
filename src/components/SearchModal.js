@@ -9,7 +9,7 @@ import { RoundBox, AlbumImage, Typography } from '@/components'
 import { useHeaderStore } from '@/stores/headers'
 
 export default function SearchModal() {
-  const { setModalOpen } = useHeaderStore()
+  const { setOpenModal } = useHeaderStore()
   const SEARCH_MOCK = [
     {
       id: 0,
@@ -40,7 +40,7 @@ export default function SearchModal() {
       </Header>
       <InputBox>
         <RoundBox width="270px" placeholder="원하는 노래를 검색해보세요" />
-        <Button as="button" onClick={() => setModalOpen(false)}>
+        <Button as="button" onClick={() => setOpenModal(false)}>
           닫기
         </Button>
       </InputBox>

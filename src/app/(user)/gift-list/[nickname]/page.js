@@ -3,7 +3,6 @@
 import styled from 'styled-components'
 import { SlideCard } from '@/components'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Typography } from '@/components'
 import 'swiper/css'
 import { MOCK } from '../page'
 
@@ -35,7 +34,7 @@ export default function ProductDetail({ params }) {
 
 const Box = styled(Swiper)`
   width: 100%;
-  height: 94%;
-  /* border: 1px solid blue; */
+  height: 100%;
+  padding-bottom: 24px;
   background-color: transparent;
 `

@@ -2,7 +2,7 @@ import styled, { StyleSheetManager } from 'styled-components'
 import { flexSpaceBetween } from '@/styles/common'
 import { Typography, CircleButton } from '@/components'
 
-export default function RoundButtonFooter(props) {
+export default function RoundButtonWithText(props) {
   const { text, buttonCommand, styles, nextUrl, buttonDisable } = props
   return (
     <Box color={styles?.color} backgroundColor={styles?.backgroundColor}>
@@ -20,7 +20,7 @@ export default function RoundButtonFooter(props) {
   )
 }
 
-const Box = styled.footer`
+const Box = styled.div`
   width: 375px;
   padding: 16px 32px 96px;
   gap: 46px;

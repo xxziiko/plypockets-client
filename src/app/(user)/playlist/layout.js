@@ -6,7 +6,7 @@ import { flexDirection } from '@/styles/common'
 import { PlaylistHeader, SearchModal } from '@/components'
 
 export default function PlaylistLayout({ children }) {
-  const { modalOpen } = useHeaderStore()
+  const { openModal } = useHeaderStore()
 
   const router = useRouter()
   const goToBack = () => {
@@ -21,7 +21,7 @@ export default function PlaylistLayout({ children }) {
         buttonAction={goToBack}
       />
       <Main>{children}</Main>
-      {modalOpen && <SearchModal />}
+      {openModal && <SearchModal />}
     </Box>
   )
 }

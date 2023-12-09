@@ -13,8 +13,6 @@ export default function Login() {
   })
   const { setButtonDisable } = useButtonStore()
 
-  console.log('ERROR_MESSAGE.ID.default', ERROR_MESSAGE.ID.default)
-
   useEffect(() => {
     // setButtonDisable(true)
   }, [])
