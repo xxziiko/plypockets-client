@@ -2,6 +2,8 @@
 import styled from 'styled-components'
 import { Typography } from '@/components'
 
+import { DESKTOP_WIDTH } from '@/lib/constants'
+
 export const Aside = () => {
   return (
     <AsideLayout>
@@ -64,7 +66,7 @@ export const Aside = () => {
 export default Aside
 
 const AsideLayout = styled.aside`
-  @media screen and (min-width: 855px) {
+  @media screen and (min-width: ${DESKTOP_WIDTH}px) {
     display: block;
   }
   display: none;

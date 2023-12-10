@@ -7,6 +7,8 @@ import { flexAlign } from '@/styles/common'
 
 import { Aside } from '@/components/Aside'
 
+import { DESKTOP_WIDTH } from '@/lib/constants'
+
 export default function RootLayout({ children }) {
   return (
     <StyledComponentsRegistry>
@@ -14,8 +16,10 @@ export default function RootLayout({ children }) {
         <GlobalStyle />
         <Html>
           <Body suppressHydrationWarning={true}>
-            <Aside />
-            <Main>{children}</Main>
+            <Layout>
+              <Aside />
+              <Main>{children}</Main>
+            </Layout>
           </Body>
         </Html>
       </ThemeProvider>
@@ -32,9 +36,15 @@ const Html = styled.html`
 const Body = styled.body`
   width: 100vw;
   display: flex;
-  padding: 0 200px;
+  justify-content: center;
+`
+
+const Layout = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
   justify-content: space-between;
-  @media screen and (max-width: 854px) {
+  @media screen and (max-width: ${DESKTOP_WIDTH - 1}px) {
     justify-content: center;
   }
 `

@@ -47,3 +47,5 @@ export const ERROR_MESSAGE = {
     },
   },
 }
+
+export const DESKTOP_WIDTH = 855
