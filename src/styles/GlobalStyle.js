@@ -16,7 +16,7 @@ const GlobalStyles = createGlobalStyle`
 		body  
 		 {
 
-        background-color: #ffffff;
+        background-color: #3c2929;
 				color: '#212b36';
 				font-size: 14px;
 				font-weight: 400px;

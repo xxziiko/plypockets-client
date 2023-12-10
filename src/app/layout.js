@@ -5,13 +5,18 @@ import GlobalStyle from '@/styles/GlobalStyle'
 import theme from '@/styles/theme'
 import { flexAlign } from '@/styles/common'
 
+import { Aside } from '@/components/Aside'
+
 export default function RootLayout({ children }) {
   return (
     <StyledComponentsRegistry>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Html>
-          <Body suppressHydrationWarning={true}>{children}</Body>
+          <Body suppressHydrationWarning={true}>
+            <Aside />
+            <Main>{children}</Main>
+          </Body>
         </Html>
       </ThemeProvider>
     </StyledComponentsRegistry>
@@ -25,7 +30,19 @@ const Html = styled.html`
 `
 
 const Body = styled.body`
+  width: 100vw;
+  display: flex;
+  padding: 0 200px;
+  justify-content: space-between;
+  @media screen and (max-width: 854px) {
+    justify-content: center;
+  }
+`
+
+const Main = styled.main`
+  position: relative;
   flex-direction: column;
+  min-width: 375px;
   width: 375px;
   height: 100vh;
   overflow: auto;
@@ -33,4 +50,5 @@ const Body = styled.body`
     ${theme.animation.slideInFromBottom} 1s
   `};
   ${flexAlign};
+  background-color: #ffffff;
 `
