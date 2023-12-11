@@ -1,13 +1,17 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import styled from 'styled-components'
+import styled, { StyleSheetManager } from 'styled-components'
 import { DefaultButton, RoundBox, Typography } from '@/components'
 import { flexDirection } from '@/styles/common'
+
+import GoBackIcon from '@/icons/GoBackIcon'
+import TreeIcon from '@/icons/TreeIcon'
+import HeartIcon from '@/icons/HeartIcon'
 
 const dummyData = {
   title: '크리스마스만을 위해 태어난 지금 마시기 딱 좋은 와인4종',
   subTitle:
-    '달콤한 분위기가 담겨있는 와인 추천 4종을 지금 모아왔어요!크리스마스 분위기에 취하고 와인의 달콤함에 취해...',
+    '달콤한 분위기가 담겨있는 와인 추천 4종을 지금 모아왔어요! 크리스마스 분위기에 취하고 와인의 달콤함에 취해...',
   author: '맛잘알 술잘알 은비에디터',
   date: '2023년 12월 7일 목요일',
   viewCount: 627,
@@ -32,51 +36,96 @@ const dummyData = {
   ],
 }
 
-export default function ContentDetailPage() {
-  const router = useRouter()
+const AuthorText = ({ children }) => {
   return (
-    <Background>
-      <Container>
-        <Typography size="24px" weight={600} spacing={-0.96} color={'#000000'}>
-          콘텐츠 페이지
-        </Typography>
-        <BottomBox>
-          <Typography size="16px" weight={600} spacing={-0.64}>
-            아직 플리보따리가 없으시다면 새롭게 만들어보세요!
-          </Typography>
-          <DefaultButton
-            command="내 플리 보따리 만들기"
-            color={({ theme }) => theme.colors.white}
-            backgroundColor={({ theme }) => theme.colors.red}
-            onClick={() => router.push('/login', undefined, { shallow: true })}
-          />
-        </BottomBox>
-      </Container>
-    </Background>
+    <></>
+    // <Box style={{ display: 'inline-flex' }}>
+    //   <Typography size={'12px'} weight={600} spacing={-0.48} color={'#888'}>
+    //     {children}
+    //   </Typography>
+    // </Box>
   )
 }
 
-const Background = styled.div`
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
+export default function ContentDetailPage() {
+  const router = useRouter()
+  return (
+    <Container>
+      {/* title section */}
+      <Box style={{ flexDirection: 'row' }}>
+        {/* title */}
+        <Box style={{ paddingRight: '28px' }}>
+          <Typography
+            size={'24px'}
+            weight={600}
+            spacing={-0.96}
+            color={'#000000'}
+          >
+            {dummyData.title}
+          </Typography>
+        </Box>
+
+        {/* back icon */}
+        <Box style={{ alignItems: 'flex-start' }}>
+          <GoBackIcon color={'#B3DCD2'} />
+        </Box>
+      </Box>
+
+      {/* subTitle section */}
+      <Box style={{ paddingTop: '8px' }}>
+        <Typography size="14px" weight={400} spacing={-0.56} color={'#000000'}>
+          {dummyData.subTitle}
+        </Typography>
+      </Box>
+
+      {/* author section */}
+      <Box
+        style={{
+          paddingTop: '50px',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
+      >
+        <AuthorText>{dummyData.author}</AuthorText>
+
+        <AuthorText>{dummyData.date}</AuthorText>
+      </Box>
+
+      {/* view & count section */}
+      <Box
+        style={{
+          paddingTop: '18px',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: '8px',
+        }}
+      >
+        {/* view */}
+        <TreeIcon />
+        <AuthorText>{`조회수 ${dummyData.viewCount}`}</AuthorText>
+
+        {/* count */}
+        <HeartIcon />
+        <AuthorText>{`좋아요 ${dummyData.likeCount}`}</AuthorText>
+      </Box>
+    </Container>
+  )
+}
+
+const Container = styled.div`
   background-color: #ffffff;
-  background-repeat: no-repeat;
-  background-size: 100% 100vh;
+
+  width: 100%;
+  padding: 32px;
+  color: ${({ theme }) => theme.colors.black};
+  img {
+    padding: 16px 0;
+  }
+
   ${flexDirection}
 `
 
-const Container = styled.section`
-  width: 100%;
-  padding: 32px 32px 0;
-  color: ${({ theme }) => theme.colors.black};
-
-  ${flexDirection};
-`
-
-const DescriptionBox = styled.div`
-  padding-top: 32px;
-  gap: 8px;
+const Box = styled.div`
   ${flexDirection}
 `
 
