@@ -7,7 +7,11 @@ import { flexAlign } from '@/styles/common'
 
 import { Aside } from '@/components/Aside'
 
-import { DESKTOP_WIDTH } from '@/lib/constants'
+import {
+  DESKTOP_WIDTH,
+  MOBILE_MAX_WIDTH,
+  MOBILE_MIN_WIDTH,
+} from '@/lib/constants'
 
 export default function RootLayout({ children }) {
   return (
@@ -52,8 +56,9 @@ const Layout = styled.div`
 const Main = styled.main`
   position: relative;
   flex-direction: column;
-  min-width: 375px;
-  width: 375px;
+  min-width: ${MOBILE_MIN_WIDTH}px;
+  max-width: ${MOBILE_MAX_WIDTH}px;
+  width: 100vw;
   height: 100vh;
   overflow: auto;
   animation: ${({ theme }) => css`
