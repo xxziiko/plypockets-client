@@ -74,7 +74,7 @@ export default function Main() {
           >
             <ShareButton>
               <p>친구에게 링크 공유</p>
-              <ShareIcon />
+              <ShareIcon color="#323232" />
             </ShareButton>
           </CopyToClipboard>
         </section>
