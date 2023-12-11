@@ -1,6 +1,7 @@
 'use client'
+
 import { useRouter } from 'next/navigation'
-import styled, { StyleSheetManager } from 'styled-components'
+import styled from 'styled-components'
 import { DefaultButton, RoundBox, Typography } from '@/components'
 import { flexDirection } from '@/styles/common'
 
@@ -53,7 +54,7 @@ const AuthorText = (props) => {
 export default function ContentDetailPage() {
   const router = useRouter()
   return (
-    <Container>
+    <>
       {/* title section */}
       <DescriptionBox style={{ flexDirection: 'row' }}>
         {/* title */}
@@ -69,7 +70,7 @@ export default function ContentDetailPage() {
         </Box>
 
         {/* back icon */}
-        <Box style={{ alignItems: 'flex-start' }}>
+        <Box style={{ alignItems: 'flex-start', cursor: 'pointer' }}>
           <GoBackIcon color={'#B3DCD2'} />
         </Box>
       </DescriptionBox>
@@ -175,9 +176,9 @@ export default function ContentDetailPage() {
               </DescriptionBox>
 
               <img
-                src={item.image}
-                alt={`${item.image}`}
                 style={{ paddingTop: '24px' }}
+                src={item.image}
+                alt={item.imageDescription}
               />
 
               <DescriptionBox
@@ -201,19 +202,9 @@ export default function ContentDetailPage() {
           )
         })}
       </Box>
-    </Container>
+    </>
   )
 }
-
-const Container = styled.div`
-  background-color: #ffffff;
-
-  width: 100%;
-  padding: 32px 0;
-  color: ${({ theme }) => theme.colors.black};
-
-  ${flexDirection}
-`
 
 const Box = styled.div`
   ${flexDirection}
