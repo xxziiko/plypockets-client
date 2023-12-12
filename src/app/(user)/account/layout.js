@@ -1,12 +1,18 @@
 'use client'
 import styled, { css } from 'styled-components'
-import { RoundButtonWithText, Typography } from '@/components'
+import { DefaultButton, Typography } from '@/components'
 import { flexStart } from '@/styles/common'
+import { useRouter } from 'next/navigation'
+import { useButtonStore } from '@/stores/buttons'
+import { useHeaderStore } from '@/stores/headers'
 
 export default function LoginLayout({ children }) {
-  const styles = {
-    buttonBackgroundColor: ({ theme }) => theme.colors.subGreen,
-    backgroundColor: ({ theme }) => theme.colors.white,
+  const { buttonDisable } = useButtonStore()
+  const { nickname } = useHeaderStore()
+  const router = useRouter()
+
+  const goToAccount = () => {
+    router.push(`/${nickname}`, undefined, { shallow: true })
   }
 
   return (
@@ -20,19 +26,19 @@ export default function LoginLayout({ children }) {
           플리보따리
           <br />
           만들기 전에
-          <br />
-          로그인 부터
         </Typography>
       </Header>
 
       <Main>{children}</Main>
-
-      <RoundButtonWithText
-        nextUrl={'/main'}
-        styles={styles}
-        buttonCommand="네"
-        text="로그인을 완료했나요?"
-      />
+      <ButtonBox>
+        <DefaultButton
+          command="플리보따리 방 입장하기"
+          color="#fff"
+          backgroundColor={({ theme }) => theme.colors.green}
+          onClick={goToAccount}
+          isButtonDisable={buttonDisable}
+        />
+      </ButtonBox>
     </>
   )
 }
@@ -52,4 +58,8 @@ const Main = styled.main`
   width: 100%;
   height: 100%;
   padding: 43px 32px 0;
+`
+
+const ButtonBox = styled.div`
+  padding-bottom: 48px;
 `

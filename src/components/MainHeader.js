@@ -8,16 +8,8 @@ import GoBackIcon from '@/icons/GoBackIcon'
 import { useEffect } from 'react'
 
 export default function MainHeader(props) {
-  const { title } = props
-  const router = useRouter()
-  const { hasToken, setHasToken } = useHeaderStore()
-
-  const handleAction = () => {}
-
-  useEffect(() => {
-    // test
-    // setHasToken(true)
-  }, [])
+  const { title, goToBack } = props
+  const { hasToken, isViewText } = useHeaderStore()
 
   return (
     <Header>
@@ -31,8 +23,7 @@ export default function MainHeader(props) {
           {title}
         </Typography>
 
-        {/* token 없을 때 */}
-        {!hasToken && (
+        {(isViewText || !hasToken) && (
           <Typography
             size={({ theme }) => theme.fontSize.small}
             weight={({ theme }) => theme.fontWeight.large}
@@ -44,7 +35,7 @@ export default function MainHeader(props) {
         )}
       </TextBox>
 
-      <IconBox as="button" onClick={() => handleAction()}>
+      <IconBox as="button" onClick={() => goToBack()}>
         <GoBackIcon color="#ECECEC" />
       </IconBox>
     </Header>

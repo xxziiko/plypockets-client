@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { flexCenter } from '@/styles/common'
-import { useHeaderStore } from '@/stores/headers'
+import { useButtonStore } from '@/stores/buttons'
 import CheckRoundIcon from '@/icons/CheckIcon'
 import { Typography } from '@/components'
 
 export default function ToastPopUp() {
-  const { isCopyClipboard, setIsCopyClipboard } = useHeaderStore()
+  const { isCopyClipboard, setIsCopyClipboard } = useButtonStore()
 
   useEffect(() => {
     if (isCopyClipboard) {
@@ -40,25 +40,27 @@ export default function ToastPopUp() {
 
 const slideInFromBottom = keyframes`
   0% {
-    transform: translateY(5px);
+    transform: translateY(35px);
     opacity: 0;
   }
-  50% {
+  30% {
     transform: translateY(0); 
-    opacity: 0.9;
+    opacity: 1;
   }
   100% {
-    transform: translateY(100px);
-    opacity: 0;
+    transform: translateY(150px);
+    opacity: 1;
   }
 `
 
 const Box = styled.div`
+  position: fixed;
   display: flex;
   justify-content: center;
   bottom: 0;
-  width: 100%;
-  padding-bottom: 37px;
+  width: 375px;
+  padding-bottom: 48px;
+  /* border: 1px solid red; */
 
   z-index: 999;
 `
@@ -70,6 +72,6 @@ const Card = styled.div`
   border-radius: 13px;
   background: ${({ theme }) => theme.colors.white};
   backdrop-filter: blur(40px);
-  animation: ${slideInFromBottom} 4s;
+  animation: ${slideInFromBottom} 5s;
   ${flexCenter};
 `

@@ -1,23 +1,31 @@
 'use client'
-import { MainHeader, ToastPopUp, GiftBundle } from '@/components'
+import { MainHeader } from '@/components'
 import styled, { css } from 'styled-components'
 import { flexDirection } from '@/styles/common'
+import { useHeaderStore } from '@/stores/headers'
+import { useRouter } from 'next/navigation'
 
 export default function MainLayout({ children }) {
+  const { nickname } = useHeaderStore()
+  const router = useRouter()
+
+  const goToBack = () => {
+    router.push('/', undefined, { shallow: true })
+    // TODO: 토큰 비우기
+  }
   const title = (
     <>
-      샌디의
-      <br />
+      <FlexAlign>
+        <Alias>{nickname}</Alias>의
+      </FlexAlign>
       플리 보따리
     </>
   )
 
   return (
     <Box>
-      <MainHeader title={title} />
+      <MainHeader title={title} goToBack={goToBack} />
       <Main>{children}</Main>
-      <GiftBundle />
-      <ToastPopUp />
     </Box>
   )
 }
@@ -39,5 +47,17 @@ const Main = styled.main`
   `};
   width: 100%;
   height: 100%;
-  padding: 0 32px;
+`
+
+const Alias = styled.p`
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 220px;
+`
+
+const FlexAlign = styled.div`
+  display: flex;
+  align-items: center;
 `
