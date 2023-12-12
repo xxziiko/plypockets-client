@@ -47,10 +47,13 @@ export default function Home() {
             아직 플리보따리가 없으시다면 새롭게 만들어보세요!
           </Typography>
           <DefaultButton
+            isShowIcon
             command="내 플리 보따리 만들기"
-            color={({ theme }) => theme.colors.white}
+            color="#fff"
             backgroundColor={({ theme }) => theme.colors.red}
-            onClick={() => router.push('/login', undefined, { shallow: true })}
+            onClick={() =>
+              router.push('/account', undefined, { shallow: true })
+            }
           />
         </BottomBox>
       </Main>
@@ -87,6 +90,6 @@ const BottomBox = styled.div`
   align-items: center;
   bottom: 0;
   gap: 16px;
-  padding-bottom: 96px;
+  padding-bottom: 48px;
   ${flexDirection}
 `
