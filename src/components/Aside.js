@@ -74,6 +74,7 @@ const AsideLayout = styled.aside`
   min-width: 480px;
   height: 100vh;
   margin-right: 20px;
+  padding-left: 32px;
   overflow-x: hidden;
 `
 

@@ -10,6 +10,11 @@ import TreeIcon from '@/icons/TreeIcon'
 import HeartIcon from '@/icons/HeartIcon'
 import ShareIcon from '@/icons/ShareIcon'
 
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+
+import ContentsParagraph from '@/components/ContentsParagraph'
+import QA from '@/components/QA'
+
 const dummyData = {
   title: '크리스마스만을 위해 태어난 지금 마시기 딱 좋은 와인4종',
   subTitle:
@@ -18,7 +23,7 @@ const dummyData = {
   date: '2023년 12월 7일 목요일',
   viewCount: 627,
   likeCount: 627,
-  paragraph: [
+  paragraphs: [
     {
       title:
         '남녀노소 모두가 사랑하는 크리스마스. 특별한 날이니만큼 어디에서 보낼지 고민',
@@ -40,6 +45,38 @@ const dummyData = {
   ],
 }
 
+const dummyFAQData = [
+  {
+    question: '1. 와인을 선택할 때 어떤 기준을 고려해야 할까요?',
+    answer:
+      '와인을 선택할 때에는 크리스마스 식사의 메뉴와 어울리는 맛과 향을 고려해보세요. 레드, 화이트, 거품이 나는 와인 중에서 선호하는 스타일을 찾아보는 것이 좋습니다.',
+  },
+  {
+    question:
+      '2. 와인을 선택할 때 어떤 기준을 고려, 레드 와인과 화이트 와인 중 어떤 것이 더 어울릴까요?',
+    answer:
+      '와인을 선택할 때에는 크리스마스 식사의 메뉴와 어울리는 맛과 향을 고려해보세요. 레드, 화이트, 거품이 나는 와인 중에서 선호하는 스타일을 찾아보는 것이 좋습니다.',
+  },
+  {
+    question:
+      '3. 와인을 선택할 때 어떤 기준을 고려, 레드 와인과 화이트 와인 중 어떤 것이 더 어울릴까요?',
+    answer:
+      '와인을 선택할 때에는 크리스마스 식사의 메뉴와 어울리는 맛과 향을 고려해보세요. 레드, 화이트, 거품이 나는 와인 중에서 선호하는 스타일을 찾아보는 것이 좋습니다.',
+  },
+  {
+    question:
+      '4. 와인을 선택할 때 어떤 기준을 고려, 레드 와인과 화이트 와인 중 어떤 것이 더 어울릴까요?',
+    answer:
+      '와인을 선택할 때에는 크리스마스 식사의 메뉴와 어울리는 맛과 향을 고려해보세요. 레드, 화이트, 거품이 나는 와인 중에서 선호하는 스타일을 찾아보는 것이 좋습니다.',
+  },
+  {
+    question:
+      '5. 와인을 선택할 때 어떤 기준을 고려, 레드 와인과 화이트 와인 중 어떤 것이 더 어울릴까요?',
+    answer:
+      '와인을 선택할 때에는 크리스마스 식사의 메뉴와 어울리는 맛과 향을 고려해보세요. 레드, 화이트, 거품이 나는 와인 중에서 선호하는 스타일을 찾아보는 것이 좋습니다.',
+  },
+]
+
 const AuthorText = (props) => {
   const { children } = props
   return (
@@ -51,8 +88,13 @@ const AuthorText = (props) => {
   )
 }
 
-export default function ContentDetailPage() {
+export default function ContentDetailPage({ params }) {
   const router = useRouter()
+
+  const { id } = params
+
+  const contentData = contents[id - 1]
+
   return (
     <>
       {/* title section */}
@@ -131,77 +173,34 @@ export default function ContentDetailPage() {
       </DescriptionBox>
 
       {/* share button */}
-      <ShareButton
-        style={{
-          marginTop: '32px',
-          gap: '8px',
-        }}
-      >
-        <Typography
-          size={'14px'}
-          weight={600}
-          spacing={-0.56}
-          color={'#00916F'}
+      <CopyToClipboard>
+        <ShareButton
+          style={{
+            marginTop: '32px',
+            gap: '8px',
+          }}
         >
-          친구에게 링크공유
-        </Typography>
-        <ShareIcon color={'#00916F'} width={14} height={18} />
-      </ShareButton>
+          <Typography
+            size={'14px'}
+            weight={600}
+            spacing={-0.56}
+            color={'#00916F'}
+          >
+            친구에게 링크공유
+          </Typography>
+          <ShareIcon color={'#00916F'} width={14} height={18} />
+        </ShareButton>
+      </CopyToClipboard>
 
       {/* paragraph section */}
       <Box style={{ paddingTop: '32px' }}>
-        {dummyData.paragraph.map((item, index) => {
-          return (
-            <Box key={index}>
-              <DescriptionBox>
-                <Typography
-                  size={'18px'}
-                  weight={600}
-                  spacing={-0.72}
-                  color={'#323232'}
-                >
-                  {item.title}
-                </Typography>
-              </DescriptionBox>
-
-              <DescriptionBox style={{ paddingTop: '16px' }}>
-                <Typography
-                  size={'14px'}
-                  weight={400}
-                  spacing={-0.56}
-                  color={'#323232'}
-                >
-                  {item.paragraph}
-                </Typography>
-              </DescriptionBox>
-
-              <img
-                style={{ paddingTop: '24px' }}
-                src={item.image}
-                alt={item.imageDescription}
-              />
-
-              <DescriptionBox
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  paddingTop: '16px',
-                  paddingBottom: '48px',
-                }}
-              >
-                <Typography
-                  size={'12px'}
-                  weight={500}
-                  spacing={-0.48}
-                  color={'#595959'}
-                >
-                  {item.imageDescription}
-                </Typography>
-              </DescriptionBox>
-            </Box>
-          )
+        {dummyData.paragraphs.map((paragraph, index) => {
+          return <ContentsParagraph key={index} {...paragraph} />
         })}
       </Box>
+
+      {/* faq section */}
+      <QA qaDatas={dummyFAQData} />
     </>
   )
 }
@@ -238,3 +237,5 @@ const ShareButton = styled.button`
   border: 1px solid var(--main_green, #00916f);
   background: var(--field_grey, #f9f9f9);
 `
+
+const HorizontalLine = styled.div``

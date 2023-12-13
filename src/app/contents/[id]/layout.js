@@ -15,7 +15,7 @@ export default function ContentDetailLayout({ children }) {
 }
 
 const Container = styled.div`
-  background-color: #ffffff;
+  background-color: #f9f9f9;
 
   width: 100%;
   padding-top: 32px;

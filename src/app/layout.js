@@ -45,7 +45,7 @@ const Body = styled.body`
 
 const Layout = styled.div`
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
   display: flex;
   justify-content: space-between;
   @media screen and (max-width: ${DESKTOP_WIDTH - 1}px) {
@@ -58,6 +58,10 @@ const Main = styled.main`
   flex-direction: column;
   min-width: ${MOBILE_MIN_WIDTH}px;
   max-width: ${MOBILE_MAX_WIDTH}px;
+  @media screen and (min-width: ${DESKTOP_WIDTH}px) {
+    margin-right: 32px;
+  }
+
   width: 100vw;
   height: 100vh;
   overflow: auto;
