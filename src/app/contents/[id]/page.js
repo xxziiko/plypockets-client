@@ -149,6 +149,39 @@ export default function ContentDetailPage({ params }) {
 
       {/* vote section */}
       <Vote />
+
+      {/* bottom section */}
+      <Box
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          gap: '8px',
+          padding: '32px',
+        }}
+      >
+        <Box
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: '3px',
+          }}
+        >
+          <Typography
+            size={'12px'}
+            weight={500}
+            color={'#888888'}
+            spacing={-0.48}
+          >
+            링크 공유하기
+          </Typography>
+          <RoundButton>
+            <ShareIcon width={14} height={18} color={'#323232'} />
+          </RoundButton>
+        </Box>
+        <RoundButton>
+          <HeartIcon width={18} height={18} color={'#F84A68'} />
+        </RoundButton>
+      </Box>
     </>
   )
 }
@@ -187,3 +220,15 @@ const ShareButton = styled.button`
 `
 
 const HorizontalLine = styled.div``
+
+const RoundButton = styled.button`
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 64px;
+  border: 1px solid var(--stroke_grey, #e5e5e5);
+  background: #fff;
+`

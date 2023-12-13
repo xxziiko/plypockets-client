@@ -134,7 +134,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 32px;
+  padding: 32px 32px 0;
   background-color: #f9f9f9;
 `
 
