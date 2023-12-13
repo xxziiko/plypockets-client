@@ -4,7 +4,8 @@ import { Typography } from '@/components'
 import QAIcon from '../icons/QAIcon'
 
 export const QA = (props) => {
-  const { qaDatas } = props
+  const { qaData } = props
+  const { datas } = qaData
   return (
     <Container>
       <Box
@@ -25,9 +26,9 @@ export const QA = (props) => {
         </Typography>
       </Box>
 
-      {qaDatas.map((qaData) => (
+      {datas.map((data, idx) => (
         <Box
-          key={qaData.id}
+          key={data.id}
           style={{
             paddingTop: '24px',
             gap: '8px',
@@ -39,7 +40,7 @@ export const QA = (props) => {
             spacing={-0.56}
             color={'#323232'}
           >
-            {qaData.question}
+            {idx + 1}. {data.question}
           </Typography>
           <Typography
             size={'14px'}
@@ -47,7 +48,7 @@ export const QA = (props) => {
             spacing={-0.56}
             color={'#323232'}
           >
-            {qaData.answer}
+            {data.answer}
           </Typography>
         </Box>
       ))}

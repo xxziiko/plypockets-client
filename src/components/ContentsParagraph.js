@@ -4,7 +4,7 @@ import { flexDirection } from '@/styles/common'
 import { Typography } from '@/components'
 
 export const ContentsParagraph = (props) => {
-  const { title, paragraph, image, imageDescription } = props
+  const { title, contents, image, imageDescription, imageSource } = props
 
   return (
     <Box>
@@ -26,11 +26,15 @@ export const ContentsParagraph = (props) => {
           spacing={-0.56}
           color={'#323232'}
         >
-          {paragraph}
+          {contents}
         </Typography>
       </DescriptionBox>
 
-      <img style={{ paddingTop: '24px' }} src={image} alt={imageDescription} />
+      <img
+        style={{ paddingTop: '24px' }}
+        src={`/images${image}`}
+        alt={imageDescription}
+      />
 
       <DescriptionBox
         style={{
@@ -48,6 +52,16 @@ export const ContentsParagraph = (props) => {
         >
           {imageDescription}
         </Typography>
+        {imageSource.length > 0 && (
+          <Typography
+            size={'12px'}
+            weight={500}
+            spacing={-0.48}
+            color={'#595959'}
+          >
+            사진 출처: {imageSource}
+          </Typography>
+        )}
       </DescriptionBox>
     </Box>
   )

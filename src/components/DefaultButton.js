@@ -1,17 +1,28 @@
-import { flexCenter, flexStart } from '@/styles/common'
+import { flexCenter } from '@/styles/common'
 import styled from 'styled-components'
 import GiftIcon from '@/icons/GiftIcon'
 
 export default function DefaultButton(props) {
-  const { command, color, backgroundColor, onClick } = props
+  const {
+    command,
+    color,
+    backgroundColor,
+    onClick,
+    isShowIcon,
+    isButtonDisable,
+  } = props
+
   return (
     <Button
       color={color}
-      backgroundColor={backgroundColor}
+      backgroundcolor={
+        isButtonDisable ? ({ theme }) => theme.colors.grey : backgroundColor
+      }
       onClick={() => onClick()}
+      disabled={isButtonDisable}
     >
       <Layout>
-        <GiftIcon />
+        {isShowIcon && <GiftIcon color={color} />}
         {command}
       </Layout>
     </Button>
@@ -30,8 +41,9 @@ const Button = styled.button`
   height: 56px;
   border-radius: 8px;
   color: ${(props) => props.color};
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) => props.backgroundcolor};
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.64px;
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 `

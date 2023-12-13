@@ -15,67 +15,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import ContentsParagraph from '@/components/ContentsParagraph'
 import QA from '@/components/QA'
 
-const dummyData = {
-  title: '크리스마스만을 위해 태어난 지금 마시기 딱 좋은 와인4종',
-  subTitle:
-    '달콤한 분위기가 담겨있는 와인 추천 4종을 지금 모아왔어요! 크리스마스 분위기에 취하고 와인의 달콤함에 취해...',
-  author: '맛잘알 술잘알 은비에디터',
-  date: '2023년 12월 7일 목요일',
-  viewCount: 627,
-  likeCount: 627,
-  paragraphs: [
-    {
-      title:
-        '남녀노소 모두가 사랑하는 크리스마스. 특별한 날이니만큼 어디에서 보낼지 고민',
-      paragraph:
-        '남녀노소 모두가 사랑하는 크리스마스. 특별한 날이니만큼 어디에서, 어떤 음식을 먹으며 보낼지 고민이 된다. 아무거나 먹을 수는 없지! 특히 중요한 것은 바로 술인데, 분위기를 내야 하는 만큼 주종은 와인으로 고르는 것이 좋다. 그럼 어떤 와인이 좋을까. 따스하고 신나는 분위기를 담은 달콤하면서도 가볍게 마실 수 있는 디저트 와인이 제격! 크리스마스만을 기다려 온 특별한 술, 어떤 와인이 있을까?',
-      image:
-        'https://cdn.pixabay.com/photo/2016/11/29/05/45/astronomy-1867616_960_720.jpg',
-      imageDescription: '모젤 크리스마스 와인',
-    },
-    {
-      title:
-        '남녀노소 모두가 사랑하는 크리스마스. 특별한 날이니만큼 어디에서 보낼지 고민',
-      paragraph:
-        '남녀노소 모두가 사랑하는 크리스마스. 특별한 날이니만큼 어디에서, 어떤 음식을 먹으며 보낼지 고민이 된다. 아무거나 먹을 수는 없지! 특히 중요한 것은 바로 술인데, 분위기를 내야 하는 만큼 주종은 와인으로 고르는 것이 좋다. 그럼 어떤 와인이 좋을까. 따스하고 신나는 분위기를 담은 달콤하면서도 가볍게 마실 수 있는 디저트 와인이 제격! 크리스마스만을 기다려 온 특별한 술, 어떤 와인이 있을까?',
-      image:
-        'https://cdn.pixabay.com/photo/2016/11/29/05/45/astronomy-1867616_960_720.jpg',
-      imageDescription: '모젤 크리스마스 와인',
-    },
-  ],
-}
-
-const dummyFAQData = [
-  {
-    question: '1. 와인을 선택할 때 어떤 기준을 고려해야 할까요?',
-    answer:
-      '와인을 선택할 때에는 크리스마스 식사의 메뉴와 어울리는 맛과 향을 고려해보세요. 레드, 화이트, 거품이 나는 와인 중에서 선호하는 스타일을 찾아보는 것이 좋습니다.',
-  },
-  {
-    question:
-      '2. 와인을 선택할 때 어떤 기준을 고려, 레드 와인과 화이트 와인 중 어떤 것이 더 어울릴까요?',
-    answer:
-      '와인을 선택할 때에는 크리스마스 식사의 메뉴와 어울리는 맛과 향을 고려해보세요. 레드, 화이트, 거품이 나는 와인 중에서 선호하는 스타일을 찾아보는 것이 좋습니다.',
-  },
-  {
-    question:
-      '3. 와인을 선택할 때 어떤 기준을 고려, 레드 와인과 화이트 와인 중 어떤 것이 더 어울릴까요?',
-    answer:
-      '와인을 선택할 때에는 크리스마스 식사의 메뉴와 어울리는 맛과 향을 고려해보세요. 레드, 화이트, 거품이 나는 와인 중에서 선호하는 스타일을 찾아보는 것이 좋습니다.',
-  },
-  {
-    question:
-      '4. 와인을 선택할 때 어떤 기준을 고려, 레드 와인과 화이트 와인 중 어떤 것이 더 어울릴까요?',
-    answer:
-      '와인을 선택할 때에는 크리스마스 식사의 메뉴와 어울리는 맛과 향을 고려해보세요. 레드, 화이트, 거품이 나는 와인 중에서 선호하는 스타일을 찾아보는 것이 좋습니다.',
-  },
-  {
-    question:
-      '5. 와인을 선택할 때 어떤 기준을 고려, 레드 와인과 화이트 와인 중 어떤 것이 더 어울릴까요?',
-    answer:
-      '와인을 선택할 때에는 크리스마스 식사의 메뉴와 어울리는 맛과 향을 고려해보세요. 레드, 화이트, 거품이 나는 와인 중에서 선호하는 스타일을 찾아보는 것이 좋습니다.',
-  },
-]
+import { contentsDatas, qaDatas } from '@/constants/contents'
 
 const AuthorText = (props) => {
   const { children } = props
@@ -93,7 +33,11 @@ export default function ContentDetailPage({ params }) {
 
   const { id } = params
 
-  const contentData = contents[id - 1]
+  const viewCount = 627
+  const likeCount = 627
+
+  const contentData = contentsDatas[id - 1]
+  const qaData = qaDatas[id - 1]
 
   return (
     <>
@@ -107,7 +51,7 @@ export default function ContentDetailPage({ params }) {
             spacing={-0.96}
             color={'#000000'}
           >
-            {dummyData.title}
+            {contentData.title}
           </Typography>
         </Box>
 
@@ -120,7 +64,7 @@ export default function ContentDetailPage({ params }) {
       {/* subTitle section */}
       <DescriptionBox style={{ paddingTop: '8px' }}>
         <Typography size="14px" weight={400} spacing={-0.56} color={'#000000'}>
-          {dummyData.subTitle}
+          {contentData.subTitle}
         </Typography>
       </DescriptionBox>
 
@@ -132,9 +76,9 @@ export default function ContentDetailPage({ params }) {
           justifyContent: 'space-between',
         }}
       >
-        <AuthorText>{dummyData.author}</AuthorText>
+        <AuthorText>{contentData.author}</AuthorText>
 
-        <AuthorText>{dummyData.date}</AuthorText>
+        <AuthorText>{contentData.date}</AuthorText>
       </DescriptionBox>
 
       {/* view & count section */}
@@ -155,7 +99,7 @@ export default function ContentDetailPage({ params }) {
           }}
         >
           <TreeIcon color="#00916F" />
-          <AuthorText>조회수 {dummyData.viewCount}</AuthorText>
+          <AuthorText>조회수 {viewCount}</AuthorText>
         </Box>
 
         <Box
@@ -168,7 +112,7 @@ export default function ContentDetailPage({ params }) {
         >
           <HeartIcon color="#F84A68" />
 
-          <AuthorText>좋아요 {dummyData.likeCount}</AuthorText>
+          <AuthorText>좋아요 {likeCount}</AuthorText>
         </Box>
       </DescriptionBox>
 
@@ -194,13 +138,13 @@ export default function ContentDetailPage({ params }) {
 
       {/* paragraph section */}
       <Box style={{ paddingTop: '32px' }}>
-        {dummyData.paragraphs.map((paragraph, index) => {
+        {contentData.paragraphs.map((paragraph, index) => {
           return <ContentsParagraph key={index} {...paragraph} />
         })}
       </Box>
 
       {/* faq section */}
-      <QA qaDatas={dummyFAQData} />
+      <QA qaData={qaData} />
     </>
   )
 }

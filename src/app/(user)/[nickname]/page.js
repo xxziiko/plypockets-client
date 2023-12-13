@@ -1,54 +1,78 @@
 'use client'
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { flexAlign, flexCenter, flexDirection } from '@/styles/common'
-import { Typography, RoundBox } from '@/components'
+import {
+  Typography,
+  RoundBox,
+  DefaultButton,
+  ToastPopUp,
+  GiftBundle,
+} from '@/components'
 import { useHeaderStore } from '@/stores/headers'
+import { useButtonStore } from '@/stores/buttons'
 import ShareIcon from '@/icons/ShareIcon'
 
-export default function Main() {
-  const { setIsCopyClipboard, hasToken } = useHeaderStore()
-  const [isNextStep, setIsNextStep] = useState(false)
+export const MOCK = [
+  { id: 0, nickname: '짐니', date: '2023-12-01' },
+  { id: 3, nickname: '발리', date: '2023-12-02' },
+  { id: 2, nickname: '은정', date: '2023-12-12' },
+  { id: 1, nickname: '하와이', date: '2023-12-23' },
+  { id: 4, nickname: '괌', date: '2023-12-24' },
+  { id: 5, nickname: '괌', date: '2023-12-24' },
+  { id: 6, nickname: '괌', date: '2023-12-24' },
+  { id: 7, nickname: '괌', date: '2023-12-24' },
+  { id: 8, nickname: '괌', date: '2023-12-24' },
+  { id: 9, nickname: '괌', date: '2023-12-24' },
+  { id: 10, nickname: '괌', date: '2023-12-24' },
+]
+
+export default function Main({ params }) {
+  const { hasToken, setHasToken } = useHeaderStore()
+  const { setIsCopyClipboard } = useButtonStore()
   const router = useRouter()
+  const decodedParams = decodeURI(params.nickname)
 
   const goToMyPack = () => {
-    setIsNextStep(true)
+    router.push('/account', undefined, { shallow: true })
   }
 
   const goToPlaylist = () => {
     router.push('/playlist', undefined, { shallow: true })
   }
 
+  useEffect(() => {
+    // test
+    setHasToken(true)
+  }, [])
+
   return (
     <Box>
       {/*  user가 아닐 때  */}
-      {!hasToken &&
-        (!isNextStep ? (
-          <NoTokenSection>
-            <RoundBox
-              as="button"
-              width="191px"
-              buttonCommand="선물하러 가기"
-              IconColor="#F84A68"
-              onClick={goToPlaylist}
-            />
-            <RoundBox
-              as="button"
-              width="191px"
-              buttonCommand="내 보따리 방 보기"
-              IconColor="#00C496"
-              onClick={goToMyPack}
-            />
-          </NoTokenSection>
-        ) : (
-          <section>ddd</section>
-        ))}
+      {!hasToken && (
+        <NoTokenSection>
+          <RoundBox
+            as="button"
+            width="191px"
+            buttonCommand="선물하러 가기"
+            IconColor="#F84A68"
+            onClick={goToPlaylist}
+          />
+          <DefaultButton
+            color="#323232"
+            command="내 플리 보따리 가기"
+            isShowIcon
+            backgroundColor="#fff"
+            onClick={goToMyPack}
+          />
+        </NoTokenSection>
+      )}
 
       {/* user일 때 */}
       {hasToken && (
-        <section>
+        <Section>
           <TextBox>
             <Typography
               size={({ theme }) => theme.fontSize.small}
@@ -77,8 +101,14 @@ export default function Main() {
               <ShareIcon color="#323232" />
             </ShareButton>
           </CopyToClipboard>
-        </section>
+          <Typography color={({ theme }) => theme.colors.green} weight={700}>
+            보따리를 눌러 선물을 확인해보세요!
+          </Typography>
+        </Section>
       )}
+
+      <GiftBundle data={MOCK} nickname={decodedParams} />
+      <ToastPopUp />
     </Box>
   )
 }
@@ -86,8 +116,8 @@ export default function Main() {
 const Box = styled.div`
   flex-direction: column;
   height: 100%;
+  padding: 0 32px;
 
-  gap: 8px;
   ${flexAlign}
 `
 const TextBox = styled.div`
@@ -112,9 +142,14 @@ const NoTokenSection = styled.section`
   justify-content: flex-end;
   width: 100%;
   height: 100%;
-  padding-bottom: 144px;
   gap: 16px;
   z-index: 999;
+
+  ${flexDirection}
+`
+
+const Section = styled.section`
+  gap: 16px;
 
   ${flexDirection}
 `
