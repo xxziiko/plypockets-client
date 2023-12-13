@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '@/components'
-import QAIcon from '../icons/QAIcon'
+import ThreeTriangleIcon from '../icons/ThreeTriangleIcon'
 
 export const QA = (props) => {
   const { qaData } = props
@@ -15,7 +15,7 @@ export const QA = (props) => {
           gap: '8px',
         }}
       >
-        <QAIcon />
+        <ThreeTriangleIcon />
         <Typography
           size={'18px'}
           weight={600}

@@ -14,6 +14,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import ContentsParagraph from '@/components/ContentsParagraph'
 import QA from '@/components/QA'
+import Vote from '@/components/Vote'
 
 import { contentsDatas, qaDatas } from '@/constants/contents'
 
@@ -145,6 +146,9 @@ export default function ContentDetailPage({ params }) {
 
       {/* faq section */}
       <QA qaData={qaData} />
+
+      {/* vote section */}
+      <Vote />
     </>
   )
 }
