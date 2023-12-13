@@ -43,6 +43,9 @@ export const QA = (props) => {
             {idx + 1}. {data.question}
           </Typography>
           <Typography
+            style={{
+              lineHeight: '150%',
+            }}
             size={'14px'}
             weight={400}
             spacing={-0.56}

@@ -1,9 +1,15 @@
 import styled from 'styled-components'
 
 export default function Typography(props) {
-  const { children, size, weight, spacing, color } = props
+  const { style, children, size, weight, spacing, color } = props
   return (
-    <Text size={size} weight={weight} spacing={spacing} color={color}>
+    <Text
+      style={style}
+      size={size}
+      weight={weight}
+      spacing={spacing}
+      color={color}
+    >
       {children}
     </Text>
   )

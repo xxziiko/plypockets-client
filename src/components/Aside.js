@@ -72,7 +72,7 @@ const AsideLayout = styled.aside`
   display: none;
   position: fixed;
   top: 0;
-  left: 0;
+  right: 50%;
   width: 480px;
   min-width: 480px;
   height: 100vh;

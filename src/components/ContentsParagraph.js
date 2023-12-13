@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { flexDirection } from '@/styles/common'
 import { Typography } from '@/components'
 
+import Image from 'next/image'
+
 export const ContentsParagraph = (props) => {
   const { title, contents, image, imageDescription, imageSource } = props
 
@@ -21,6 +23,9 @@ export const ContentsParagraph = (props) => {
 
       <DescriptionBox style={{ paddingTop: '16px' }}>
         <Typography
+          style={{
+            lineHeight: '150%',
+          }}
           size={'14px'}
           weight={400}
           spacing={-0.56}
@@ -32,7 +37,7 @@ export const ContentsParagraph = (props) => {
 
       <img
         style={{ paddingTop: '24px' }}
-        src={`/images${image}`}
+        src={`/img${image}`}
         alt={imageDescription}
       />
 
