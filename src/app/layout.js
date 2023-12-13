@@ -39,15 +39,18 @@ const Html = styled.html`
 
 const Body = styled.body`
   width: 100vw;
+  position: relative;
   display: flex;
   justify-content: center;
+  overflow-y: auto;
 `
 
 const Layout = styled.div`
   width: 100%;
   max-width: 1000px;
+  height: 100vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   @media screen and (max-width: ${DESKTOP_WIDTH - 1}px) {
     justify-content: center;
   }
@@ -64,7 +67,6 @@ const Main = styled.main`
 
   width: 100vw;
   height: 100vh;
-  overflow: auto;
   animation: ${({ theme }) => css`
     ${theme.animation.slideInFromBottom} 1s
   `};

@@ -70,12 +70,13 @@ const AsideLayout = styled.aside`
     display: block;
   }
   display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 480px;
   min-width: 480px;
   height: 100vh;
-  margin-right: 20px;
-  padding-left: 32px;
-  overflow-x: hidden;
+  padding-left: 48px;
 `
 
 const Box = styled.div`
