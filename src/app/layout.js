@@ -72,4 +72,8 @@ const Main = styled.main`
   `};
   ${flexAlign};
   background-color: #ffffff;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `

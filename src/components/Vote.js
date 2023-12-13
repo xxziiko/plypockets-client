@@ -48,6 +48,7 @@ export const Vote = (props) => {
     <Container>
       <ThreeTriangleIcon style={{ alignSelf: 'flex-start' }} />
       <Typography
+        as="h2"
         style={{
           paddingTop: '16px',
         }}

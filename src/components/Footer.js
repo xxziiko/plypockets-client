@@ -61,7 +61,6 @@ export default Footer
 
 const Container = styled.footer`
   width: 100%;
-  margin-top: 32px;
   background-color: #503939;
 
   display: flex;

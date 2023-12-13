@@ -15,11 +15,11 @@ export default function ContentDetailLayout({ children }) {
 }
 
 const Container = styled.div`
+  ${flexDirection}
+
   background-color: #f9f9f9;
 
   width: 100%;
   padding-top: 32px;
   color: ${({ theme }) => theme.colors.black};
-
-  ${flexDirection}
 `

@@ -17,6 +17,7 @@ export const QA = (props) => {
       >
         <ThreeTriangleIcon />
         <Typography
+          as="h2"
           size={'18px'}
           weight={600}
           spacing={-0.72}
@@ -35,6 +36,7 @@ export const QA = (props) => {
           }}
         >
           <Typography
+            as="h3"
             size={'14px'}
             weight={600}
             spacing={-0.56}
@@ -43,6 +45,7 @@ export const QA = (props) => {
             {idx + 1}. {data.question}
           </Typography>
           <Typography
+            as="p"
             style={{
               lineHeight: '150%',
             }}

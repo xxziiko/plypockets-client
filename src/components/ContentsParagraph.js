@@ -9,31 +9,33 @@ export const ContentsParagraph = (props) => {
   const { title, contents, image, imageDescription, imageSource } = props
 
   return (
-    <Box>
-      <DescriptionBox>
-        <Typography
-          size={'18px'}
-          weight={600}
-          spacing={-0.72}
-          color={'#323232'}
-        >
-          {title}
-        </Typography>
-      </DescriptionBox>
+    <Container>
+      <Typography
+        as="h2"
+        style={{
+          padding: '0 32px',
+        }}
+        size={'18px'}
+        weight={600}
+        spacing={-0.72}
+        color={'#323232'}
+      >
+        {title}
+      </Typography>
 
-      <DescriptionBox style={{ paddingTop: '16px' }}>
-        <Typography
-          style={{
-            lineHeight: '150%',
-          }}
-          size={'14px'}
-          weight={400}
-          spacing={-0.56}
-          color={'#323232'}
-        >
-          {contents}
-        </Typography>
-      </DescriptionBox>
+      <Typography
+        as="p"
+        style={{
+          lineHeight: '150%',
+          padding: '16px 32px',
+        }}
+        size={'14px'}
+        weight={400}
+        spacing={-0.56}
+        color={'#323232'}
+      >
+        {contents}
+      </Typography>
 
       <img
         style={{ paddingTop: '24px' }}
@@ -41,44 +43,39 @@ export const ContentsParagraph = (props) => {
         alt={imageDescription}
       />
 
-      <DescriptionBox
+      <Typography
         style={{
-          justifyContent: 'center',
-          alignItems: 'center',
+          alignSelf: 'center',
           paddingTop: '16px',
-          paddingBottom: '48px',
         }}
+        size={'12px'}
+        weight={500}
+        spacing={-0.48}
+        color={'#595959'}
       >
+        {imageDescription}
+      </Typography>
+      {imageSource.length > 0 && (
         <Typography
+          style={{
+            alignSelf: 'center',
+          }}
           size={'12px'}
           weight={500}
           spacing={-0.48}
           color={'#595959'}
         >
-          {imageDescription}
+          사진 출처: {imageSource}
         </Typography>
-        {imageSource.length > 0 && (
-          <Typography
-            size={'12px'}
-            weight={500}
-            spacing={-0.48}
-            color={'#595959'}
-          >
-            사진 출처: {imageSource}
-          </Typography>
-        )}
-      </DescriptionBox>
-    </Box>
+      )}
+    </Container>
   )
 }
 
 export default ContentsParagraph
 
-const Box = styled.div`
-  ${flexDirection}
-`
-
-const DescriptionBox = styled.div`
-  ${flexDirection}
-  padding: 0 32px;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 48px;
 `
