@@ -2,7 +2,11 @@
 import styled from 'styled-components'
 import { Typography } from '@/components'
 
+import { ContentsCard } from '@/components/ContentsCard'
+
 import { DESKTOP_WIDTH } from '@/lib/constants'
+
+import { contentsCardDatas } from '@/constants'
 
 export const Aside = () => {
   return (
@@ -55,9 +59,9 @@ export const Aside = () => {
           읽을 보따리 보러가기
         </Typography>
         <Box style={{ flexDirection: 'row', gap: '20px' }}>
-          <Content />
-          <Content />
-          <Content />
+          {contentsCardDatas.slice(0, 2).map((data) => (
+            <ContentsCard {...data} />
+          ))}
         </Box>
       </Box>
     </AsideLayout>
@@ -84,16 +88,4 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-`
-
-const Content = styled.div`
-  display: flex;
-  width: 192px;
-  height: 256px;
-  padding: 16px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  border-radius: 8px;
-  background-color: #ffffff;
 `

@@ -4,32 +4,14 @@ import { Typography, DefaultButton } from '@/components'
 import ThreeTriangleIcon from '@/icons/ThreeTriangleIcon'
 import CheckRoundIcon from '@/icons/CheckIcon'
 
-const dummyVoteDatas = [
-  {
-    id: 1,
-    content: '모젤 크리스마스 와인',
-    percent: 34,
-  },
-  {
-    id: 2,
-    content: '모젤 크리스마스 와인',
-    percent: 29,
-  },
-  {
-    id: 3,
-    content: '모젤 크리스마스 와인',
-    percent: 21,
-  },
-  {
-    id: 4,
-    content: '모젤 크리스마스 와인',
-    percent: 24,
-  },
-]
-
 export const Vote = (props) => {
   const [selected, setSelected] = useState(null)
   const [clicked, setClicked] = useState(null)
+
+  const {
+    voteData: { topic, datas },
+    count,
+  } = props
 
   const handleButtonClick = (idx) => {
     if (clicked === idx) {
@@ -57,7 +39,7 @@ export const Vote = (props) => {
         spacing={-0.56}
         color={'#323232'}
       >
-        가장 마시고 싶은 와인에 투표해보시고 마시고 싶은 와인에 투표해 보세요!
+        {topic}
       </Typography>
 
       <Typography
@@ -71,7 +53,7 @@ export const Vote = (props) => {
         spacing={-0.48}
         color={'#888888'}
       >
-        투표 참여자 601
+        투표 참여자 {count}
       </Typography>
 
       <Box
@@ -80,8 +62,7 @@ export const Vote = (props) => {
           marginBottom: '32px',
         }}
       >
-        {dummyVoteDatas.map((data, idx) => {
-          const { percent, content } = data
+        {datas.map((content, idx) => {
           const isDefault = idx !== selected && idx !== clicked
           const isClicked = idx === clicked
           const isSelected = idx === selected
@@ -102,7 +83,7 @@ export const Vote = (props) => {
                 {content}
               </Typography>
               {isClicked && <CheckRoundIcon />}
-              {selected !== null && (
+              {/* {selected !== null && (
                 <Typography
                   size={'16px'}
                   weight={isSelected ? 700 : 500}
@@ -111,7 +92,7 @@ export const Vote = (props) => {
                 >
                   {percent}%
                 </Typography>
-              )}
+              )} */}
             </VoteButton>
           )
         })}

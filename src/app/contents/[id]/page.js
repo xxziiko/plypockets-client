@@ -18,10 +18,17 @@ import ShareIcon from '@/icons/ShareIcon'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import ContentsParagraph from '@/components/ContentsParagraph'
-import QA from '@/components/QA'
+import FAQ from '@/components/FAQ'
 import Vote from '@/components/Vote'
 
-import { contentsDatas, qaDatas } from '@/constants/contents'
+import { ContentsCard } from '@/components/ContentsCard'
+import {
+  contentsDatas,
+  faqDatas,
+  keywordDatas,
+  voteDatas,
+  contentsCardDatas,
+} from '@/constants'
 
 const SmallText = (props) => {
   const { children, style } = props
@@ -51,22 +58,20 @@ export default function ContentDetailPage({ params }) {
 
   const { id } = params
 
+  // TODO: get data from server
   const viewCount = 627
   const likeCount = 627
+  const voteCount = 627
 
   const contentData = contentsDatas[id - 1]
-  const qaData = qaDatas[id - 1]
-  const dummyKeywordData = [
-    '#크리스마스_와인',
-    '#기념일',
-    '#분위기',
-    '#모젤크리스마스리슬링',
-    '#산테로',
-    '#모스카토',
-    '#폰타나프레다',
-    '#또스띠',
-    '#크리스마스아스티',
-  ]
+  const faqData = faqDatas[id - 1]
+  const { keywords } = keywordDatas[id - 1]
+  const voteData = Number(id) < voteDatas.length ? voteDatas[id - 1] : undefined
+
+  const handleGoBack = () => {
+    // TODO: go back
+    router.back()
+  }
 
   return (
     <>
@@ -87,7 +92,7 @@ export default function ContentDetailPage({ params }) {
 
         {/* back icon */}
         <FlexBox style={{ alignItems: 'flex-start' }}>
-          <span style={{ cursor: 'pointer' }}>
+          <span style={{ cursor: 'pointer' }} onClick={handleGoBack}>
             <GoBackIcon color={'#B3DCD2'} />
           </span>
         </FlexBox>
@@ -161,8 +166,9 @@ export default function ContentDetailPage({ params }) {
       <CopyToClipboard>
         <ShareButton
           style={{
-            marginTop: '32px',
+            margin: '32px auto',
             gap: '8px',
+            alignSelf: 'center',
           }}
         >
           <Typography
@@ -179,19 +185,19 @@ export default function ContentDetailPage({ params }) {
       </CopyToClipboard>
 
       {/* paragraph section */}
-      <FlexBox style={{ paddingTop: '32px' }}>
+      <FlexBox>
         {contentData.paragraphs.map((paragraph, index) => {
           return <ContentsParagraph key={index} {...paragraph} />
         })}
       </FlexBox>
 
       {/* faq section */}
-      <QA qaData={qaData} />
+      <FAQ faqData={faqData} />
 
       <HorizontalLine />
 
       {/* vote section */}
-      <Vote />
+      {voteData && <Vote voteData={voteData} count={voteCount} />}
 
       {/* bottom section */}
       <ContainerBox
@@ -217,11 +223,13 @@ export default function ContentDetailPage({ params }) {
           >
             링크 공유하기
           </Typography>
+          {/* TODO: Share Feature */}
           <RoundButton>
             <ShareIcon width={14} height={18} color={'#323232'} />
           </RoundButton>
         </FlexBox>
 
+        {/* TODO: Like Feature */}
         <RoundButton>
           <HeartIcon width={18} height={18} color={'#F84A68'} />
         </RoundButton>
@@ -283,7 +291,7 @@ export default function ContentDetailPage({ params }) {
             gap: '8px',
           }}
         >
-          {dummyKeywordData.map((keyword, index) => (
+          {keywords.map((keyword, index) => (
             <KeywordBox key={index}>
               <Typography
                 size={'12px'}
@@ -310,7 +318,7 @@ export default function ContentDetailPage({ params }) {
         <Typography
           as="h2"
           style={{
-            paddingLeft: '32px'
+            paddingLeft: '32px',
           }}
           size={'18px'}
           weight={600}
@@ -320,15 +328,11 @@ export default function ContentDetailPage({ params }) {
           다른 보따리 읽으러 가기
         </Typography>
         <RowScrollBox>
-          <RoundBox />
-          <RoundBox />
-          <RoundBox />
-          <RoundBox />
-          <RoundBox />
-          <RoundBox />
-          <RoundBox />
-          <RoundBox />
-          <RoundBox />
+          {contentsCardDatas
+            .filter((data) => Number(id) !== data.id)
+            .map((data) => (
+              <ContentsCard {...data} />
+            ))}
         </RowScrollBox>
       </ContainerBox>
     </>

@@ -6,6 +6,8 @@ import theme from '@/styles/theme'
 import { flexAlign } from '@/styles/common'
 
 import { Aside } from '@/components/Aside'
+import Analytics from '@/components/gtmComponent'
+import { Suspense } from 'react'
 
 import {
   DESKTOP_WIDTH,
@@ -20,6 +22,9 @@ export default function RootLayout({ children }) {
         <GlobalStyle />
         <Html>
           <Body suppressHydrationWarning={true}>
+            <Suspense>
+              <Analytics />
+            </Suspense>
             <Layout>
               <Aside />
               <Main>{children}</Main>

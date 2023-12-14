@@ -96,14 +96,6 @@ export default function Typography(props) {
   }
 }
 
-Typography.defaultProps = {
-  size: '16px',
-  weight: 400,
-  spacing: 0,
-  color: '#000000',
-  as: TYPE.span,
-}
-
 const Text = styled.span`
   font-size: ${(props) => props.size};
   font-style: normal;

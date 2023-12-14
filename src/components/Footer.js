@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Typography from './Typography'
 
 export const Footer = () => {
+  // TODO: Feature
   return (
     <Container>
       <Box style={{ gap: '10px' }}>
