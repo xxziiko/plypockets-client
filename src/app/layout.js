@@ -5,13 +5,21 @@ import GlobalStyle from '@/styles/GlobalStyle'
 import theme from '@/styles/theme'
 import { flexAlign } from '@/styles/common'
 
+import Analytics from '@/components/gtmComponent'
+import { Suspense } from 'react'
+
 export default function RootLayout({ children }) {
   return (
     <StyledComponentsRegistry>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Html>
-          <Body suppressHydrationWarning={true}>{children}</Body>
+          <Body suppressHydrationWarning={true}>
+            <Suspense>
+              <Analytics />
+            </Suspense>
+            {children}
+          </Body>
         </Html>
       </ThemeProvider>
     </StyledComponentsRegistry>
