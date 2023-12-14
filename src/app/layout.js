@@ -1,4 +1,5 @@
 'use client'
+
 import styled, { css, ThemeProvider } from 'styled-components'
 import StyledComponentsRegistry from '@/lib/registry'
 import GlobalStyle from '@/styles/GlobalStyle'

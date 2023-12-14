@@ -5,6 +5,8 @@ import { flexDirection } from '@/styles/common'
 
 import Footer from '@/components/Footer'
 
+// meta tag for SEO
+
 export default function ContentDetailLayout({ children }) {
   return (
     <Container>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import styled from 'styled-components'
 import {
   DefaultButton,
@@ -9,6 +9,8 @@ import {
   Typography,
 } from '@/components'
 import { flexDirection } from '@/styles/common'
+
+import ToastPopUp from '@/components/ToastPopUp'
 
 import GoBackIcon from '@/icons/GoBackIcon'
 import TreeIcon from '@/icons/TreeIcon'
@@ -30,33 +32,42 @@ import {
   contentsCardDatas,
 } from '@/constants'
 
-const SmallText = (props) => {
-  const { children, style } = props
-  return (
-    <Typography
-      style={style}
-      size={'12px'}
-      weight={600}
-      spacing={-0.48}
-      color={'#888'}
-    >
-      {children}
-    </Typography>
-  )
-}
+import { useButtonStore } from '@/stores/buttons'
 
-const dateFormat = (date) => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
+// TODO: metadata
 
-  return `${year}년 ${month}월 ${day}일`
-}
+// export async function generateMetadata({ params, searchParams }, parent) {
+//   const { id } = params
+//   const url = usePathname(`/contents/${id}`)
+
+//   const contentData = contentsDatas[id - 1]
+//   const faqData = faqDatas[id - 1]
+//   const { keywords } = keywordDatas[id - 1]
+
+//   return {
+//     title: contentData.title,
+//     description: contentData.subTitle,
+//     keywords: keywords,
+//     author: contentData.author,
+//     openGraph: {
+//       title: contentData.title,
+//       description: contentData.subTitle,
+//       url: url,
+//       image: contentData.paragraphs[0].image,
+//       type: 'website',
+//     },
+//   }
+// }
 
 export default function ContentDetailPage({ params }) {
   const router = useRouter()
 
+  const { setIsCopyClipboard } = useButtonStore()
+
   const { id } = params
+
+  const path = usePathname()
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}${path}`
 
   // TODO: get data from server
   const viewCount = 627
@@ -163,7 +174,7 @@ export default function ContentDetailPage({ params }) {
       </ContainerBox>
 
       {/* share button */}
-      <CopyToClipboard>
+      <CopyToClipboard text={url} onCopy={() => setIsCopyClipboard(true)}>
         <ShareButton
           style={{
             margin: '32px auto',
@@ -224,9 +235,11 @@ export default function ContentDetailPage({ params }) {
             링크 공유하기
           </Typography>
           {/* TODO: Share Feature */}
-          <RoundButton>
-            <ShareIcon width={14} height={18} color={'#323232'} />
-          </RoundButton>
+          <CopyToClipboard text={url} onCopy={() => setIsCopyClipboard(true)}>
+            <RoundButton>
+              <ShareIcon width={14} height={18} color={'#323232'} />
+            </RoundButton>
+          </CopyToClipboard>
         </FlexBox>
 
         {/* TODO: Like Feature */}
@@ -335,8 +348,33 @@ export default function ContentDetailPage({ params }) {
             ))}
         </RowScrollBox>
       </ContainerBox>
+
+      <ToastPopUp />
     </>
   )
+}
+
+const SmallText = (props) => {
+  const { children, style } = props
+  return (
+    <Typography
+      style={style}
+      size={'12px'}
+      weight={600}
+      spacing={-0.48}
+      color={'#888'}
+    >
+      {children}
+    </Typography>
+  )
+}
+
+const dateFormat = (date) => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+
+  return `${year}년 ${month}월 ${day}일`
 }
 
 const ContainerBox = styled.div`
