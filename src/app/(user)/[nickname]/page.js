@@ -98,7 +98,7 @@ export default function Main({ params }) {
           >
             <ShareButton>
               <p>친구에게 링크 공유</p>
-              <ShareIcon />
+              <ShareIcon color="#323232" />
             </ShareButton>
           </CopyToClipboard>
           <Typography color={({ theme }) => theme.colors.green} weight={700}>

@@ -32,3 +32,7 @@ export const ERROR_MESSAGE = {
     },
   },
 }
+
+export const DESKTOP_WIDTH = 950
+export const MOBILE_MIN_WIDTH = 360
+export const MOBILE_MAX_WIDTH = 390
