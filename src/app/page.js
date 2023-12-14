@@ -6,6 +6,7 @@ import { flexDirection } from '@/styles/common'
 
 export default function Home() {
   const router = useRouter()
+
   return (
     <Background>
       <Main>
