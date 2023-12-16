@@ -69,6 +69,7 @@ const Main = styled.main`
   max-width: ${MOBILE_MAX_WIDTH}px;
   @media screen and (min-width: ${DESKTOP_WIDTH}px) {
     margin-right: 32px;
+    z-index: 0;
   }
 
   width: 100vw;

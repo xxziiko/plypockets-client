@@ -11,7 +11,7 @@ export default function CircleButton(props) {
 
   return (
     <CircleIcon
-      backgroundColor={
+      backgroundcolor={
         buttonDisable ? ({ theme }) => theme.colors.grey : backgroundColor
       }
       onClick={() => router.push(nextUrl, undefined, { shallow: true })}
@@ -34,7 +34,7 @@ const CircleIcon = styled.button`
   border-radius: 50%;
   flex-shrink: 0;
   color: ${({ theme }) => theme.colors.white};
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) => props.backgroundcolor};
   cursor: pointer;
   ${flexCenter};
 `

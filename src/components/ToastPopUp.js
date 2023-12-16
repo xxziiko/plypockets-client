@@ -41,7 +41,7 @@ export default function ToastPopUp() {
 const slideInFromBottom = keyframes`
   0% {
     transform: translateY(35px);
-    opacity: 0;
+    opacity: 0.5;
   }
   30% {
     transform: translateY(0); 
@@ -62,7 +62,7 @@ const Box = styled.div`
   padding-bottom: 48px;
   /* border: 1px solid red; */
 
-  z-index: 999;
+  z-index: 1;
 `
 
 const Card = styled.div`
