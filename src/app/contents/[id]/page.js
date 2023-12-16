@@ -33,6 +33,7 @@ import {
 } from '@/constants'
 
 import { useButtonStore } from '@/stores/buttons'
+import { useContentsInfo } from '@/hooks/useContentsInfo'
 
 // TODO: metadata
 
@@ -70,6 +71,7 @@ export default function ContentDetailPage({ params }) {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}${path}`
 
   // TODO: get data from server
+  // const { viewCount, likeCount, voteCount } = useContentsInfo(id)
   const viewCount = 627
   const likeCount = 627
   const voteCount = 627
@@ -136,7 +138,7 @@ export default function ContentDetailPage({ params }) {
         >
           <SmallText>{contentData.author}</SmallText>
 
-          <SmallText>{dateFormat(new Date(contentData.date))}</SmallText>
+          <SmallText>{dateFormat(contentData.date)}</SmallText>
         </FlexBox>
       </ContainerBox>
 
@@ -370,9 +372,7 @@ const SmallText = (props) => {
 }
 
 const dateFormat = (date) => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
+  const [year, month, day] = date.split('.')
 
   return `${year}년 ${month}월 ${day}일`
 }
