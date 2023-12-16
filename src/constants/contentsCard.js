@@ -28,4 +28,18 @@ export const contentsCardDatas = [
     image: '/img/contents/4/thumbnail.jpg',
     imageDescription: 'christmas card',
   },
+  {
+    id: 5,
+    title: 'E는 크리스마스도 활기차게! : 외향인이 크리스마스를 보내는 법',
+    subTitle: '',
+    image: '/img/contents/5/thumbnail.jpg',
+    imageDescription: 'christmas',
+  },
+  {
+    id: 6,
+    title: 'I의 취향 저격 크리스마스는? : 내향인이 크리스마스를 보내는 법',
+    subTitle: '',
+    image: '/img/contents/6/thumbnail.jpg',
+    imageDescription: 'christmas',
+  },
 ]
