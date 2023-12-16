@@ -3,23 +3,61 @@ import NotionIcon from '@/icons/NotionIcon'
 import styled from 'styled-components'
 import Typography from './Typography'
 
+const redirectUrl = {
+  teamUrl:
+    'https://near-quince-092.notion.site/43dcdc4c25124334b432ab75015dd212?pvs=4',
+  purchaseUrl:
+    'https://near-quince-092.notion.site/36341708de704a508e9dfc910276181d?pvs=4',
+  instagramUrl: 'https://www.instagram.com/plypockets/',
+  notionUrl:
+    'https://near-quince-092.notion.site/19d919ce5a34436b8430b005366a908f?pvs=4',
+}
+
 export const Footer = () => {
-  // TODO: Feature
+  const handleRedirect = (url) => {
+    window.open(url)
+  }
+
+  const RedirectWrapperButton = ({ children, url }) => {
+    return (
+      <button
+        style={{
+          border: 'none',
+          padding: '0',
+          backgroundColor: 'transparent',
+          cursor: 'pointer',
+        }}
+        onClick={() => handleRedirect(url)}
+      >
+        {children}
+      </button>
+    )
+  }
+
   return (
     <Container>
       <Box style={{ gap: '10px' }}>
-        <InstagramIcon width={24} height={24} color={'white'} />
-        <NotionIcon width={24} height={24} color={'white'} />
+        <RedirectWrapperButton url={redirectUrl.instagramUrl}>
+          <InstagramIcon width={24} height={24} color={'white'} />
+        </RedirectWrapperButton>
+
+        <RedirectWrapperButton url={redirectUrl.notionUrl}>
+          <NotionIcon width={24} height={24} color={'white'} />
+        </RedirectWrapperButton>
       </Box>
 
       <Box style={{ justifyContent: 'space-between' }}>
-        <Typography size="14px" weight={600} spacing={-0.56} color="#ffffff">
-          플리보따리 소개
-        </Typography>
+        <RedirectWrapperButton url={redirectUrl.teamUrl}>
+          <Typography size="14px" weight={600} spacing={-0.56} color="#ffffff">
+            플리보따리 팀 소개
+          </Typography>
+        </RedirectWrapperButton>
 
-        <Typography size="14px" weight={600} spacing={-0.56} color="#ffffff">
-          선물보따리 구매 안내
-        </Typography>
+        <RedirectWrapperButton url={redirectUrl.purchaseUrl}>
+          <Typography size="14px" weight={600} spacing={-0.56} color="#ffffff">
+            선물보따리 구매 안내
+          </Typography>
+        </RedirectWrapperButton>
       </Box>
 
       <Box
