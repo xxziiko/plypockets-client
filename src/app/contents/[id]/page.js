@@ -10,10 +10,6 @@ import {
 } from '@/components'
 import { flexDirection } from '@/styles/common'
 
-import ToastPopUp from '@/components/ToastPopUp'
-
-import ScrollUpButton from '@/components/ScrollUpButton'
-
 import GoBackIcon from '@/icons/GoBackIcon'
 import TreeIcon from '@/icons/TreeIcon'
 import HeartIcon from '@/icons/HeartIcon'
@@ -361,9 +357,6 @@ export default function ContentDetailPage({ params }) {
             ))}
         </RowScrollBox>
       </ContainerBox>
-
-      <ScrollUpButton />
-      <ToastPopUp />
     </>
   )
 }

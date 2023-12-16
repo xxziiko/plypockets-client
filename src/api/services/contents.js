@@ -3,7 +3,7 @@ import {
   callContentsLikes,
   callCheckIsVote,
   callContentsVotes,
-} from '@/api/apis'
+} from '@/api/apis/contents'
 
 export const getContentsInfo = (id) => {
   return callContentsInfo(id)
