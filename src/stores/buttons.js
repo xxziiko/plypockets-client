@@ -5,4 +5,6 @@ export const useButtonStore = create((set) => ({
   isCopyClipboard: false,
   setIsCopyClipboard: (state) => set({ isCopyClipboard: state }),
   setButtonDisable: (state) => set({ buttonDisable: state }),
+  isAccountPopupOpen: false,
+  setIsAccountPopupOpen: (state) => set({ isAccountPopupOpen: state }),
 }))
