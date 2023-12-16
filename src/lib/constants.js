@@ -30,6 +30,10 @@ export const ERROR_MESSAGE = {
       message: '숫자, 영어로 된 8자 이상의 비밀번호를 입력해주세요.',
       color: ({ theme }) => theme.colors.red,
     },
+    incorrect: {
+      message: '비밀번호가 일치하지 않습니다.',
+      color: ({ theme }) => theme.colors.red,
+    },
   },
 }
 

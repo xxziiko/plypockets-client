@@ -3,7 +3,15 @@ import { Typography } from '@/components'
 import { flexSpaceBetween, flexCenter } from '@/styles/common'
 
 export default function InputForm(props) {
-  const { inputValue, onChange, label, placeholder, errorMessage, name } = props
+  const {
+    inputValue,
+    onChange,
+    label,
+    placeholder,
+    errorMessage,
+    name,
+    onBlurInputs,
+  } = props
 
   return (
     <InputLayout>
@@ -24,6 +32,7 @@ export default function InputForm(props) {
             name={name}
             onChange={(e) => onChange(e)}
             type={name === 'password' ? 'password' : 'text'}
+            onBlur={() => onBlurInputs(name, inputValue)}
           />
         </InputBox>
       </InputWrapper>
@@ -46,6 +55,7 @@ const InputLayout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  z-index: 0;
 `
 
 const InputWrapper = styled.div`
