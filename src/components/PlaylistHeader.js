@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { Typography } from '@/components'
-import { flexAlign, flexDirection, flexSpaceBetween } from '@/styles/common'
 import GoBackIcon from '@/icons/GoBackIcon'
 import ProgressIcon from '@/icons/ProgressIcon'
+import theme from '@/styles/theme'
+import { flexAlign, flexDirection, flexSpaceBetween } from '@/styles/common'
 
 // TODO: main header 하나로 통일
 export default function PlaylistHeader(props) {
@@ -33,19 +34,21 @@ export default function PlaylistHeader(props) {
           </IconBox>
         </Title>
 
-        <SubTitle>
-          <Typography
-            color={({ theme }) => theme.colors.black}
-            size={({ theme }) => theme.fontSize.small}
-            weight={({ theme }) => theme.fontWeight.medium}
-            spacing={-0.64}
-          >
-            {subtitle}
-          </Typography>
-        </SubTitle>
+        {subtitle && (
+          <SubTitle>
+            <Typography
+              color={({ theme }) => theme.colors.black}
+              size={({ theme }) => theme.fontSize.small}
+              weight={({ theme }) => theme.fontWeight.medium}
+              spacing={-0.64}
+            >
+              {subtitle}
+            </Typography>
+          </SubTitle>
+        )}
       </TitleBox>
       <ButtonIcon onClick={() => buttonAction()}>
-        <GoBackIcon color="#cccccc" />
+        <GoBackIcon color={theme.colors.brown} />
       </ButtonIcon>
     </Box>
   )
@@ -55,7 +58,7 @@ const Box = styled.div`
   width: 100%;
   max-height: 100%;
   padding: 32px;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => props.backgroundColor};
 
   ${flexSpaceBetween}
 `
