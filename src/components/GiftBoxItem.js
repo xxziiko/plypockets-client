@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 export default function GiftBoxItem(props) {
-  const { list, onClick } = props
+  const { list, onClick, index } = props
   return (
-    <GiftBox as="button" onClick={() => onClick()}>
-      {list?.nickname}
+    <GiftBox as="button" onClick={() => onClick(index)}>
+      {list?.friendname}
     </GiftBox>
   )
 }
