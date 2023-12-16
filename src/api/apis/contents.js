@@ -1,0 +1,29 @@
+import AxiosInstance from '@/api/instance'
+
+export const callContentsInfo = (id) => {
+  return AxiosInstance.patch(`/contents/${id}`)
+    .then((response) => response)
+    .catch((error) => error)
+}
+
+export const callContentsLikes = (id) => {
+  return AxiosInstance.patch(`/contents/likes/${id}`)
+    .then((response) => response)
+    .catch((error) => error)
+}
+
+export const callCheckIsVote = (contentId, userId) => {
+  return AxiosInstance.get(`/contents/votes/${contentId}/${userId}`)
+    .then((response) => response)
+    .catch((error) => error)
+}
+
+export const callContentsVotes = (contentId, userId, choice) => {
+  return AxiosInstance.post(`/contents/votes`, {
+    contentId,
+    userId,
+    choice,
+  })
+    .then((response) => response)
+    .catch((error) => error)
+}

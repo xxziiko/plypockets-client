@@ -40,7 +40,6 @@ export default function RootLayout({ children }) {
 const Html = styled.html`
   display: flex;
   justify-content: center;
-  overflow: hidden;
 `
 
 const Body = styled.body`
