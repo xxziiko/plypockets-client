@@ -1,22 +1,65 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import { DefaultButton, SlideCard } from '@/components'
 import { flexDirection } from '@/styles/common'
 import { useHeaderStore } from '@/stores/headers'
-import { useUserBundleStore } from '@/stores/userInfo'
+import { useBundlesStore, useUserInfoStore } from '@/stores/userInfo'
+import { getPlaylist } from '@/api/services'
 
 export default function ProductDetail() {
   const { setIsViewText } = useHeaderStore()
-  const { bundles, currentIndex } = useUserBundleStore()
+  const { userInfo } = useUserInfoStore()
+  const { currentIndex, setCurrentIndex } = useBundlesStore()
+  const [bundles, setBundles] = useState()
+  const audioRefs = useRef([])
+
+  const onChangeSlide = (swiper) => {
+    const newIndex = swiper.activeIndex
+    const previousIdx = swiper.previousIndex
+
+    setCurrentIndex(newIndex)
+    pauseAudio(previousIdx)
+
+    // 주석 해제 시 자동재생
+    // playAudio(newIndex)
+  }
+
+  const playAudio = (index) => {
+    if (audioRefs.current[index]) {
+      audioRefs.current[index].play()
+    }
+  }
+
+  const pauseAudio = (index) => {
+    if (audioRefs.current[index]) {
+      audioRefs.current[index]?.pause()
+    }
+  }
 
   useEffect(() => {
-    console.log('current', currentIndex)
-    console.log('bundle', bundles)
     setIsViewText(true)
   }, [])
+
+  useEffect(() => {
+    if (userInfo?.userId) {
+      getPlaylist(userInfo.userId).then((res) => {
+        console.log('res', res)
+        if (res) setBundles(res.results)
+      })
+    }
+  }, [])
+
+  useEffect(() => {
+    //오디오 관련 초기 설정 등을 수행하고 싶다면 여기서 작성
+    audioRefs.current.forEach((audioRef) => {
+      if (audioRef) {
+        audioRef.volume = 0.5
+      }
+    })
+  }, [bundles])
 
   return (
     <Layout>
@@ -27,13 +70,14 @@ export default function ProductDetail() {
         spaceBetween={20}
         centeredSlides={true}
         initialSlide={currentIndex}
+        onSlideChange={(swiper) => onChangeSlide(swiper)}
         pagination={{
           clickable: true,
         }}
       >
-        {bundles?.map((list) => (
+        {bundles?.map((list, index) => (
           <SwiperSlide key={list.playlistId}>
-            <SlideCard list={list} />
+            <SlideCard list={list} audioRefs={audioRefs} index={index} />
           </SwiperSlide>
         ))}
       </SwiperBox>
@@ -59,7 +103,6 @@ const Layout = styled.div`
 
 const SwiperBox = styled(Swiper)`
   width: 100%;
-  height: 77%;
   background-color: transparent;
 `
 const Text = styled.p`

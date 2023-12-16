@@ -3,13 +3,16 @@ import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 import GiftBoxItem from './GiftBoxItem'
+import { useBundlesStore } from '@/stores/userInfo'
 
 export default function GiftBundle(props) {
   const { data, nickname } = props
+  const { setCurrentIndex } = useBundlesStore()
   const containerRef = useRef(null)
   const router = useRouter()
 
-  const goToDetail = () => {
+  const goToDetail = (index) => {
+    setCurrentIndex(index)
     router.push(`/${nickname}/gift`, undefined, { shallow: true })
   }
 
@@ -20,13 +23,17 @@ export default function GiftBundle(props) {
       container.scrollTop = -100
     }
   }, [])
-
   return (
     <GiftBox ref={containerRef}>
       {data
-        .sort((a, b) => new Date(a.date) - new Date(b.date))
-        .map((list) => (
-          <GiftBoxItem key={list.id} list={list} onClick={goToDetail} />
+        ?.sort((a, b) => new Date(a.createdDate) - new Date(b.createdDate))
+        .map((list, index) => (
+          <GiftBoxItem
+            key={list.playlistId}
+            list={list}
+            onClick={goToDetail}
+            index={index}
+          />
         ))}
     </GiftBox>
   )
@@ -41,6 +48,6 @@ const GiftBox = styled.div`
   gap: 0;
   width: 374px;
   height: 450px;
-  z-index: 0;
+  z-index: 1;
   overflow-y: auto;
 `

@@ -17,7 +17,7 @@ export default function SnowBox(props) {
     }
 
     return (
-      <ImageBox key={index} style={snowflakeStyle}>
+      <ImageBox key={index} styles={snowflakeStyle}>
         <SnowflakeIcon />
       </ImageBox>
     )
@@ -42,11 +42,15 @@ const ImageBox = styled.div`
   animation: ${css`
     ${fallKeyframes} 7s linear infinite
   `};
+  left: ${(props) => props.styles.left};
+  animation-delay: ${(props) => props.styles.animationDelay};
+  opacity: ${(props) => props.styles.opacity};
 `
 
 const Box = styled.div`
   position: absolute;
   top: -50px;
   width: 375px;
-  border: 1px solid red;
+  /* height: 100%; */
+  /* border: 1px solid red; */
 `
