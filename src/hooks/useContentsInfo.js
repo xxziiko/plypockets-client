@@ -7,31 +7,35 @@ export const useContentsInfo = (id, userId) => {
   const [voteCount, setVoteCount] = useState(0)
   const [isVote, setIsVote] = useState(false)
 
-  useEffect(() => {
-    const data = await getContentsInfo(id);
-    const { viewCnt, likeCnt, voteCnt } = data;
+  const getDefaultState = async () => {
+    const contentData = await getContentsInfo(id)
+    const { viewCnt, likeCnt, voteCnt } = contentData
 
-    setViewCount(viewCnt);
-    setLikeCount(likeCnt);
-    setVoteCount(voteCnt);
+    setViewCount(viewCnt)
+    setLikeCount(likeCnt)
+    setVoteCount(voteCnt)
 
     // TODO: userId check
-    if (!userId) return;
-    const data = await checkIsVote({ contentId: id, userId });
-    const { isVote } = data;
-    setIsVote(isVote);
-  }, [])
-
-  const handleLike = () => {
-    const data = await sendContentsLikes(id);
-    const { likeCnt } = data;
-    setLikeCount(likeCnt);
+    if (!userId) return
+    const voteData = await checkIsVote({ contentId: id, userId })
+    const { isVote } = voteData
+    setIsVote(isVote)
   }
 
-  const handleSendVote = (choice) => {
-    const data = await sendContentsVotes({ contentId: id, userId, choice });
-    const { voteCnt } = data;
-    setVoteCount(voteCnt);
+  useEffect(() => {
+    getDefaultState()
+  }, [])
+
+  const handleLike = async () => {
+    const data = await sendContentsLikes(id)
+    const { likeCnt } = data
+    setLikeCount(likeCnt)
+  }
+
+  const handleSendVote = async (choice) => {
+    const data = await sendContentsVotes({ contentId: id, userId, choice })
+    const { voteCnt } = data
+    setVoteCount(voteCnt)
   }
 
   return { viewCount, likeCount, voteCount, isVote, handleLike, handleSendVote }

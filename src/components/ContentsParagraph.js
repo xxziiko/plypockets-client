@@ -37,24 +37,29 @@ export const ContentsParagraph = (props) => {
         {contents}
       </Typography>
 
-      <img
-        style={{ paddingTop: '24px' }}
-        src={`/img${image}`}
-        alt={imageDescription}
-      />
+      {image.length > 0 && (
+        <img
+          style={{ paddingTop: '24px' }}
+          src={`/img${image}`}
+          alt={imageDescription}
+        />
+      )}
 
-      <Typography
-        style={{
-          alignSelf: 'center',
-          paddingTop: '16px',
-        }}
-        size={'12px'}
-        weight={500}
-        spacing={-0.48}
-        color={'#595959'}
-      >
-        {imageDescription}
-      </Typography>
+      {imageDescription.length > 0 && (
+        <Typography
+          style={{
+            alignSelf: 'center',
+            paddingTop: '16px',
+          }}
+          size={'12px'}
+          weight={500}
+          spacing={-0.48}
+          color={'#595959'}
+        >
+          {imageDescription}
+        </Typography>
+      )}
+
       {imageSource.length > 0 && (
         <Typography
           style={{

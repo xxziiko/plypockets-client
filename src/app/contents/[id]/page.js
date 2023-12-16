@@ -71,14 +71,14 @@ export default function ContentDetailPage({ params }) {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}${path}`
 
   // TODO: get data from server
-  const {
-    viewCount,
-    likeCount,
-    voteCount,
-    isVote,
-    handleLike,
-    handleSendVote,
-  } = useContentsInfo(id, userId)
+  // const {
+  //   viewCount,
+  //   likeCount,
+  //   voteCount,
+  //   isVote,
+  //   handleLike,
+  //   handleSendVote,
+  // } = useContentsInfo(id, userId)
   const viewCount = 627
   const likeCount = 627
   const voteCount = 627
@@ -210,6 +210,8 @@ export default function ContentDetailPage({ params }) {
           return <ContentsParagraph key={index} {...paragraph} />
         })}
       </FlexBox>
+
+      <HorizontalLine />
 
       {/* faq section */}
       <FAQ faqData={faqData} />
