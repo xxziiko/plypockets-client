@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { flexCenter } from '@/styles/common'
 import { useButtonStore } from '@/stores/buttons'
@@ -6,6 +6,18 @@ import CheckRoundIcon from '@/icons/CheckIcon'
 import { Typography } from '@/components'
 
 export default function ScrollUpButton() {
+  const [isVisible, setIsVisible] = useState(window.scrollY !== 0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsVisible(window.scrollY !== 0)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   const handleScrollUp = () => {
     window.scrollTo({
       top: 0,
@@ -15,7 +27,7 @@ export default function ScrollUpButton() {
 
   return (
     <Box>
-      <Button onClick={handleScrollUp}>
+      <Button onClick={handleScrollUp} isVisible={isVisible}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="13"
@@ -52,15 +64,15 @@ const Box = styled.div`
 `
 
 const Button = styled.button`
-  /* position: sticky; */
-  /* right: 34px; */
   display: flex;
-  /* bottom: 34px; */
 
   flex-direction: column;
 
   margin-right: 34px;
   margin-left: auto;
+
+  transition: opacity 0.5s ease-in-out;
+  opacity: ${(props) => (props.isVisible ? '1' : '0')};
 
   justify-content: center;
   align-items: center;
@@ -70,8 +82,6 @@ const Button = styled.button`
 
   background-color: var(--sub_green, #00c496);
   box-shadow: 0px 0px 8px 0px rgba(0, 196, 150, 0.2);
-
-  /* border: 1px solid red; */
 
   z-index: 9999;
 `
