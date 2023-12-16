@@ -10,8 +10,6 @@ import {
 } from '@/components'
 import { flexDirection } from '@/styles/common'
 
-import ToastPopUp from '@/components/ToastPopUp'
-
 import GoBackIcon from '@/icons/GoBackIcon'
 import TreeIcon from '@/icons/TreeIcon'
 import HeartIcon from '@/icons/HeartIcon'
@@ -33,6 +31,7 @@ import {
 } from '@/constants'
 
 import { useButtonStore } from '@/stores/buttons'
+import { useContentsInfo } from '@/hooks/useContentsInfo'
 
 // TODO: metadata
 
@@ -70,6 +69,14 @@ export default function ContentDetailPage({ params }) {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}${path}`
 
   // TODO: get data from server
+  // const {
+  //   viewCount,
+  //   likeCount,
+  //   voteCount,
+  //   isVote,
+  //   handleLike,
+  //   handleSendVote,
+  // } = useContentsInfo(id, userId)
   const viewCount = 627
   const likeCount = 627
   const voteCount = 627
@@ -136,7 +143,7 @@ export default function ContentDetailPage({ params }) {
         >
           <SmallText>{contentData.author}</SmallText>
 
-          <SmallText>{dateFormat(new Date(contentData.date))}</SmallText>
+          <SmallText>{dateFormat(contentData.date)}</SmallText>
         </FlexBox>
       </ContainerBox>
 
@@ -201,6 +208,8 @@ export default function ContentDetailPage({ params }) {
           return <ContentsParagraph key={index} {...paragraph} />
         })}
       </FlexBox>
+
+      <HorizontalLine />
 
       {/* faq section */}
       <FAQ faqData={faqData} />
@@ -348,8 +357,6 @@ export default function ContentDetailPage({ params }) {
             ))}
         </RowScrollBox>
       </ContainerBox>
-
-      <ToastPopUp />
     </>
   )
 }
@@ -370,9 +377,7 @@ const SmallText = (props) => {
 }
 
 const dateFormat = (date) => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
+  const [year, month, day] = date.split('.')
 
   return `${year}년 ${month}월 ${day}일`
 }
