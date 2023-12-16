@@ -2,6 +2,8 @@ import InstagramIcon from '@/icons/InstagramIcon'
 import NotionIcon from '@/icons/NotionIcon'
 import styled from 'styled-components'
 import Typography from './Typography'
+import { useButtonStore } from '@/stores/buttons'
+import AccountToastPopUp from './AccountToastPopUp'
 
 const redirectUrl = {
   teamUrl:
@@ -14,11 +16,13 @@ const redirectUrl = {
 }
 
 export const Footer = () => {
+  const { isAccountPopupOpen, setIsAccountPopupOpen } = useButtonStore()
+
   const handleRedirect = (url) => {
     window.open(url)
   }
 
-  const RedirectWrapperButton = ({ children, url }) => {
+  const WrapperButton = ({ children, url, onClick }) => {
     return (
       <button
         style={{
@@ -27,7 +31,7 @@ export const Footer = () => {
           backgroundColor: 'transparent',
           cursor: 'pointer',
         }}
-        onClick={() => handleRedirect(url)}
+        onClick={onClick ? onClick : () => handleRedirect(url)}
       >
         {children}
       </button>
@@ -35,64 +39,91 @@ export const Footer = () => {
   }
 
   return (
-    <Container>
-      <Box style={{ gap: '10px' }}>
-        <RedirectWrapperButton url={redirectUrl.instagramUrl}>
-          <InstagramIcon width={24} height={24} color={'white'} />
-        </RedirectWrapperButton>
+    <>
+      <Container>
+        <Box style={{ gap: '10px' }}>
+          <WrapperButton url={redirectUrl.instagramUrl}>
+            <InstagramIcon width={24} height={24} color={'white'} />
+          </WrapperButton>
 
-        <RedirectWrapperButton url={redirectUrl.notionUrl}>
-          <NotionIcon width={24} height={24} color={'white'} />
-        </RedirectWrapperButton>
-      </Box>
+          <WrapperButton url={redirectUrl.notionUrl}>
+            <NotionIcon width={24} height={24} color={'white'} />
+          </WrapperButton>
+        </Box>
 
-      <Box style={{ justifyContent: 'space-between' }}>
-        <RedirectWrapperButton url={redirectUrl.teamUrl}>
-          <Typography size="14px" weight={600} spacing={-0.56} color="#ffffff">
-            플리보따리 팀 소개
-          </Typography>
-        </RedirectWrapperButton>
+        <Box style={{ justifyContent: 'space-between' }}>
+          <WrapperButton url={redirectUrl.teamUrl}>
+            <Typography
+              size="14px"
+              weight={600}
+              spacing={-0.56}
+              color="#ffffff"
+            >
+              플리보따리 팀 소개
+            </Typography>
+          </WrapperButton>
 
-        <RedirectWrapperButton url={redirectUrl.purchaseUrl}>
-          <Typography size="14px" weight={600} spacing={-0.56} color="#ffffff">
-            선물보따리 구매 안내
-          </Typography>
-        </RedirectWrapperButton>
-      </Box>
+          <WrapperButton url={redirectUrl.purchaseUrl}>
+            <Typography
+              size="14px"
+              weight={600}
+              spacing={-0.56}
+              color="#ffffff"
+            >
+              선물보따리 구매 안내
+            </Typography>
+          </WrapperButton>
+        </Box>
 
-      <Box
-        style={{ justifyContent: 'space-between', alignItems: 'flex-start' }}
-      >
-        <div
-          style={{
-            display: 'inline-flex',
-            flexDirection: 'column',
-            gap: '8px',
-          }}
+        <Box
+          style={{ justifyContent: 'space-between', alignItems: 'flex-start' }}
         >
+          <WrapperButton onClick={() => setIsAccountPopupOpen(true)}>
+            <div
+              style={{
+                display: 'inline-flex',
+                flexDirection: 'column',
+                gap: '8px',
+                alignItems: 'flex-start',
+              }}
+            >
+              <Typography
+                size="14px"
+                weight={600}
+                spacing={-0.56}
+                color="#ffffff"
+              >
+                계정 정보
+              </Typography>
+              <Typography
+                size="12px"
+                weight={500}
+                spacing={-0.48}
+                color="#ffffff"
+              >
+                비밀번호 찾기
+              </Typography>
+            </div>
+          </WrapperButton>
+
           <Typography size="14px" weight={600} spacing={-0.56} color="#ffffff">
-            계정 정보
+            이용 약관
           </Typography>
-          <Typography size="12px" weight={500} spacing={-0.48} color="#ffffff">
-            비밀번호 찾기
+        </Box>
+
+        <Box style={{ gap: '8px' }}>
+          <Typography size="14px" weight={600} spacing={-0.56} color="#ffffff">
+            문의
           </Typography>
-        </div>
 
-        <Typography size="14px" weight={600} spacing={-0.56} color="#ffffff">
-          이용 약관
-        </Typography>
-      </Box>
+          <Typography size="12px" weight={500} spacing={-0.28} color="#ffffff">
+            plypockets@gmail.com
+          </Typography>
+        </Box>
+      </Container>
 
-      <Box style={{ gap: '8px' }}>
-        <Typography size="14px" weight={600} spacing={-0.56} color="#ffffff">
-          문의
-        </Typography>
-
-        <Typography size="12px" weight={500} spacing={-0.28} color="#ffffff">
-          plypockets@gmail.com
-        </Typography>
-      </Box>
-    </Container>
+      <AccountToastPopUp />
+    </>
   )
 }
 
