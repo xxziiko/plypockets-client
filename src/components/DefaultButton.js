@@ -32,6 +32,7 @@ export default function DefaultButton(props) {
 const Layout = styled.div`
   width: 100%;
   gap: 8px;
+  z-index: 1000;
 
   ${flexCenter}
 `

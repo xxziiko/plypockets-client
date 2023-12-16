@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
-import { DefaultButton, RoundBox, Typography } from '@/components'
+import { DefaultButton, SnowBox, Typography } from '@/components'
 import { flexDirection } from '@/styles/common'
 
 export default function Home() {
@@ -9,6 +9,8 @@ export default function Home() {
 
   return (
     <Background>
+      <SnowBox />
+
       <Main>
         <section>
           <Typography
@@ -66,17 +68,18 @@ const Background = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  background-image: url('/img/background.jpg');
+  background-image: url('/img/mainBackground.png');
   background-repeat: no-repeat;
   background-size: 100% 100vh;
+  z-index: 0;
   ${flexDirection}
 `
 
 const Main = styled.main`
   width: 100%;
+  height: 100%;
   padding: 48px 32px 0;
   color: ${({ theme }) => theme.colors.white};
-
   ${flexDirection};
 `
 

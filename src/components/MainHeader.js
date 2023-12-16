@@ -47,7 +47,7 @@ const Header = styled.header`
   width: 100%;
   min-height: 176px;
   padding: 32px 32px 40px;
-  /* border: 1px solid red; */
+  z-index: 1;
   ${flexStart}
 `
 
