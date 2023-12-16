@@ -5,13 +5,15 @@ import ThreeTriangleIcon from '@/icons/ThreeTriangleIcon'
 import CheckRoundIcon from '@/icons/CheckIcon'
 
 export const Vote = (props) => {
-  const [selected, setSelected] = useState(null)
-  const [clicked, setClicked] = useState(null)
-
   const {
     voteData: { topic, datas },
     count,
+    hasVoted,
+    handleSendVote,
+    choice,
   } = props
+
+  const [clicked, setClicked] = useState(null)
 
   const handleButtonClick = (idx) => {
     if (clicked === idx) {
@@ -22,7 +24,7 @@ export const Vote = (props) => {
   }
 
   const handleSubmit = () => {
-    setSelected(clicked)
+    handleSendVote(clicked)
     setClicked(null)
   }
 
@@ -63,16 +65,16 @@ export const Vote = (props) => {
         }}
       >
         {datas.map((content, idx) => {
-          const isDefault = idx !== selected && idx !== clicked
+          const isDefault = idx !== choice && idx !== clicked
           const isClicked = idx === clicked
-          const isSelected = idx === selected
+          const isSelected = idx === choice
           return (
             <VoteButton
               key={idx}
               onClick={() => handleButtonClick(idx)}
               default={isDefault}
-              selected={idx === selected}
-              disabled={selected !== null}
+              choice={idx === choice}
+              disabled={choice !== null}
             >
               <Typography
                 size={'14px'}
@@ -83,7 +85,7 @@ export const Vote = (props) => {
                 {content}
               </Typography>
               {isClicked && <CheckRoundIcon />}
-              {/* {selected !== null && (
+              {/* {choice !== null && (
                 <Typography
                   size={'16px'}
                   weight={isSelected ? 700 : 500}
@@ -99,7 +101,7 @@ export const Vote = (props) => {
       </Box>
 
       <DefaultButton
-        command={selected !== null ? '투표 완료' : '투표 하기'}
+        command={choice !== null ? '투표 완료' : '투표 하기'}
         color={clicked === null ? '#A4A4A4' : '#ffffff'}
         backgroundColor={clicked === null ? '#E2E2E2' : '#00916F'}
         isShowIcon={false}
@@ -139,6 +141,6 @@ const VoteButton = styled.button`
       ? '2px solid var(--stroke_grey, #e5e5e5)'
       : '2px solid var(--main_green, #00916F)'};
   background: ${(props) =>
-    props.selected ? 'var(--main_green, #00916F)' : 'var(--main_white, #fff)'};
+    props.choice ? 'var(--main_green, #00916F)' : 'var(--main_white, #fff)'};
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 `
