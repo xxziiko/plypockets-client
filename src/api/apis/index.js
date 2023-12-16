@@ -6,8 +6,14 @@ export const callGetTodayHot100 = () => {
     .catch((error) => error)
 }
 
-export const sendPostFeedback = (body) => {
-  return callPostFeedbackApi(body)
+export const callPostLoginApi = (body) => {
+  return AxiosInstance.post('/users/login', body)
     .then((response) => response)
-    .catch((err) => err)
+    .catch((error) => error)
+}
+
+export const callGetPlaylistApi = (id) => {
+  return AxiosInstance.get(`/playlists/${id}`)
+    .then((response) => response)
+    .catch((error) => error)
 }

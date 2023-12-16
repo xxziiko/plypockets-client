@@ -40,7 +40,6 @@ export default function RootLayout({ children }) {
 const Html = styled.html`
   display: flex;
   justify-content: center;
-  overflow: hidden;
 `
 
 const Body = styled.body`
@@ -69,6 +68,7 @@ const Main = styled.main`
   max-width: ${MOBILE_MAX_WIDTH}px;
   @media screen and (min-width: ${DESKTOP_WIDTH}px) {
     margin-right: 32px;
+    z-index: 0;
   }
 
   width: 100vw;

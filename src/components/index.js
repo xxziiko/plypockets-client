@@ -1,4 +1,4 @@
-export { default as Snowflake } from '@/components/Snowflake'
+export { default as SnowBox } from '@/components/SnowBox'
 export { default as RoundButtonWithText } from '@/components/RoundButtonWithText'
 export { default as Typography } from '@/components/Typography'
 export { default as CircleButton } from '@/components/CircleButton'

@@ -5,13 +5,16 @@ import { useButtonStore } from '@/stores/buttons'
 import { InputForm } from '@/components'
 import { useState } from 'react'
 import { ERROR_MESSAGE } from '@/lib/constants'
+import { useUserInputStore } from '@/stores/userInfo'
 
 export default function Login() {
+  const { setUserInputValue, setErrorMessage, errorMessage } =
+    useUserInputStore()
   const [isError, setIsError] = useState({ id: true, pw: true })
-  const [errorMessage, setErrorMessage] = useState({
-    id: ERROR_MESSAGE.ID?.default,
-    pw: ERROR_MESSAGE.PW?.default,
-  })
+  // const [errorMessage, setErrorMessage] = useState({
+  //   id: ERROR_MESSAGE.ID?.default,
+  //   pw: ERROR_MESSAGE.PW?.default,
+  // })
   const [userInfo, setUserInfo] = useState({
     nickname: '',
     password: '',
@@ -22,7 +25,10 @@ export default function Login() {
     const { name, value } = e.target
 
     setUserInfo({ ...userInfo, [name]: value })
-    console.log(name, value)
+  }
+
+  const onBlurInputs = () => {
+    setUserInputValue(userInfo)
   }
 
   useEffect(() => {
@@ -83,6 +89,7 @@ export default function Login() {
           errorMessage={errorMessage.id}
           inputValue={userInfo.nickname}
           onChange={onChange}
+          onBlurInputs={onBlurInputs}
         />
 
         <InputForm
@@ -92,6 +99,7 @@ export default function Login() {
           errorMessage={errorMessage.pw}
           inputValue={userInfo.password}
           onChange={onChange}
+          onBlurInputs={onBlurInputs}
         />
       </Section>
     </>
