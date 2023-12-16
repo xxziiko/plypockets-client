@@ -1,5 +1,5 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -11,29 +11,18 @@ import {
   ToastPopUp,
   GiftBundle,
 } from '@/components'
-import { useHeaderStore } from '@/stores/headers'
 import { useButtonStore } from '@/stores/buttons'
 import ShareIcon from '@/icons/ShareIcon'
-
-export const MOCK = [
-  { id: 0, nickname: '짐니', date: '2023-12-01' },
-  { id: 3, nickname: '발리', date: '2023-12-02' },
-  { id: 2, nickname: '은정', date: '2023-12-12' },
-  { id: 1, nickname: '하와이', date: '2023-12-23' },
-  { id: 4, nickname: '괌', date: '2023-12-24' },
-  { id: 5, nickname: '괌', date: '2023-12-24' },
-  { id: 6, nickname: '괌', date: '2023-12-24' },
-  { id: 7, nickname: '괌', date: '2023-12-24' },
-  { id: 8, nickname: '괌', date: '2023-12-24' },
-  { id: 9, nickname: '괌', date: '2023-12-24' },
-  { id: 10, nickname: '괌', date: '2023-12-24' },
-]
+import { useUserBundleStore, useUserInfoStore } from '@/stores/userInfo'
+import { getPlaylist } from '@/api/services'
 
 export default function Main({ params }) {
-  const { hasToken, setHasToken } = useHeaderStore()
-  const { setIsCopyClipboard } = useButtonStore()
+  const { userInfo } = useUserInfoStore()
+  const { bundles, setBundles } = useUserBundleStore()
+  const { setIsCopyClipboard, isCopyClipboard } = useButtonStore()
   const router = useRouter()
   const decodedParams = decodeURI(params.nickname)
+  const [isAuth, setIsAuth] = useState(false)
 
   const goToMyPack = () => {
     router.push('/account', undefined, { shallow: true })
@@ -44,14 +33,57 @@ export default function Main({ params }) {
   }
 
   useEffect(() => {
-    // test
-    setHasToken(true)
+    console.log('storedUserInfo', userInfo)
+    if (userInfo.userId) setIsAuth(true)
+    getPlaylist(userInfo.userId).then((res) => {
+      console.log('res', res)
+      if (res) setBundles(res.results)
+    })
   }, [])
 
   return (
     <Box>
+      {/* user일 때 */}
+      {isAuth && (
+        <Section>
+          <TextBox>
+            <Typography
+              size={({ theme }) => theme.fontSize.small}
+              weight={600}
+              spcing={-0.64}
+              color={({ theme }) => theme.colors.white}
+            >
+              플리 보따리 방에 담긴 선물
+            </Typography>
+            <Typography
+              size={({ theme }) => theme.fontSize.large}
+              weight={600}
+              spcing={-0.64}
+              color={({ theme }) => theme.colors.white}
+            >
+              {bundles?.length || 0}개
+            </Typography>
+          </TextBox>
+
+          <CopyToClipboard
+            text={`${process.env.NEXT_PUBLIC_BASE_URL}/${userInfo.nickname}`}
+            onCopy={() => setIsCopyClipboard(true)}
+          >
+            <ShareButton>
+              <p>친구에게 링크 공유</p>
+              <ShareIcon color="#323232" />
+            </ShareButton>
+          </CopyToClipboard>
+          {bundles?.length > 0 && (
+            <Typography color={({ theme }) => theme.colors.green} weight={700}>
+              보따리를 눌러 선물을 확인해보세요!
+            </Typography>
+          )}
+        </Section>
+      )}
       {/*  user가 아닐 때  */}
-      {!hasToken && (
+      {/* TODO: 새로고침 시 안뜨게 */}
+      {!isAuth && (
         <NoTokenSection>
           <RoundBox
             as="button"
@@ -69,46 +101,8 @@ export default function Main({ params }) {
           />
         </NoTokenSection>
       )}
-
-      {/* user일 때 */}
-      {hasToken && (
-        <Section>
-          <TextBox>
-            <Typography
-              size={({ theme }) => theme.fontSize.small}
-              weight={600}
-              spcing={-0.64}
-              color={({ theme }) => theme.colors.white}
-            >
-              플리 보따리 방에 담긴 선물
-            </Typography>
-            <Typography
-              size={({ theme }) => theme.fontSize.large}
-              weight={600}
-              spcing={-0.64}
-              color={({ theme }) => theme.colors.white}
-            >
-              {}개
-            </Typography>
-          </TextBox>
-
-          <CopyToClipboard
-            text="copy 테스트입니당"
-            onCopy={() => setIsCopyClipboard(true)}
-          >
-            <ShareButton>
-              <p>친구에게 링크 공유</p>
-              <ShareIcon color="#323232" />
-            </ShareButton>
-          </CopyToClipboard>
-          <Typography color={({ theme }) => theme.colors.green} weight={700}>
-            보따리를 눌러 선물을 확인해보세요!
-          </Typography>
-        </Section>
-      )}
-
-      <GiftBundle data={MOCK} nickname={decodedParams} />
-      <ToastPopUp />
+      <GiftBundle data={bundles} nickname={decodedParams} />
+      {isCopyClipboard && <ToastPopUp />}
     </Box>
   )
 }
@@ -133,7 +127,7 @@ const ShareButton = styled.button`
   background: #fff;
   font-weight: 600;
   letter-spacing: -0.64px;
-
+  z-index: 1;
   ${flexCenter}
 `
 
@@ -142,7 +136,8 @@ const NoTokenSection = styled.section`
   justify-content: flex-end;
   width: 100%;
   height: 100%;
-  gap: 16px;
+  padding-bottom: 48px;
+  gap: 40px;
   z-index: 999;
 
   ${flexDirection}

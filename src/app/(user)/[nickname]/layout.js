@@ -1,22 +1,30 @@
 'use client'
-import { MainHeader } from '@/components'
+import { usePathname, useRouter } from 'next/navigation'
+import { MainHeader, SnowBox } from '@/components'
 import styled, { css } from 'styled-components'
 import { flexDirection } from '@/styles/common'
-import { useHeaderStore } from '@/stores/headers'
-import { useRouter } from 'next/navigation'
 
-export default function MainLayout({ children }) {
-  const { nickname } = useHeaderStore()
+export default function MainLayout({ children, params }) {
+  const path = usePathname()
+  const decodedParams = decodeURI(params.nickname)
+
   const router = useRouter()
 
   const goToBack = () => {
+    if (path.split('/')[2] === 'gift') {
+      router.push(`/${decodedParams}`, undefined, { shallow: true })
+
+      return
+    }
+
     router.push('/', undefined, { shallow: true })
-    // TODO: 토큰 비우기
+    sessionStorage.removeItem('user-storage')
   }
+
   const title = (
     <>
       <FlexAlign>
-        <Alias>{nickname}</Alias>의
+        <Alias>{decodedParams}</Alias>의
       </FlexAlign>
       플리 보따리
     </>
@@ -25,7 +33,8 @@ export default function MainLayout({ children }) {
   return (
     <Box>
       <MainHeader title={title} goToBack={goToBack} />
-      <Main>{children}</Main>
+      <Main id="main">{children}</Main>
+      <SnowBox />
     </Box>
   )
 }
@@ -34,9 +43,10 @@ const Box = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  background-image: url('/img/background.jpg');
+  background-image: url('/img/mainBackground.png');
   background-repeat: no-repeat;
   background-size: 100% 100vh;
+  z-index: 0;
 
   ${flexDirection}
 `

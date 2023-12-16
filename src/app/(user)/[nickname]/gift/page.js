@@ -1,20 +1,20 @@
 'use client'
+import { useEffect } from 'react'
 import styled from 'styled-components'
-import { DefaultButton, SlideCard } from '@/components'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import { MOCK } from '../page'
+import { DefaultButton, SlideCard } from '@/components'
 import { flexDirection } from '@/styles/common'
 import { useHeaderStore } from '@/stores/headers'
-import { useEffect } from 'react'
+import { useUserBundleStore } from '@/stores/userInfo'
 
 export default function ProductDetail() {
   const { setIsViewText } = useHeaderStore()
-  // const currentIndex = MOCK.findIndex(
-  //   (value) => value.nickname === decodeURI(params.nickname),
-  // )
+  const { bundles, currentIndex } = useUserBundleStore()
 
   useEffect(() => {
+    console.log('current', currentIndex)
+    console.log('bundle', bundles)
     setIsViewText(true)
   }, [])
 
@@ -23,16 +23,16 @@ export default function ProductDetail() {
       <SwiperBox
         // loop={true}
         // loopFillGroupWithBlank={true}
-        slidesPerView={1.2}
+        slidesPerView={1.25}
         spaceBetween={20}
         centeredSlides={true}
-        // initialSlide={currentIndex}
+        initialSlide={currentIndex}
         pagination={{
           clickable: true,
         }}
       >
-        {MOCK?.map((list) => (
-          <SwiperSlide key={list.id}>
+        {bundles?.map((list) => (
+          <SwiperSlide key={list.playlistId}>
             <SlideCard list={list} />
           </SwiperSlide>
         ))}
@@ -53,13 +53,13 @@ export default function ProductDetail() {
 const Layout = styled.div`
   gap: 16px;
   align-items: center;
+  height: 100%;
   ${flexDirection};
 `
 
 const SwiperBox = styled(Swiper)`
   width: 100%;
-  height: 526px;
-  padding-bottom: 24px;
+  height: 77%;
   background-color: transparent;
 `
 const Text = styled.p`
