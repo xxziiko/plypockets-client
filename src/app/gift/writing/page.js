@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
 import { PlaylistHeader } from '@/components'
 import Style from './styles'
@@ -44,7 +44,7 @@ function ExpandedLetter({ closeCurrentView, content, setContent }) {
   )
 }
 
-export default function Writing() {
+export default function WritingPage() {
   const [isExpanded, setIsExpanded] = useState(false)
   const [content, setContent] = useState('')
 
