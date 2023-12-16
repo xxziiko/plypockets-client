@@ -11,9 +11,3 @@ export const sendPostFeedback = (body) => {
     .then((response) => response)
     .catch((err) => err)
 }
-
-export const callContentsInfo = (id) => {
-  return AxiosInstance.patch(`/contents/${id}`)
-    .then((response) => response)
-    .catch((error) => error)
-}
