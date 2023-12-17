@@ -12,7 +12,11 @@ const ContentWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.brown};
 `
 
+const WrappingStepBox = styled.div``
+
 export default {
   Box,
   ContentWrapper,
+
+  WrappingStepBox,
 }
