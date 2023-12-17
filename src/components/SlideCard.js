@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { flexAlign, flexCenter } from '@/styles/common'
 import AlbumImage from './AlbumImage'
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 
 export default function SlideCard(props) {
   const { list, audioRefs, index } = props
