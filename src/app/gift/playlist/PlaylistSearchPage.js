@@ -26,7 +26,12 @@ const useSearchSong = () => {
 
 export default function PlayListSearchPage({ closeView }) {
   const { data: initialData } = useFetchTodayHot100()
-  const { debouncedValue, data, handleInputChange } = useSearchSong()
+  const { debouncedValue, inputValue, data, handleInputChange } =
+    useSearchSong()
+
+  const isNotFoundState = debouncedValue && data?.length === 0
+  const isDefaultState = initialData && !inputValue
+  const isSearchingState = !isNotFoundState && !isDefaultState
 
   return (
     <Style.SearchPageBox>
@@ -42,17 +47,26 @@ export default function PlayListSearchPage({ closeView }) {
         </Style.SearchPageCloseButton>
       </Style.SearchPageTopContainer>
       <Style.SearchPageContentWrapper>
-        <NotFound />
+        {isNotFoundState && (
+          <Style.NotFoundWrapper>
+            <NotFound />
+          </Style.NotFoundWrapper>
+        )}
         <Style.PlayListContainer>
-          <Style.PlayListContainerTitle color={theme.colors.white}>
-            지금 가장 사랑 받는 노래 HOT 5
-          </Style.PlayListContainerTitle>
-          {/* {data?.map((el) => (
-            <Playlist
-              data={el}
-              style={{ color: theme.colors.white }}
-            ></Playlist>
-          ))} */}
+          {isDefaultState && (
+            <>
+              <Style.PlayListContainerTitle color={theme.colors.white}>
+                지금 가장 사랑 받는 노래 HOT 5
+              </Style.PlayListContainerTitle>
+              {initialData?.slice(0, 6).map((el) => (
+                <Playlist data={el} style={{ color: theme.colors.white }} />
+              ))}
+            </>
+          )}
+          {isSearchingState &&
+            data?.map((el) => (
+              <Playlist data={el} style={{ color: theme.colors.white }} />
+            ))}
         </Style.PlayListContainer>
       </Style.SearchPageContentWrapper>
     </Style.SearchPageBox>
