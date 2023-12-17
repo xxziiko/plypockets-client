@@ -21,11 +21,10 @@ export const useUserInputStore = create((set) => ({
     })),
 }))
 
-export const useUserBundleStore = create((set) => ({
+export const useBundlesStore = create((set) => ({
   currentIndex: 0,
-  bundles: [],
+
   setCurrentIndex: (index) => set(() => ({ currentIndex: index })),
-  setBundles: (data) => set(() => ({ bundles: data })),
 }))
 
 export const useUserInfoStore = create(
@@ -35,6 +34,7 @@ export const useUserInfoStore = create(
         userId: 0,
         nickname: '',
       },
+
       setUserInfo: (userInfo) => set(userInfo),
     }),
     {

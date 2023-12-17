@@ -13,16 +13,16 @@ import {
 } from '@/components'
 import { useButtonStore } from '@/stores/buttons'
 import ShareIcon from '@/icons/ShareIcon'
-import { useUserBundleStore, useUserInfoStore } from '@/stores/userInfo'
+import { useUserInfoStore } from '@/stores/userInfo'
 import { getPlaylist } from '@/api/services'
 
 export default function Main({ params }) {
   const { userInfo } = useUserInfoStore()
-  const { bundles, setBundles } = useUserBundleStore()
   const { setIsCopyClipboard, isCopyClipboard } = useButtonStore()
   const router = useRouter()
   const decodedParams = decodeURI(params.nickname)
   const [isAuth, setIsAuth] = useState(false)
+  const [bundles, setBundles] = useState([])
 
   const goToMyPack = () => {
     router.push('/account', undefined, { shallow: true })
@@ -34,11 +34,13 @@ export default function Main({ params }) {
 
   useEffect(() => {
     console.log('storedUserInfo', userInfo)
-    if (userInfo.userId) setIsAuth(true)
-    getPlaylist(userInfo.userId).then((res) => {
-      console.log('res', res)
-      if (res) setBundles(res.results)
-    })
+    if (userInfo?.userId) {
+      setIsAuth(true)
+      getPlaylist(userInfo.userId).then((res) => {
+        console.log('res', res)
+        if (res) setBundles(res.results)
+      })
+    }
   }, [])
 
   return (
