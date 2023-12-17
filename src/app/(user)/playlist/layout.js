@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { useRouter } from 'next/navigation'
 import { useHeaderStore } from '@/stores/headers'
 import { flexDirection } from '@/styles/common'
-import { PlaylistHeader, SearchModal } from '@/components'
+import { GiftHeader, SearchModal } from '@/components'
 
 export default function PlaylistLayout({ children }) {
   const { openModal } = useHeaderStore()
@@ -15,7 +15,7 @@ export default function PlaylistLayout({ children }) {
 
   return (
     <Box>
-      <PlaylistHeader
+      <GiftHeader
         title="노래 선물하기"
         subtitle="당신이 선물하고 싶은 노래는?"
         buttonAction={goToBack}
