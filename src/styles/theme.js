@@ -16,6 +16,7 @@ export const colors = {
   brown: 'var(--bg_brown, #3C2929)',
   letterPink: '#FFDDDD',
   highlight: 'var(--highlight, #498DFD)',
+  textBasic: '#323232',
 }
 
 export const fontSize = {

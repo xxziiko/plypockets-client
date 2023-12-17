@@ -26,7 +26,10 @@ function Letter({ content, extendView }) {
 function ExpandedLetter({ closeCurrentView, content, setContent }) {
   return (
     <Style.ExpandedBox>
-      <GiftHeader title="편지 작성하기" backgroundColor="#FFE8E2" />
+      <GiftHeader
+        title="편지 작성하기"
+        colors={{ backgroundColor: '#FFE8E2' }}
+      />
       <Style.GuideMessage>공백포함 300자까지 쓸 수 있어요!</Style.GuideMessage>
       <Style.TextInput
         maxLength={300}

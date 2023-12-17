@@ -2,6 +2,7 @@
 
 import styled from 'styled-components'
 import { GiftHeader } from '@/components'
+import theme from '@/styles/theme'
 
 export default function WritingLayout({ children }) {
   return (
