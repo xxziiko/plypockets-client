@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import theme from '@/styles/theme'
 
 const Box = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -10,9 +10,11 @@ const Box = styled.div`
 const ContentWrapper = styled.div`
   flex: 1;
   padding: 0 32px;
+  background-color: ${({ theme }) => theme.colors.white};
   background-image: url('/img/playlist-background.jpg');
+  background-position: center bottom;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 `
 
 const InputContainer = styled.div`

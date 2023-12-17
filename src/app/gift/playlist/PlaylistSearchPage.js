@@ -4,9 +4,7 @@ import Playlist from './Playlist'
 import SearchIcon from '@/icons/SearchIcon'
 import theme from '@/styles/theme'
 
-export default function PlayListSearchPage({ closeView }) {
-  const list = new Array(5).fill()
-
+export default function PlayListSearchPage({ closeView, data }) {
   return (
     <Style.SearchPageBox>
       <Style.SearchPageTopBorder />
@@ -24,8 +22,11 @@ export default function PlayListSearchPage({ closeView }) {
           <Style.PlayListContainerTitle color={theme.colors.white}>
             지금 가장 사랑 받는 노래 HOT 5
           </Style.PlayListContainerTitle>
-          {list.map(() => (
-            <Playlist style={{ color: theme.colors.white }}></Playlist>
+          {data?.map((el) => (
+            <Playlist
+              data={el}
+              style={{ color: theme.colors.white }}
+            ></Playlist>
           ))}
         </Style.PlayListContainer>
       </Style.SearchPageContentWrapper>

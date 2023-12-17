@@ -1,13 +1,21 @@
 import styled from 'styled-components'
 import theme from '@/styles/theme'
 
-export default function Playlist({ style = { color: theme.colors.black } }) {
+export default function Playlist({
+  data,
+  style = { color: theme.colors.black },
+  onClick,
+}) {
   return (
-    <PlayListWrapper>
-      <PlayListImageWrapper>이미지</PlayListImageWrapper>
+    <PlayListWrapper onClick={onClick}>
+      <PlayListImageWrapper>
+        <img src={data.imageUrl} />
+      </PlayListImageWrapper>
       <PlayListTextWrapper>
-        <PlayListTitle color={style.color}>This Christmas</PlayListTitle>
-        <PlayListSubTitle color={style.color}>태연</PlayListSubTitle>
+        <PlayListTitle color={style.color}>{data.title}</PlayListTitle>
+        <PlayListSubTitle color={style.color}>
+          {data.artistName}
+        </PlayListSubTitle>
       </PlayListTextWrapper>
     </PlayListWrapper>
   )
@@ -22,8 +30,8 @@ const PlayListWrapper = styled.div`
 const PlayListImageWrapper = styled.div`
   width: 64px;
   height: 64px;
-  border: 1px solid black;
   border-radius: 8px;
+  overflow: hidden;
 `
 
 const PlayListTextWrapper = styled.div`
