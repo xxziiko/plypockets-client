@@ -1,38 +1,53 @@
 'use client'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { useRouter } from 'next/navigation'
+import { sendPostLogin } from '@/api/services'
 import { useButtonStore } from '@/stores/buttons'
-import { InputForm } from '@/components'
-import { useState } from 'react'
+import { InputForm, DefaultButton } from '@/components'
+import { flexSpaceBetween } from '@/styles/common'
+import { useUserInfoStore } from '@/stores/userInfo'
 import { ERROR_MESSAGE } from '@/lib/constants'
-import { useUserInputStore } from '@/stores/userInfo'
 
 export default function Login() {
-  const { setUserInputValue, setErrorMessage, errorMessage } =
-    useUserInputStore()
+  const { setButtonDisable, buttonDisable } = useButtonStore()
+  const { setUserInfo } = useUserInfoStore()
   const [isError, setIsError] = useState({ id: true, pw: true })
-  // const [errorMessage, setErrorMessage] = useState({
-  //   id: ERROR_MESSAGE.ID?.default,
-  //   pw: ERROR_MESSAGE.PW?.default,
-  // })
-  const [userInfo, setUserInfo] = useState({
+  const [errorMessage, setErrorMessage] = useState({
+    id: ERROR_MESSAGE.ID?.default,
+    pw: ERROR_MESSAGE.PW?.default,
+  })
+  const [userInputValue, setUserInputValue] = useState({
     nickname: '',
     password: '',
   })
-  const { setButtonDisable } = useButtonStore()
+  const router = useRouter()
+
+  const goToAccount = () => {
+    console.log('userinfo', userInputValue)
+    sendPostLogin(userInputValue).then(
+      (res) => {
+        setUserInfo({ userInfo: res })
+        router.push(`/${res.nickname}`, undefined, { shallow: true })
+      },
+      (error) => {
+        console.log('error', error.data.message)
+        if (error)
+          setErrorMessage({
+            id: ERROR_MESSAGE.ID.duplicated,
+            pw: ERROR_MESSAGE.PW.incorrect,
+          })
+      },
+    )
+  }
 
   const onChange = (e) => {
     const { name, value } = e.target
-
-    setUserInfo({ ...userInfo, [name]: value })
-  }
-
-  const onBlurInputs = () => {
-    setUserInputValue(userInfo)
+    setUserInputValue((prevUserInfo) => ({ ...prevUserInfo, [name]: value }))
   }
 
   useEffect(() => {
-    if (!userInfo.nickname) {
+    if (!userInputValue.nickname) {
       setErrorMessage({
         ...errorMessage,
         id: ERROR_MESSAGE.ID?.default,
@@ -40,7 +55,10 @@ export default function Login() {
       return
     }
 
-    if (userInfo.nickname.length < 2 || userInfo.nickname.length > 8) {
+    if (
+      userInputValue.nickname.length < 2 ||
+      userInputValue.nickname.length > 8
+    ) {
       setIsError({ ...isError, id: true })
       setErrorMessage({ ...errorMessage, id: ERROR_MESSAGE.ID.invalid })
       return
@@ -48,12 +66,12 @@ export default function Login() {
 
     setIsError({ ...isError, id: false })
     setErrorMessage({ ...errorMessage, id: ERROR_MESSAGE.ID.success })
-  }, [userInfo.nickname])
+  }, [userInputValue.nickname])
 
   useEffect(() => {
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/
 
-    if (!userInfo.password) {
+    if (!userInputValue.password) {
       setErrorMessage({
         ...errorMessage,
         pw: ERROR_MESSAGE.PW?.default,
@@ -62,8 +80,8 @@ export default function Login() {
     }
 
     if (
-      userInfo.password.length < 8 ||
-      !passwordRegex.test(userInfo.password)
+      userInputValue.password.length < 8 ||
+      !passwordRegex.test(userInputValue.password)
     ) {
       setIsError({ ...isError, pw: true })
       setErrorMessage({ ...errorMessage, pw: ERROR_MESSAGE.PW.invalid })
@@ -72,7 +90,7 @@ export default function Login() {
 
     setIsError({ ...isError, pw: false })
     setErrorMessage({ ...errorMessage, pw: ERROR_MESSAGE.PW.success })
-  }, [userInfo.password])
+  }, [userInputValue.password])
 
   useEffect(() => {
     if (!isError.id && !isError.pw) setButtonDisable(false)
@@ -80,16 +98,15 @@ export default function Login() {
   }, [isError.id, isError.pw])
 
   return (
-    <>
+    <Layout>
       <Section>
         <InputForm
           label="닉네임"
           placeholder="나의 닉네임은?"
           name="nickname"
           errorMessage={errorMessage.id}
-          inputValue={userInfo.nickname}
+          inputValue={userInputValue.nickname}
           onChange={onChange}
-          onBlurInputs={onBlurInputs}
         />
 
         <InputForm
@@ -97,17 +114,37 @@ export default function Login() {
           placeholder="쉿! 들키지 않게 조심"
           name="password"
           errorMessage={errorMessage.pw}
-          inputValue={userInfo.password}
+          inputValue={userInputValue.password}
           onChange={onChange}
-          onBlurInputs={onBlurInputs}
         />
       </Section>
-    </>
+
+      <ButtonBox>
+        <DefaultButton
+          command="플리보따리 방 입장하기"
+          color="#fff"
+          backgroundColor={({ theme }) => theme.colors.green}
+          onClick={goToAccount}
+          isButtonDisable={buttonDisable}
+        />
+      </ButtonBox>
+    </Layout>
   )
 }
+
+const Layout = styled.div`
+  flex-direction: column;
+  ${flexSpaceBetween}
+  height:100%
+`
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
   gap: 16px;
+`
+
+const ButtonBox = styled.div`
+  padding-bottom: 48px;
+  z-index: 0;
 `
