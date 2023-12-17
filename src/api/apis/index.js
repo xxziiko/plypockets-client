@@ -17,3 +17,9 @@ export const callGetPlaylistApi = (id) => {
     .then((response) => response)
     .catch((error) => error)
 }
+
+export const callGetBoxesApi = (username) => {
+  return AxiosInstance.get(`/playlists/boxes?nickname=${username}`)
+    .then((response) => response)
+    .catch((error) => error)
+}

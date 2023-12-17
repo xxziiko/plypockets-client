@@ -6,14 +6,15 @@ import GiftBoxItem from './GiftBoxItem'
 import { useBundlesStore } from '@/stores/userInfo'
 
 export default function GiftBundle(props) {
-  const { data, nickname } = props
+  const { data, nickname, isClickable } = props
   const { setCurrentIndex } = useBundlesStore()
   const containerRef = useRef(null)
   const router = useRouter()
 
   const goToDetail = (index) => {
     setCurrentIndex(index)
-    router.push(`/${nickname}/gift`, undefined, { shallow: true })
+    if (isClickable)
+      router.push(`/${nickname}/gift`, undefined, { shallow: true })
   }
 
   useEffect(() => {
@@ -46,8 +47,8 @@ const GiftBox = styled.div`
   justify-content: right;
   flex-wrap: wrap-reverse;
   gap: 0;
-  width: 374px;
+  width: 100%;
   height: 450px;
   z-index: 1;
-  overflow-y: auto;
+  overflow: auto;
 `
