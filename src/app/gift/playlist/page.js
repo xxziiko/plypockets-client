@@ -46,13 +46,11 @@ export default function PlaylistPage() {
   const [isSearching, setIsSearching] = useState(false)
 
   const isAllExpandedHot100List = hot100list.length >= 50
-  const isAllExpandedKoreanHot100List = koreanHot100List >= 100
+  const isAllExpandedKoreanHot100List = koreanHot100List >= 50
 
   const updateSongListLength = (length, type) => {
-    const steps = [5, 30, 50, 100]
+    const steps = [5, 30, 50]
     const nextStep = steps[steps.indexOf(length) + 1]
-
-    console.log(length, nextStep, type)
 
     if (type === 'popular') {
       getHot100List(nextStep)
@@ -69,17 +67,18 @@ export default function PlaylistPage() {
         subTitle="당신이 선물하고 싶은 노래는?"
         colors={{ button: theme.colors.bgGreen }}
       />
+      <Style.InputContainer>
+        <Style.InputWrapper onClick={() => setIsSearching(true)}>
+          <SearchIcon />
+          <span>원하는 노래를 검색해보세요</span>
+        </Style.InputWrapper>
+        <Style.InputBottomText>
+          <p>노래 선택 건너뛰기</p>
+          <SkipIcon />
+        </Style.InputBottomText>
+      </Style.InputContainer>
       <Style.ContentWrapper>
-        <Style.InputContainer>
-          <Style.InputWrapper onClick={() => setIsSearching(true)}>
-            <SearchIcon />
-            <span>원하는 노래를 검색해보세요</span>
-          </Style.InputWrapper>
-          <Style.InputBottomText>
-            <p>노래 선택 건너뛰기</p>
-            <SkipIcon />
-          </Style.InputBottomText>
-        </Style.InputContainer>
+        <ScrollUpButton />
 
         <Style.PlayListContainer>
           <Style.PlayListContainerTitle>
@@ -102,7 +101,7 @@ export default function PlaylistPage() {
 
         <Style.PlayListContainer>
           <Style.PlayListContainerTitle>
-            지금 가장 핫한 노래 100개를 가져왔어요!
+            지금 가장 핫한 노래 50개를 가져왔어요!
           </Style.PlayListContainerTitle>
           {koreanHot100List?.map((el) => (
             <Playlist data={el} />
@@ -120,12 +119,8 @@ export default function PlaylistPage() {
         </Style.PlayListContainer>
       </Style.ContentWrapper>
       {isSearching && (
-        <PlayListSearchPage
-          data={hot100list?.slice(0, 6 || [])}
-          closeView={() => setIsSearching(false)}
-        />
+        <PlayListSearchPage closeView={() => setIsSearching(false)} />
       )}
-      <ScrollUpButton />
     </Style.Box>
   )
 }

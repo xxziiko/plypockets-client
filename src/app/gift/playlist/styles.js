@@ -5,9 +5,11 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
 `
 
 const ContentWrapper = styled.div`
+  position: relative;
   flex: 1;
   padding: 0 32px;
   background-color: ${({ theme }) => theme.colors.white};
@@ -15,12 +17,14 @@ const ContentWrapper = styled.div`
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: contain;
+  overflow: scroll;
 `
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 32px;
   margin-bottom: 16px;
 `
 
@@ -114,6 +118,11 @@ const SearchPageBox = styled.div`
   flex-direction: column;
   align-items: center;
   border-radius: 16px 16px 0px 0px;
+  background-color: ${({ theme }) => theme.colors.white};
+  background-image: url('/img/playlist-search-background.png');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
 
   background-color: ${({ theme }) => theme.colors.brown};
 `
@@ -144,8 +153,11 @@ const SearchPageCloseButton = styled.button`
 `
 
 const SearchPageContentWrapper = styled.div`
+  border: 1px solid white;
+
   padding: 0 32px;
   width: 100%;
+  height: 100%;
 `
 
 export default {

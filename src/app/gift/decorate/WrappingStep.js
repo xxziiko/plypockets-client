@@ -4,66 +4,21 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 
-const width = 80
-const height = 80
-
-const wrapperList = ['red', 'green', 'pink']
-const decorationList = [
-  'stripe',
-  'star',
-  'triangle',
-  'ribbon',
-  'snow',
-  'flower',
-]
-const colorList = ['coral', 'green', 'white']
+import {
+  wrapperList,
+  decorationList,
+  colorList,
+  colors,
+} from '@/constants/gift'
 
 function SelectableSection({ children, name, isSelected, setIsSelected }) {
   return (
-    <div
-      onClick={() => {
-        setIsSelected(name)
-      }}
-    >
+    <div onClick={() => setIsSelected(name)}>
       {children}
-      <div
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}
-      >
-        <div
-          style={{
-            width: '20px',
-            height: '20px',
-            border: '2px solid white',
-            borderRadius: '50%',
-            backgroundColor: isSelected ? '#B3DCD2' : 'transparent',
-          }}
-        />
-      </div>
+      <SelectorWrapper>
+        <Selector selected={isSelected} />
+      </SelectorWrapper>
     </div>
-  )
-}
-
-function ColorChip({ name }) {
-  const getColor = (name) => {
-    switch (name) {
-      case 'coral':
-        return '#FF6D86'
-      case 'green':
-        return '#00C496'
-      case 'white':
-        return '#FFF'
-    }
-  }
-
-  return (
-    <div
-      style={{
-        width: '24px',
-        height: '24px',
-        borderRadius: '4px',
-        backgroundColor: getColor(name),
-      }}
-    />
   )
 }
 
@@ -74,11 +29,14 @@ export default function WrappingStep({ moveToNextStep }) {
     color: null,
   })
 
+  const width = 80
+  const height = 80
+
   const isAllSelected = Object.values(selected).every((el) => el !== null)
 
   return (
     <Box>
-      <Content>
+      <div>
         <StepWrapper>
           <StepTitle>포장지 선택하기</StepTitle>
           <ElementWrapper>
@@ -142,13 +100,13 @@ export default function WrappingStep({ moveToNextStep }) {
                   }
                   isSelected={selected.color === name}
                 >
-                  <ColorChip name={name} />
+                  <Chip color={colors[name]} />
                 </SelectableSection>
               )
             })}
           </ColorChipWrapper>
         </StepWrapper>
-      </Content>
+      </div>
       <ButtonWrapper>
         <Button
           disabled={!isAllSelected}
@@ -168,8 +126,6 @@ const Box = styled.div`
   flex-direction: column;
   padding: 0 32px;
 `
-
-const Content = styled.div``
 
 const StepWrapper = styled.div`
   margin-bottom: 48px;
@@ -214,4 +170,24 @@ const Button = styled.button`
   border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
+`
+
+const SelectorWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+`
+const Selector = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 50%;
+  background-color: ${({ selected }) => (selected ? '#B3DCD2' : 'transparent')};
+`
+
+const Chip = styled.div`
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: ${({ color }) => color};
 `
