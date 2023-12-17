@@ -159,12 +159,12 @@ const SearchPageContentWrapper = styled.div`
 `
 
 const NotFoundWrapper = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 100%;
-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 `
 
 export default {
@@ -183,5 +183,5 @@ export default {
   SearchPageCloseButton,
   SearchPageTopContainer,
   SearchPageContentWrapper,
-  NotFoundWrapper
+  NotFoundWrapper,
 }
