@@ -43,7 +43,7 @@ export default function PlaylistPage() {
     api: useFetchKoreanHot100,
     initialNum: 5,
   })
-  const [isSearching, setIsSearching] = useState(false)
+  const [isSearching, setIsSearching] = useState(true)
 
   const isAllExpandedHot100List = hot100list.length >= 50
   const isAllExpandedKoreanHot100List = koreanHot100List >= 50

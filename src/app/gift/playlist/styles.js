@@ -123,7 +123,6 @@ const SearchPageBox = styled.div`
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: contain;
-
   background-color: ${({ theme }) => theme.colors.brown};
 `
 
@@ -153,11 +152,19 @@ const SearchPageCloseButton = styled.button`
 `
 
 const SearchPageContentWrapper = styled.div`
-  border: 1px solid white;
-
+  flex: 1;
   padding: 0 32px;
   width: 100%;
-  height: 100%;
+  overflow: scroll;
+`
+
+const NotFoundWrapper = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 100%;
 `
 
 export default {
@@ -176,4 +183,5 @@ export default {
   SearchPageCloseButton,
   SearchPageTopContainer,
   SearchPageContentWrapper,
+  NotFoundWrapper
 }
