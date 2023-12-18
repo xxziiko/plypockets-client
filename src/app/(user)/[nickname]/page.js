@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { flexAlign, flexCenter, flexDirection } from '@/styles/common'
 import {
@@ -56,7 +56,6 @@ export default function Main({ params }) {
 
   return (
     <Box>
-      {/* user일 때 */}
       {isAuth && (
         <Section>
           <TextBox>
@@ -128,6 +127,9 @@ const Box = styled.div`
   flex-direction: column;
   height: 100%;
   padding: 0 32px;
+  animation: ${({ theme }) => css`
+    ${theme.animation.slideInFromBottom} 1s
+  `};
 
   ${flexAlign}
 `

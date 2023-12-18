@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import { DefaultButton, SlideCard } from '@/components'
@@ -99,6 +99,9 @@ const Layout = styled.div`
   align-items: center;
   height: 100%;
   ${flexDirection};
+  animation: ${({ theme }) => css`
+    ${theme.animation.slideInFromBottom} 1s
+  `};
 `
 
 const SwiperBox = styled(Swiper)`

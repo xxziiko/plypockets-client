@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { DefaultButton, SnowBox, Typography } from '@/components'
 import { flexDirection } from '@/styles/common'
 
@@ -80,6 +80,10 @@ const Main = styled.main`
   height: 100%;
   padding: 48px 32px 0;
   color: ${({ theme }) => theme.colors.white};
+  animation: ${({ theme }) => css`
+    ${theme.animation.slideInFromBottom} 1s
+  `};
+
   ${flexDirection};
 `
 
