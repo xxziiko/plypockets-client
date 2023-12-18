@@ -85,7 +85,8 @@ export default function ContentDetailPage({ params }) {
   const faqData = faqDatas[id - 1]
   const { keywords } = keywordDatas[id - 1]
 
-  const voteData = Number(id) < voteDatas.length ? voteDatas[id - 1] : undefined
+  const voteData =
+    Number(id) < voteDatas.length + 1 ? voteDatas[id - 1] : undefined
 
   const handleGoBack = () => {
     // TODO: go back
