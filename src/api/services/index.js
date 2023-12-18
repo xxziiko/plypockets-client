@@ -13,11 +13,10 @@ export const getTodayHot100 = () => {
 
 export const sendPostLogin = (body) => {
   return callPostLoginApi(body)
-    .then(
-      (response) => response.data,
-      (error) => console.log('error', error.data),
-    )
-    .catch((error) => error)
+    .then((response) => response.data)
+    .catch((error) => {
+      throw error
+    })
 }
 
 export const getPlaylist = (id) => {

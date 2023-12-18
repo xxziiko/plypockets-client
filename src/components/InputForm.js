@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import styled from 'styled-components'
 import { Typography } from '@/components'
 import { flexSpaceBetween, flexCenter } from '@/styles/common'
@@ -25,6 +24,7 @@ export default function InputForm(props) {
             name={name}
             onChange={(e) => onChange(e)}
             type={name === 'password' ? 'password' : 'text'}
+            autoComplete="off"
           />
         </InputBox>
       </InputWrapper>
