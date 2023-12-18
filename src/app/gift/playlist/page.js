@@ -137,7 +137,13 @@ export default function PlaylistPage() {
         </Style.ContentWrapper>
       )}
       {isSearching && (
-        <PlayListSearchPage closeView={() => setIsSearching(false)} />
+        <PlayListSearchPage
+          closeView={() => setIsSearching(false)}
+          handleClick={(data) => {
+            setIsSearching(false)
+            setSelectedSong(data)
+          }}
+        />
       )}
     </Style.Box>
   )

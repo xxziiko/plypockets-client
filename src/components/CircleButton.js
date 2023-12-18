@@ -11,7 +11,7 @@ export default function CircleButton(props) {
 
   return (
     <CircleIcon
-      backgroundcolor={
+      backgroundColor={
         buttonDisable ? ({ theme }) => theme.colors.grey : backgroundColor
       }
       onClick={() => router.push(nextUrl, undefined, { shallow: true })}
