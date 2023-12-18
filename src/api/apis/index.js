@@ -9,7 +9,10 @@ export const callGetTodayHot100 = () => {
 export const callPostLoginApi = (body) => {
   return AxiosInstance.post('/users/login', body)
     .then((response) => response)
-    .catch((error) => error)
+    .catch((error) => {
+      // console.log('error', error)
+      throw Error(error.status)
+    })
 }
 
 export const callGetPlaylistApi = (id) => {

@@ -13,7 +13,7 @@ export const ERROR_MESSAGE = {
       color: ({ theme }) => theme.colors.red,
     },
     duplicated: {
-      message: '이미 존재하는 닉네임이예요.',
+      message: '이미 존재하는 닉네임이거나 비밀번호가 일치하지 않습니다.',
       color: ({ theme }) => theme.colors.red,
     },
   },
@@ -31,7 +31,7 @@ export const ERROR_MESSAGE = {
       color: ({ theme }) => theme.colors.red,
     },
     incorrect: {
-      message: '비밀번호가 일치하지 않습니다.',
+      message: '이미 존재하는 닉네임이거나 비밀번호가 일치하지 않습니다.',
       color: ({ theme }) => theme.colors.red,
     },
   },

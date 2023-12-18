@@ -15,9 +15,11 @@ export default function DefaultButton(props) {
   return (
     <Button
       color={color}
-      backgroundcolor={
-        isButtonDisable ? ({ theme }) => theme.colors.grey : backgroundColor
-      }
+      props={{
+        backgroundColor: isButtonDisable
+          ? ({ theme }) => theme.colors.grey
+          : backgroundColor,
+      }}
       onClick={() => onClick()}
       disabled={isButtonDisable}
     >
@@ -42,7 +44,7 @@ const Button = styled.button`
   height: 56px;
   border-radius: 8px;
   color: ${(props) => props.color};
-  background-color: ${(props) => props.backgroundcolor};
+  background-color: ${(props) => props.props.backgroundColor};
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.64px;

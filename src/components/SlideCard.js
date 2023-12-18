@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { flexAlign, flexCenter } from '@/styles/common'
 import AlbumImage from './AlbumImage'
-// import dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 export default function SlideCard(props) {
   const { list, audioRefs, index } = props
@@ -31,9 +31,10 @@ export default function SlideCard(props) {
       <Date>
         <BordText>선물받은 시간</BordText>
 
-        {list?.createDate
-          ? dayjs(list.createdDate).format('YYYY년 MM월 DD일')
-          : '2023년 12월 25일 오후 11시 25분 (목데이터)'}
+        {list?.createdDate &&
+          dayjs(list.createdDate)
+            .locale('ko')
+            .format('YYYY년 MM월 DD일 HH시 mm분')}
       </Date>
       <Content>{list.letter}</Content>
     </Card>

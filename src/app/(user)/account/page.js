@@ -25,20 +25,19 @@ export default function Login() {
 
   const goToAccount = () => {
     console.log('userinfo', userInputValue)
-    sendPostLogin(userInputValue).then(
-      (res) => {
+    sendPostLogin(userInputValue)
+      .then((res) => {
         setUserInfo({ userInfo: res })
         router.push(`/${res.nickname}`, undefined, { shallow: true })
-      },
-      (error) => {
-        console.log('error', error.data.message)
+      })
+      .catch((error) => {
         if (error)
           setErrorMessage({
             id: ERROR_MESSAGE.ID.duplicated,
             pw: ERROR_MESSAGE.PW.incorrect,
           })
-      },
-    )
+        return
+      })
   }
 
   const onChange = (e) => {
