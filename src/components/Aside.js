@@ -6,6 +6,8 @@ import { ContentsCard } from '@/components/ContentsCard'
 
 import { DESKTOP_WIDTH } from '@/lib/constants'
 
+import { DefaultButton } from '@/components'
+
 import { contentsCardDatas } from '@/constants'
 
 export const Aside = () => {
@@ -24,7 +26,7 @@ export const Aside = () => {
             spacing={-1.6}
             color={({ theme }) => theme.colors.subGreen}
           >
-            올 한해 마무리, 크리스마스 <br />
+            {'올 한해 마무리, 크리스마스 '}
             <Typography color={({ theme }) => theme.colors.red}>
               플리 보따리
             </Typography>
@@ -43,10 +45,34 @@ export const Aside = () => {
           </Typography>
         </div>
       </Box>
+      <Box
+        style={{
+          paddingTop: '45px',
+          gap: '8px',
+        }}
+      >
+        <div>
+          <Typography
+            color={({ theme }) => theme.colors.white}
+            size={({ theme }) => theme.fontSize.small}
+            weight={({ theme }) => theme.fontWeight.large}
+            spacing={-0.64}
+          >
+            소중한 사람들이 남긴 편지를 책자로 배송받을 수 있어요!
+          </Typography>
+        </div>
+
+        <DefaultButton
+          color="#fff"
+          command="선물 보따리 구매하러 가기"
+          isShowIcon
+          backgroundColor="#F84A68"
+        />
+      </Box>
 
       <Box
         style={{
-          paddingTop: '232px',
+          paddingTop: '180px',
           gap: '32px',
         }}
       >
@@ -59,7 +85,7 @@ export const Aside = () => {
           읽을 보따리 보러가기
         </Typography>
         <Box style={{ flexDirection: 'row', gap: '20px' }}>
-          {contentsCardDatas.slice(0, 2).map((data) => (
+          {contentsCardDatas.slice(0, 3).map((data) => (
             <ContentsCard {...data} />
           ))}
         </Box>
@@ -76,11 +102,11 @@ const AsideLayout = styled.aside`
   display: none;
   position: fixed;
   top: 0;
-  right: 50%;
-  width: 480px;
-  min-width: 480px;
+  right: 40%;
+  width: 731px;
+  min-width: 731px;
   height: 100vh;
-  padding-left: 48px;
+  padding-left: 60px;
 `
 
 const Box = styled.div`

@@ -24,7 +24,7 @@ const useSearchSong = () => {
   return { debouncedValue, inputValue, handleInputChange, data, error, loading }
 }
 
-export default function PlayListSearchPage({ closeView }) {
+export default function PlayListSearchPage({ closeView, handleClick }) {
   const { data: initialData } = useFetchTodayHot100()
   const { debouncedValue, inputValue, data, handleInputChange } =
     useSearchSong()
@@ -59,13 +59,21 @@ export default function PlayListSearchPage({ closeView }) {
                 지금 가장 사랑 받는 노래 HOT 5
               </Style.PlayListContainerTitle>
               {initialData?.slice(0, 6).map((el) => (
-                <Playlist data={el} style={{ color: theme.colors.white }} />
+                <Playlist
+                  data={el}
+                  style={{ color: theme.colors.white }}
+                  onClick={() => handleClick(el)}
+                />
               ))}
             </>
           )}
           {isSearchingState &&
             data?.map((el) => (
-              <Playlist data={el} style={{ color: theme.colors.white }} />
+              <Playlist
+                data={el}
+                style={{ color: theme.colors.white }}
+                onClick={() => handleClick(el)}
+              />
             ))}
         </Style.PlayListContainer>
       </Style.SearchPageContentWrapper>

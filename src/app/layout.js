@@ -52,7 +52,7 @@ const Body = styled.body`
 
 const Layout = styled.div`
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   height: 100vh;
   display: flex;
   justify-content: flex-end;
