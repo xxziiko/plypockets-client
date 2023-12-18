@@ -27,7 +27,7 @@ const SelectedSong = ({ data }) => {
         {artistName}
       </Typography>
 
-      <audio controls autoplay name="media">
+      <audio controls autoplay>
         <source src={previewUrl} type="audio/mpeg" />
       </audio>
 

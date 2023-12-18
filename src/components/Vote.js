@@ -5,13 +5,16 @@ import ThreeTriangleIcon from '@/icons/ThreeTriangleIcon'
 import CheckRoundIcon from '@/icons/CheckIcon'
 
 export const Vote = (props) => {
-  const [selected, setSelected] = useState(null)
-  const [clicked, setClicked] = useState(null)
-
   const {
     voteData: { topic, datas },
     count,
+    hasVoted,
+    handleSendVote,
+    choiced,
+    voteResult,
   } = props
+
+  const [clicked, setClicked] = useState(null)
 
   const handleButtonClick = (idx) => {
     if (clicked === idx) {
@@ -22,7 +25,7 @@ export const Vote = (props) => {
   }
 
   const handleSubmit = () => {
-    setSelected(clicked)
+    handleSendVote(clicked)
     setClicked(null)
   }
 
@@ -63,16 +66,17 @@ export const Vote = (props) => {
         }}
       >
         {datas.map((content, idx) => {
-          const isDefault = idx !== selected && idx !== clicked
-          const isClicked = idx === clicked
-          const isSelected = idx === selected
+          const num = idx + 1
+          const isDefault = num !== choiced && num !== clicked
+          const isClicked = num === clicked
+          const isSelected = num === choiced
           return (
             <VoteButton
-              key={idx}
-              onClick={() => handleButtonClick(idx)}
+              key={num}
+              onClick={() => handleButtonClick(num)}
               default={isDefault}
-              selected={idx === selected}
-              disabled={selected !== null}
+              choiced={num === choiced}
+              disabled={!!hasVoted}
             >
               <Typography
                 size={'14px'}
@@ -83,27 +87,27 @@ export const Vote = (props) => {
                 {content}
               </Typography>
               {isClicked && <CheckRoundIcon />}
-              {/* {selected !== null && (
+              {hasVoted && (
                 <Typography
                   size={'16px'}
                   weight={isSelected ? 700 : 500}
                   spacing={-0.64}
                   color={isSelected ? '#ffffff' : '#595959'}
                 >
-                  {percent}%
+                  {voteResult[idx].percent}%
                 </Typography>
-              )} */}
+              )}
             </VoteButton>
           )
         })}
       </Box>
 
       <DefaultButton
-        command={selected !== null ? '투표 완료' : '투표 하기'}
+        command={hasVoted ? '투표 완료' : '투표 하기'}
         color={clicked === null ? '#A4A4A4' : '#ffffff'}
-        backgroundColor={clicked === null ? '#E2E2E2' : '#00916F'}
+        backgroundColor={'#00916F'}
         isShowIcon={false}
-        isButtonDisable={clicked === null}
+        isButtonDisable={hasVoted || clicked === null}
         onClick={handleSubmit}
       />
     </Container>
@@ -139,6 +143,6 @@ const VoteButton = styled.button`
       ? '2px solid var(--stroke_grey, #e5e5e5)'
       : '2px solid var(--main_green, #00916F)'};
   background: ${(props) =>
-    props.selected ? 'var(--main_green, #00916F)' : 'var(--main_white, #fff)'};
+    props.choiced ? 'var(--main_green, #00916F)' : 'var(--main_white, #fff)'};
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 `

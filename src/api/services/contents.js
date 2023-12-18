@@ -3,6 +3,7 @@ import {
   callContentsLikes,
   callCheckIsVote,
   callContentsVotes,
+  callContentsVoteResult,
 } from '@/api/apis/contents'
 
 export const getContentsInfo = (id) => {
@@ -25,6 +26,12 @@ export const checkIsVote = ({ contentId, userId }) => {
 
 export const sendContentsVotes = ({ contentId, userId, choice }) => {
   return callContentsVotes(contentId, userId, choice)
+    .then((response) => response.data)
+    .catch((error) => error)
+}
+
+export const getContentsVoteResult = (contentId) => {
+  return callContentsVoteResult(contentId)
     .then((response) => response.data)
     .catch((error) => error)
 }
