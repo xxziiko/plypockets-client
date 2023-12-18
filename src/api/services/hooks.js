@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import AxiosInstance from '@/api/instance'
+import { useGiftStore } from '@/stores/gift'
 
 export const useFetch = ({ url, enabled = true }) => {
   const [data, setData] = useState(null)
@@ -10,7 +11,6 @@ export const useFetch = ({ url, enabled = true }) => {
   const fetchData = async () => {
     await AxiosInstance.get(url)
       .then((response) => {
-        console.log(response)
         setData(response.data)
       })
       .catch((error) => setError(error))
@@ -35,4 +35,28 @@ export const useFetchKoreanHot100 = () => {
 
 export const useFetchSearchSong = (keyword) => {
   return useFetch({ url: `/search/${keyword}`, enabled: !!keyword })
+}
+
+export const usePostGift = () => {
+  const { nickname, letter, friendName, spotifyId, giftWrapper } =
+    useGiftStore()
+
+  const dto = {
+    coverIdx: giftWrapper.cover,
+    decoIdx: giftWrapper.decoration,
+    colorIdx: giftWrapper.color,
+    letter: letter,
+    friendname: friendName,
+    spotifyId: spotifyId,
+  }
+
+  const callPostGiftApi = async () => {
+    return await AxiosInstance.post(`/playlists/${nickname}`, dto).then(
+      (response) => {
+        return response.data
+      },
+    )
+  }
+
+  return { callPostGiftApi }
 }

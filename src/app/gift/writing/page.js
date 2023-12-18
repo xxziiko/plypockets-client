@@ -1,11 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
+import { useGiftStore } from '@/stores/gift'
 import { GiftHeader } from '@/components'
 import Style from './styles'
 
 function Letter({ content, extendView }) {
+  const router = useRouter()
   return (
     <Style.Box>
       <Style.LetterSection>
@@ -17,7 +20,14 @@ function Letter({ content, extendView }) {
         </Style.ContentWrapper>
       </Style.LetterSection>
       <Style.ButtonWrapper>
-        <Style.Button disabled={content.length === 0}>다음으로</Style.Button>
+        <Style.Button
+          onClick={() =>
+            router.push('/gift/decorate', undefined, { shallow: true })
+          }
+          disabled={content.length === 0}
+        >
+          다음으로
+        </Style.Button>
       </Style.ButtonWrapper>
     </Style.Box>
   )
@@ -32,6 +42,7 @@ function ExpandedLetter({ closeCurrentView, content, setContent }) {
       />
       <Style.GuideMessage>공백포함 300자까지 쓸 수 있어요!</Style.GuideMessage>
       <Style.TextInput
+        value={content}
         maxLength={300}
         onChange={(e) => setContent(e.target.value)}
       />
@@ -48,6 +59,7 @@ function ExpandedLetter({ closeCurrentView, content, setContent }) {
 }
 
 export default function WritingPage() {
+  const { letter, setLetter } = useGiftStore()
   const [isExpanded, setIsExpanded] = useState(false)
   const [content, setContent] = useState('')
 
@@ -55,12 +67,12 @@ export default function WritingPage() {
     <>
       {isExpanded ? (
         <ExpandedLetter
-          content={content}
-          setContent={setContent}
+          content={letter}
+          setContent={setLetter}
           closeCurrentView={() => setIsExpanded(false)}
         />
       ) : (
-        <Letter content={content} extendView={() => setIsExpanded(true)} />
+        <Letter content={letter} extendView={() => setIsExpanded(true)} />
       )}
     </>
   )

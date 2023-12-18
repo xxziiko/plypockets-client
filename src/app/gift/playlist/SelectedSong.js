@@ -1,13 +1,20 @@
 import styled from 'styled-components'
-import { Typography } from '@/components'
 
+import { useRouter } from 'next/navigation'
+import { useGiftStore } from '@/stores/gift'
+
+import { Typography } from '@/components'
 import { DefaultButton } from '@/components'
 
 const SelectedSong = ({ data }) => {
+  const router = useRouter()
+  const { setSpotifyId } = useGiftStore()
+
   const { spotifyId, artistName, title, albumName, imageUrl, previewUrl } = data
 
   const handleClickedNext = () => {
-    // TODO
+    setSpotifyId(spotifyId)
+    router.push('/gift/writing', undefined, { shallow: true })
   }
 
   return (

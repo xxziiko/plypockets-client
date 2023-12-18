@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 const Box = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -12,11 +13,7 @@ const ContentWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.brown};
 `
 
-const WrappingStepBox = styled.div``
-
 export default {
   Box,
   ContentWrapper,
-
-  WrappingStepBox,
 }
