@@ -39,6 +39,12 @@ export default function ProductDetail() {
     }
   }
 
+  const goTopurchase = () => {
+    window.open(
+      'https://near-quince-092.notion.site/36341708de704a508e9dfc910276181d?pvs=4',
+    )
+  }
+
   useEffect(() => {
     setIsViewText(true)
   }, [])
@@ -87,7 +93,9 @@ export default function ProductDetail() {
           isShowIcon
           color="#fff"
           backgroundColor={({ theme }) => theme.colors.red}
+          onClick={goTopurchase}
         />
+
         <Text>소중한 사람들이 남긴 편지를 책자로 배송받을 수 있어요!</Text>
       </div>
     </Layout>
