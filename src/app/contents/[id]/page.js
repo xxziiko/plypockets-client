@@ -30,8 +30,10 @@ import {
   contentsCardDatas,
 } from '@/constants'
 
-import { useButtonStore } from '@/stores/buttons'
 import { useContentsInfo } from '@/hooks/useContentsInfo'
+
+import { useButtonStore } from '@/stores/buttons'
+import { useUserInfoStore } from '@/stores/userInfo'
 
 // TODO: metadata
 
@@ -68,22 +70,20 @@ export default function ContentDetailPage({ params }) {
   const path = usePathname()
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}${path}`
 
-  // TODO: get data from server
-  // const {
-  //   viewCount,
-  //   likeCount,
-  //   voteCount,
-  //   isVote,
-  //   handleLike,
-  //   handleSendVote,
-  // } = useContentsInfo(id, userId)
-  const viewCount = 627
-  const likeCount = 627
-  const voteCount = 627
+  const {
+    viewCount,
+    likeCount,
+    voteCount,
+    hasVoted,
+    choice,
+    handleLike,
+    handleSendVote,
+  } = useContentsInfo(id)
 
   const contentData = contentsDatas[id - 1]
   const faqData = faqDatas[id - 1]
   const { keywords } = keywordDatas[id - 1]
+
   const voteData = Number(id) < voteDatas.length ? voteDatas[id - 1] : undefined
 
   const handleGoBack = () => {
@@ -217,7 +217,15 @@ export default function ContentDetailPage({ params }) {
       <HorizontalLine />
 
       {/* vote section */}
-      {voteData && <Vote voteData={voteData} count={voteCount} />}
+      {voteData && (
+        <Vote
+          voteData={voteData}
+          count={voteCount}
+          hasVoted={hasVoted}
+          handleSendVote={handleSendVote}
+          choice={choice}
+        />
+      )}
 
       {/* bottom section */}
       <ContainerBox
@@ -252,7 +260,7 @@ export default function ContentDetailPage({ params }) {
         </FlexBox>
 
         {/* TODO: Like Feature */}
-        <RoundButton>
+        <RoundButton onClick={() => handleLike(id)}>
           <HeartIcon width={18} height={18} color={'#F84A68'} />
         </RoundButton>
       </ContainerBox>
@@ -399,7 +407,7 @@ const RowScrollBox = styled.div`
   padding: 0 32px;
   gap: 24px;
   background: #503939;
-  overflow-x: auto;
+  overflow-x: scroll;
 `
 
 const ShareButton = styled.button`

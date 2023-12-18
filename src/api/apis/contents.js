@@ -13,17 +13,23 @@ export const callContentsLikes = (id) => {
 }
 
 export const callCheckIsVote = (contentId, userId) => {
-  return AxiosInstance.get(`/contents/votes/${contentId}/${userId}`)
+  return AxiosInstance.get(`/votes/${contentId}/${userId}`)
     .then((response) => response)
     .catch((error) => error)
 }
 
 export const callContentsVotes = (contentId, userId, choice) => {
-  return AxiosInstance.post(`/contents/votes`, {
+  return AxiosInstance.post(`/votes`, {
     contentId,
     userId,
     choice,
   })
+    .then((response) => response)
+    .catch((error) => error)
+}
+
+export const callContentsVoteResult = (contentId) => {
+  return AxiosInstance.get(`/votes/${contentId}`)
     .then((response) => response)
     .catch((error) => error)
 }

@@ -12,7 +12,7 @@ export const ContentsCard = (props) => {
       onClick={() =>
         router.push(`/contents/${id}`, undefined, { shallow: true })
       }
-      image={image}
+      image={`${process.env.NEXT_PUBLIC_IMAGE_URL}${image}`}
     >
       <Typography as="h3" size="16px" weight={700} spacing={-0.64} color="#FFF">
         {title}
