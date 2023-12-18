@@ -13,16 +13,17 @@ import {
 } from '@/components'
 import { useButtonStore } from '@/stores/buttons'
 import ShareIcon from '@/icons/ShareIcon'
-import { useUserBundleStore, useUserInfoStore } from '@/stores/userInfo'
-import { getPlaylist } from '@/api/services'
+import { useUserInfoStore } from '@/stores/userInfo'
+import { getBoxes, getPlaylist } from '@/api/services'
 
 export default function Main({ params }) {
   const { userInfo } = useUserInfoStore()
-  const { bundles, setBundles } = useUserBundleStore()
   const { setIsCopyClipboard, isCopyClipboard } = useButtonStore()
   const router = useRouter()
   const decodedParams = decodeURI(params.nickname)
   const [isAuth, setIsAuth] = useState(false)
+  const [isClickable, setIsClickable] = useState(false)
+  const [bundles, setBundles] = useState([])
 
   const goToMyPack = () => {
     router.push('/account', undefined, { shallow: true })
@@ -33,13 +34,25 @@ export default function Main({ params }) {
   }
 
   useEffect(() => {
-    console.log('storedUserInfo', userInfo)
-    if (userInfo.userId) setIsAuth(true)
-    getPlaylist(userInfo.userId).then((res) => {
-      console.log('res', res)
-      if (res) setBundles(res.results)
-    })
-  }, [])
+    if (userInfo?.nickname) {
+      setIsAuth(true)
+      getPlaylist(userInfo.userId).then((res) => {
+        // console.log('res', res)
+        if (res) {
+          setBundles(res.results)
+          setIsClickable(true)
+        }
+      })
+      return
+    }
+
+    if (!userInfo?.nickname) {
+      getBoxes(decodedParams).then((res) => {
+        // console.log(res)
+        if (res) setBundles(res.results)
+      })
+    }
+  }, [userInfo])
 
   return (
     <Box>
@@ -81,8 +94,7 @@ export default function Main({ params }) {
           )}
         </Section>
       )}
-      {/*  user가 아닐 때  */}
-      {/* TODO: 새로고침 시 안뜨게 */}
+
       {!isAuth && (
         <NoTokenSection>
           <RoundBox
@@ -101,7 +113,12 @@ export default function Main({ params }) {
           />
         </NoTokenSection>
       )}
-      <GiftBundle data={bundles} nickname={decodedParams} />
+
+      <GiftBundle
+        data={bundles}
+        nickname={decodedParams}
+        isClickable={isClickable}
+      />
       {isCopyClipboard && <ToastPopUp />}
     </Box>
   )

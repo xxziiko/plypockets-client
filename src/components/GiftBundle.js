@@ -3,14 +3,18 @@ import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 import GiftBoxItem from './GiftBoxItem'
+import { useBundlesStore } from '@/stores/userInfo'
 
 export default function GiftBundle(props) {
-  const { data, nickname } = props
+  const { data, nickname, isClickable } = props
+  const { setCurrentIndex } = useBundlesStore()
   const containerRef = useRef(null)
   const router = useRouter()
 
-  const goToDetail = () => {
-    router.push(`/${nickname}/gift`, undefined, { shallow: true })
+  const goToDetail = (index) => {
+    setCurrentIndex(index)
+    if (isClickable)
+      router.push(`/${nickname}/gift`, undefined, { shallow: true })
   }
 
   useEffect(() => {
@@ -20,13 +24,17 @@ export default function GiftBundle(props) {
       container.scrollTop = -100
     }
   }, [])
-
   return (
     <GiftBox ref={containerRef}>
       {data
-        .sort((a, b) => new Date(a.date) - new Date(b.date))
-        .map((list) => (
-          <GiftBoxItem key={list.id} list={list} onClick={goToDetail} />
+        ?.sort((a, b) => new Date(a.createdDate) - new Date(b.createdDate))
+        .map((list, index) => (
+          <GiftBoxItem
+            key={list.playlistId}
+            list={list}
+            onClick={goToDetail}
+            index={index}
+          />
         ))}
     </GiftBox>
   )
@@ -39,8 +47,8 @@ const GiftBox = styled.div`
   justify-content: right;
   flex-wrap: wrap-reverse;
   gap: 0;
-  width: 374px;
+  width: 100%;
   height: 450px;
-  z-index: 0;
-  overflow-y: auto;
+  z-index: 1;
+  overflow: auto;
 `

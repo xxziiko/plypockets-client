@@ -3,17 +3,20 @@ import { keyframes } from 'styled-components'
 export const colors = {
   subGreen: 'var(--sub_green, #00C496)',
   green: '#00916F',
+  bgGreen: '#B3DCD2',
   red: 'var(--mainred, #F84A68)',
   white: ' var(--main_white, var(--White, #FFF))',
   black: '#111',
   grey: '#CCCCCC',
+  mainGrey: '#C1C1C1',
   fieldGrey: 'var(--field_grey, #F9F9F9)',
-  strokeGrey: 'var(--stroke_grey, #ECECEC)',
+  strokeGrey: 'var(--stroke_grey, #E5E5E5)',
   subGrey: '#595959',
   pink: '#FFB7B7',
   brown: 'var(--bg_brown, #3C2929)',
   letterPink: '#FFDDDD',
   highlight: 'var(--highlight, #498DFD)',
+  textBasic: '#323232',
 }
 
 export const fontSize = {

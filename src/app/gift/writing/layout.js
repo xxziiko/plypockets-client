@@ -1,12 +1,13 @@
 'use client'
 
 import styled from 'styled-components'
-import { PlaylistHeader } from '@/components'
+import { GiftHeader } from '@/components'
+import theme from '@/styles/theme'
 
 export default function WritingLayout({ children }) {
   return (
     <Box>
-      <PlaylistHeader title="편지 작성하기" />
+      <GiftHeader title="편지 작성하기" />
       {children}
     </Box>
   )

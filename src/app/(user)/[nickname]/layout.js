@@ -7,7 +7,6 @@ import { flexDirection } from '@/styles/common'
 export default function MainLayout({ children, params }) {
   const path = usePathname()
   const decodedParams = decodeURI(params.nickname)
-
   const router = useRouter()
 
   const goToBack = () => {
@@ -17,7 +16,7 @@ export default function MainLayout({ children, params }) {
       return
     }
 
-    router.push('/', undefined, { shallow: true })
+    router.push('/')
     sessionStorage.removeItem('user-storage')
   }
 
