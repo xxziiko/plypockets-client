@@ -59,8 +59,6 @@ const Box = styled.div`
   width: 375px;
   padding-bottom: 48px;
   /* border: 1px solid red; */
-
-  z-index: 999;
 `
 
 const Button = styled.button`
@@ -82,6 +80,4 @@ const Button = styled.button`
 
   background-color: var(--sub_green, #00c496);
   box-shadow: 0px 0px 8px 0px rgba(0, 196, 150, 0.2);
-
-  z-index: 9999;
 `

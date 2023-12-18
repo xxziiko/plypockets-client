@@ -20,6 +20,8 @@ export const useContentsInfo = (contentId) => {
   const [hasVoted, setHasVoted] = useState(false)
   const [choice, setChoice] = useState(null)
 
+  const [voteResult, setVoteResult] = useState([{ choice: 0, percent: 0 }])
+
   const hasVotedCookieName = `hasVotedForContent${contentId}`
   const choiceCookieName = `choiceForContent${contentId}`
 
@@ -27,6 +29,7 @@ export const useContentsInfo = (contentId) => {
     try {
       const contentsData = await getContentsInfo(contentId)
       const { viewCnt, likeCnt, totalVoteCnt } = contentsData.results
+      console.log(contentsData.results)
 
       setViewCount(viewCnt)
       setLikeCount(likeCnt)
@@ -72,7 +75,10 @@ export const useContentsInfo = (contentId) => {
     try {
       if (nickname.length > 0) {
         const data = await sendContentsVotes({ contentId, userId, choice })
-        const { voteCnt } = data.results
+        const { hasVoted, choice, voteResultResponseDtoList } = data.results
+        setHasVoted(hasVoted)
+        setChoice(choice)
+        setVoteResult(voteResultResponseDtoList)
         setVoteCount(voteCnt)
       } else {
         setHasVoted(true)

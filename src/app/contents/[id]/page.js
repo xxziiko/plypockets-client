@@ -407,7 +407,7 @@ const RowScrollBox = styled.div`
   padding: 0 32px;
   gap: 24px;
   background: #503939;
-  overflow-x: auto;
+  overflow-x: scroll;
 `
 
 const ShareButton = styled.button`

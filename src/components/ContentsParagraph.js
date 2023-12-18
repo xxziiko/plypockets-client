@@ -40,7 +40,7 @@ export const ContentsParagraph = (props) => {
       {image.length > 0 && (
         <img
           style={{ paddingTop: '24px' }}
-          src={`/img${image}`}
+          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${image}`}
           alt={imageDescription}
         />
       )}
