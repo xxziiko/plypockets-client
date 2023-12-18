@@ -41,14 +41,11 @@ export default function GiftBundle(props) {
 }
 
 const GiftBox = styled.div`
-  position: absolute;
-  bottom: 0;
   display: flex;
-  gap: 0;
   justify-content: right;
   flex-wrap: wrap-reverse;
   width: 100%;
-  max-height: 450px;
-  z-index: 1;
+  max-height: 80%;
   overflow: auto;
+  /* border: 1px solid red; */
 `
