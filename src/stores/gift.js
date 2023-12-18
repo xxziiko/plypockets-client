@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 
 export const useGiftStore = create((set) => ({
-  nickname: '공민지',
-  letter: '테스트중입니다',
+  nickname: '',
+  letter: '',
   friendName: '',
-  spotifyId: '3CWq0pAKKTWb0K4yiglDc4',
+  spotifyId: '',
   giftWrapper: {
     cover: null,
     decoration: null,

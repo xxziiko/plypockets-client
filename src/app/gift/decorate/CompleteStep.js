@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 
 import { useGiftStore } from '@/stores/gift'
@@ -9,6 +10,7 @@ import { GiftHeader, SnowBox } from '@/components'
 import GiftIcon from '@/icons/GiftIcon'
 
 export default function CompleteStep() {
+  const router = useRouter()
   const { giftWrapper: gift } = useGiftStore()
   const imageUrl = `${baseGiftImageUrl}${gift.cover}_${gift.decoration}_${gift.color}.jpg`
 
@@ -39,7 +41,11 @@ export default function CompleteStep() {
               나의 플리 보따리를 새롭게 만들어보세요!
             </Text>
             <ButtonWrapper>
-              <Button>
+              <Button
+                onClick={() =>
+                  router.push('/account', undefined, { shallow: true })
+                }
+              >
                 <GiftIcon color={'#FFF'} />
                 <span> 내 플리 보따리 가기</span>
               </Button>

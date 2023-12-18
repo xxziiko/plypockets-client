@@ -47,7 +47,6 @@ export default function PlaylistPage() {
   })
 
   const [selectedSong, setSelectedSong] = useState(null)
-
   const [isSearching, setIsSearching] = useState(false)
 
   const isAllExpandedHot100List = hot100list.length >= 50
@@ -101,7 +100,11 @@ export default function PlaylistPage() {
             </Style.PlayListContainerTitle>
 
             {hot100list?.map((el) => (
-              <Playlist data={el} onClick={() => setSelectedSong(el)} />
+              <Playlist
+                data={el}
+                key={el.spotifyId}
+                onClick={() => setSelectedSong(el)}
+              />
             ))}
 
             {!isAllExpandedHot100List && (
@@ -121,7 +124,11 @@ export default function PlaylistPage() {
               지금 가장 핫한 노래 50개를 가져왔어요!
             </Style.PlayListContainerTitle>
             {koreanHot100List?.map((el) => (
-              <Playlist data={el} onClick={() => setSelectedSong(el)} />
+              <Playlist
+                data={el}
+                key={el.spotifyId}
+                onClick={() => setSelectedSong(el)}
+              />
             ))}
             {!isAllExpandedKoreanHot100List && (
               <Style.PlayListExpandButton
