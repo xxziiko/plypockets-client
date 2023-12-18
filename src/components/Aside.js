@@ -77,6 +77,9 @@ export const Aside = () => {
         }}
       >
         <Typography
+          style={{
+            paddingLeft: '50px',
+          }}
           color={({ theme }) => theme.colors.white}
           size={({ theme }) => theme.fontSize.small}
           weight={({ theme }) => theme.fontWeight.large}
@@ -84,10 +87,47 @@ export const Aside = () => {
         >
           읽을 보따리 보러가기
         </Typography>
-        <Box style={{ flexDirection: 'row', gap: '20px' }}>
+        <Box
+          style={{
+            flexDirection: 'row',
+            gap: '20px',
+
+            alignItems: 'center',
+          }}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M8.0033 12L18.6678 1.33552L17.3323 0L5.33227 12L17.3323 24L18.6678 22.6645L8.0033 12Z"
+              fill="white"
+            />
+          </svg>
+
           {contentsCardDatas.slice(0, 3).map((data) => (
             <ContentsCard {...data} />
           ))}
+
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M15.9967 12L5.33224 1.33552L6.66776 0L18.6678 12L6.66776 24L5.33224 22.6645L15.9967 12Z"
+              fill="white"
+            />
+          </svg>
         </Box>
       </Box>
     </AsideLayout>
@@ -102,11 +142,11 @@ const AsideLayout = styled.aside`
   display: none;
   position: fixed;
   top: 0;
-  right: 40%;
-  width: 731px;
-  min-width: 731px;
+  right: 50%;
+  /* width: 731px;
+  min-width: 731px; */
   height: 100vh;
-  padding-left: 60px;
+  margin-right: -120px;
 `
 
 const Box = styled.div`

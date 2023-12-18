@@ -105,10 +105,10 @@ export default function Main({ params }) {
             onClick={goToPlaylist}
           />
           <DefaultButton
-            color="#323232"
+            color="#fff"
             command="내 플리 보따리 가기"
             isShowIcon
-            backgroundColor="#fff"
+            backgroundColor="#F84A68"
             onClick={goToMyPack}
           />
         </NoTokenSection>
