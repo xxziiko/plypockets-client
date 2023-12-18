@@ -1,5 +1,7 @@
 'use client'
 import styled from 'styled-components'
+
+import { useState } from 'react'
 import { Typography } from '@/components'
 
 import { ContentsCard } from '@/components/ContentsCard'
@@ -11,6 +13,14 @@ import { DefaultButton } from '@/components'
 import { contentsCardDatas } from '@/constants'
 
 export const Aside = () => {
+  const [cardIndex, setCardIndex] = useState(0)
+
+  const handleClickArrow = (index) => {
+    const lastIndex = contentsCardDatas.length - 1
+    if (index < 0 || index + 2 > lastIndex) return
+    setCardIndex(index)
+  }
+
   return (
     <AsideLayout>
       <Box
@@ -95,39 +105,43 @@ export const Aside = () => {
             alignItems: 'center',
           }}
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M8.0033 12L18.6678 1.33552L17.3323 0L5.33227 12L17.3323 24L18.6678 22.6645L8.0033 12Z"
-              fill="white"
-            />
-          </svg>
+          <IconWrapper onClick={() => handleClickArrow(cardIndex - 1)}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M8.0033 12L18.6678 1.33552L17.3323 0L5.33227 12L17.3323 24L18.6678 22.6645L8.0033 12Z"
+                fill="white"
+              />
+            </svg>
+          </IconWrapper>
 
-          {contentsCardDatas.slice(0, 3).map((data) => (
+          {contentsCardDatas.slice(cardIndex, cardIndex + 3).map((data) => (
             <ContentsCard {...data} />
           ))}
 
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M15.9967 12L5.33224 1.33552L6.66776 0L18.6678 12L6.66776 24L5.33224 22.6645L15.9967 12Z"
-              fill="white"
-            />
-          </svg>
+          <IconWrapper onClick={() => handleClickArrow(cardIndex + 1)}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M15.9967 12L5.33224 1.33552L6.66776 0L18.6678 12L6.66776 24L5.33224 22.6645L15.9967 12Z"
+                fill="white"
+              />
+            </svg>
+          </IconWrapper>
         </Box>
       </Box>
     </AsideLayout>
@@ -154,4 +168,8 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+`
+
+const IconWrapper = styled.span`
+  cursor: pointer;
 `
