@@ -34,11 +34,17 @@ function Letter({ content, extendView }) {
 }
 
 function ExpandedLetter({ closeCurrentView, content, setContent }) {
+  const router = useRouter()
+
   return (
     <Style.ExpandedBox>
       <GiftHeader
         title="편지 작성하기"
         colors={{ backgroundColor: '#FFE8E2' }}
+        buttonAction={() =>
+          router.push('/gift/playlist', undefined, { shallow: true })
+        }
+        step={2}
       />
       <Style.GuideMessage>공백포함 300자까지 쓸 수 있어요!</Style.GuideMessage>
       <Style.TextInput
@@ -61,7 +67,6 @@ function ExpandedLetter({ closeCurrentView, content, setContent }) {
 export default function WritingPage() {
   const { letter, setLetter } = useGiftStore()
   const [isExpanded, setIsExpanded] = useState(false)
-  const [content, setContent] = useState('')
 
   return (
     <>

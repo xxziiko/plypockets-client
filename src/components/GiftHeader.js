@@ -22,7 +22,7 @@ export default function GiftHeader(props) {
       subTitle: theme.colors.black,
       button: theme.colors.brown,
     },
-
+    step = 0,
     title,
     subTitle,
     buttonAction,
@@ -44,9 +44,9 @@ export default function GiftHeader(props) {
           {!hideIcon && (
             <IconBox>
               <ProgressIcon
-                firstStep="#F84A68"
-                secondStep="#F84A68"
-                lastStep="#F84A68"
+                lastStep={step > 2 ? '#F84A68' : theme.colors.green}
+                secondStep={step > 1 ? '#F84A68' : theme.colors.green}
+                firstStep={step > 0 ? '#F84A68' : theme.colors.green}
               />
             </IconBox>
           )}

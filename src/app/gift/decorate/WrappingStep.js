@@ -14,12 +14,12 @@ import {
 
 function SelectableSection({ children, name, isSelected, setIsSelected }) {
   return (
-    <div onClick={() => setIsSelected(name)}>
+    <SelectorContainer onClick={() => setIsSelected(name)}>
       {children}
       <SelectorWrapper>
         <Selector selected={isSelected} />
       </SelectorWrapper>
-    </div>
+    </SelectorContainer>
   )
 }
 
@@ -86,7 +86,7 @@ export default function WrappingStep({ moveToNextStep }) {
         </StepWrapper>
         <StepWrapper>
           <StepTitle>장식 컬러 선택하기</StepTitle>
-          <ColorChipWrapper>
+          <ElementWrapper>
             {colorList.map((name) => {
               return (
                 <SelectableSection
@@ -101,7 +101,7 @@ export default function WrappingStep({ moveToNextStep }) {
                 </SelectableSection>
               )
             })}
-          </ColorChipWrapper>
+          </ElementWrapper>
         </StepWrapper>
       </div>
       <ButtonWrapper>
@@ -172,7 +172,19 @@ const Button = styled.button`
   font-weight: 600;
 `
 
+const SelectorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+
+  /* border: 1px solid white; */
+`
+
 const SelectorWrapper = styled.div`
+  /* border: 1px solid white; */
+
   display: flex;
   justify-content: center;
   margin-top: 16px;

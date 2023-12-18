@@ -12,7 +12,7 @@ const ProgressIcon = (props) => (
         <path
           id="Polygon 23"
           d="M7 3L13.0622 12.8077L0.937822 12.8077L7 3Z"
-          fill={props.firstStep}
+          fill={props.lastStep}
         />
         <path
           id="Polygon 22"
@@ -22,7 +22,7 @@ const ProgressIcon = (props) => (
         <path
           id="Polygon 21"
           d="M7 23.9231L13.0622 33.7308L0.937822 33.7308L7 23.9231Z"
-          fill={props.lastStep}
+          fill={props.firstStep}
         />
       </g>
     </g>
