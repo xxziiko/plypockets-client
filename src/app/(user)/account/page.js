@@ -65,7 +65,7 @@ export default function Login() {
 
     setIsError({ ...isError, id: false })
     setErrorMessage({ ...errorMessage, id: ERROR_MESSAGE.ID.success })
-  }, [userInputValue.nickname])
+  }, [userInputValue.nickname, isError.pw])
 
   useEffect(() => {
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/
@@ -89,7 +89,7 @@ export default function Login() {
 
     setIsError({ ...isError, pw: false })
     setErrorMessage({ ...errorMessage, pw: ERROR_MESSAGE.PW.success })
-  }, [userInputValue.password])
+  }, [userInputValue.password, isError.id])
 
   useEffect(() => {
     if (!isError.id && !isError.pw) setButtonDisable(false)
