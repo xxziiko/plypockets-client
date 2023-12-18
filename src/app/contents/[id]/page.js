@@ -75,7 +75,8 @@ export default function ContentDetailPage({ params }) {
     likeCount,
     voteCount,
     hasVoted,
-    choice,
+    voteResult,
+    choiced,
     handleLike,
     handleSendVote,
   } = useContentsInfo(id)
@@ -223,7 +224,8 @@ export default function ContentDetailPage({ params }) {
           count={voteCount}
           hasVoted={hasVoted}
           handleSendVote={handleSendVote}
-          choice={choice}
+          voteResult={voteResult}
+          choiced={choiced}
         />
       )}
 

@@ -10,8 +10,11 @@ export const Vote = (props) => {
     count,
     hasVoted,
     handleSendVote,
-    choice,
+    choiced,
+    voteResult,
   } = props
+
+  console.log()
 
   const [clicked, setClicked] = useState(null)
 
@@ -65,16 +68,17 @@ export const Vote = (props) => {
         }}
       >
         {datas.map((content, idx) => {
-          const isDefault = idx !== choice && idx !== clicked
-          const isClicked = idx === clicked
-          const isSelected = idx === choice
+          const num = idx + 1
+          const isDefault = num !== choiced && num !== clicked
+          const isClicked = num === clicked
+          const isSelected = num === choiced
           return (
             <VoteButton
-              key={idx}
-              onClick={() => handleButtonClick(idx)}
+              key={num}
+              onClick={() => handleButtonClick(num)}
               default={isDefault}
-              choice={idx === choice}
-              disabled={hasVoted}
+              choiced={num === choiced}
+              disabled={!!hasVoted}
             >
               <Typography
                 size={'14px'}
@@ -85,16 +89,16 @@ export const Vote = (props) => {
                 {content}
               </Typography>
               {isClicked && <CheckRoundIcon />}
-              {/* {choice !== null && (
+              {hasVoted && (
                 <Typography
                   size={'16px'}
                   weight={isSelected ? 700 : 500}
                   spacing={-0.64}
                   color={isSelected ? '#ffffff' : '#595959'}
                 >
-                  {percent}%
+                  {voteResult[idx].percent}%
                 </Typography>
-              )} */}
+              )}
             </VoteButton>
           )
         })}
@@ -103,7 +107,7 @@ export const Vote = (props) => {
       <DefaultButton
         command={hasVoted ? '투표 완료' : '투표 하기'}
         color={clicked === null ? '#A4A4A4' : '#ffffff'}
-        backgroundColor={clicked === null ? '#E2E2E2' : '#00916F'}
+        backgroundColor={'#00916F'}
         isShowIcon={false}
         isButtonDisable={hasVoted || clicked === null}
         onClick={handleSubmit}
@@ -141,6 +145,6 @@ const VoteButton = styled.button`
       ? '2px solid var(--stroke_grey, #e5e5e5)'
       : '2px solid var(--main_green, #00916F)'};
   background: ${(props) =>
-    props.choice ? 'var(--main_green, #00916F)' : 'var(--main_white, #fff)'};
+    props.choiced ? 'var(--main_green, #00916F)' : 'var(--main_white, #fff)'};
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 `

@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
                   <path
                     d="M297.288 0L593.717 469.5H0.857849L297.288 0Z"
                     fill="#018969"
-                    fill-opacity="0.7"
+                    fillOpacity="0.7"
                   />
                 </svg>
               </Mountain>
