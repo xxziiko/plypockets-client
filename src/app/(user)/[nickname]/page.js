@@ -15,10 +15,12 @@ import { useButtonStore } from '@/stores/buttons'
 import ShareIcon from '@/icons/ShareIcon'
 import { useUserInfoStore } from '@/stores/userInfo'
 import { getBoxes, getPlaylist } from '@/api/services'
+import { useGiftStore } from '@/stores/gift'
 
 export default function Main({ params }) {
   const { userInfo } = useUserInfoStore()
   const { setIsCopyClipboard, isCopyClipboard } = useButtonStore()
+  const { setNickname } = useGiftStore()
   const router = useRouter()
   const decodedParams = decodeURI(params.nickname)
   const [isAuth, setIsAuth] = useState(false)
@@ -30,7 +32,7 @@ export default function Main({ params }) {
   }
 
   const goToPlaylist = () => {
-    router.push('/playlist', undefined, { shallow: true })
+    router.push('/gift/playlist', undefined, { shallow: true })
   }
 
   useEffect(() => {
@@ -47,6 +49,7 @@ export default function Main({ params }) {
     }
 
     if (!userInfo?.nickname) {
+      setNickname(decodedParams)
       getBoxes(decodedParams).then((res) => {
         // console.log(res)
         if (res) setBundles(res.results)
