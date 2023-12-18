@@ -76,6 +76,7 @@ const Background = styled.div`
 `
 
 const Main = styled.main`
+  justify-content: space-between;
   width: 100%;
   height: 100%;
   padding: 48px 32px 0;
@@ -94,9 +95,7 @@ const DescriptionBox = styled.div`
 `
 
 const BottomBox = styled.div`
-  position: fixed;
   align-items: center;
-  bottom: 0;
   gap: 16px;
   padding-bottom: 48px;
   ${flexDirection}

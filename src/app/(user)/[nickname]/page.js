@@ -107,10 +107,10 @@ export default function Main({ params }) {
             onClick={goToPlaylist}
           />
           <DefaultButton
-            color="#fff"
+            color="#323232"
             command="내 플리 보따리 가기"
             isShowIcon
-            backgroundColor="#F84A68"
+            backgroundColor="#fff"
             onClick={goToMyPack}
           />
         </NoTokenSection>
@@ -128,8 +128,9 @@ export default function Main({ params }) {
 
 const Box = styled.div`
   flex-direction: column;
-  height: 100%;
+  justify-content: space-between;
   padding: 0 32px;
+  height: 100%;
   animation: ${({ theme }) => css`
     ${theme.animation.slideInFromBottom} 1s
   `};
