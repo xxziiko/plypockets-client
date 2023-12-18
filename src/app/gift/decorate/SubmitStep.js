@@ -15,7 +15,9 @@ export default function SubmitStep({ moveToNextStep }) {
   const onInputChange = (e) => setFriendName(e.target.value)
 
   const onSubmitHandler = () => {
-    callPostGiftApi().then(() => moveToNextStep())
+    callPostGiftApi().then(() =>
+      moveToNextStep().catch(() => console.log('error')),
+    )
   }
 
   return (

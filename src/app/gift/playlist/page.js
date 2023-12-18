@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+
 import { useFetchTodayHot100, useFetchKoreanHot100 } from '@/api/services/hooks'
 
 import { GiftHeader } from '@/components'
@@ -45,6 +47,7 @@ export default function PlaylistPage() {
     api: useFetchKoreanHot100,
     initialNum: 5,
   })
+  const router = useRouter()
 
   const [selectedSong, setSelectedSong] = useState(null)
   const [isSearching, setIsSearching] = useState(false)
@@ -70,6 +73,8 @@ export default function PlaylistPage() {
         title="노래 선물하기"
         subTitle="당신이 선물하고 싶은 노래는?"
         colors={{ button: theme.colors.bgGreen }}
+        buttonAction={() => router.back()}
+        step={1}
       />
       <Style.InputContainer>
         <Style.InputWrapper

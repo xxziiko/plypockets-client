@@ -6,7 +6,7 @@ import { GiftHeader } from '@/components'
 export default function WritingLayout({ children }) {
   return (
     <Box>
-      <GiftHeader title="편지 작성하기" />
+      <GiftHeader title="편지 작성하기" step={2} />
       {children}
     </Box>
   )

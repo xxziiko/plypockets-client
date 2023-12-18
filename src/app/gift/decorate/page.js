@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
-import { GiftHeader, SnowBox } from '@/components'
+import { GiftHeader } from '@/components'
 import theme from '@/styles/theme'
 
 import WrappingStep from './WrappingStep'
@@ -17,6 +18,7 @@ const subTitles = [
 ]
 
 export default function DecoratePage() {
+  const router = useRouter()
   const [step, setStep] = useState(0)
 
   const moveToNextStep = () => {
@@ -35,6 +37,10 @@ export default function DecoratePage() {
           subTitle: theme.colors.white,
           button: theme.colors.strokeGrey,
         }}
+        step={3}
+        buttonAction={() =>
+          router.push('/gift/writing', undefined, { shallow: true })
+        }
       />
       <Style.ContentWrapper>
         {step === 0 && <WrappingStep moveToNextStep={moveToNextStep} />}
