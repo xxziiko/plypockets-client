@@ -5,12 +5,12 @@ import { useFetchTodayHot100 } from '@/api/services/hooks'
 
 import useDebounce from '@/hooks/useDebounce'
 
+import { NotFound } from '@/components'
 import SearchIcon from '@/icons/SearchIcon'
 import theme from '@/styles/theme'
 
 import Style from './styles'
 import Playlist from './Playlist'
-import { NotFound } from '@/components'
 
 const useSearchSong = () => {
   const [inputValue, setInputValue] = useState('')

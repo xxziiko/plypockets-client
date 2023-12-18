@@ -2,11 +2,12 @@
 
 import { useState } from 'react'
 
-import { GiftHeader } from '@/components'
+import { GiftHeader, SnowBox } from '@/components'
 import theme from '@/styles/theme'
 
 import WrappingStep from './WrappingStep'
 import SubmitStep from './SubmitStep'
+import CompleteStep from './CompleteStep'
 import Style from './style'
 
 const titles = [`선물 포장하기`, `샌디의 \n플리 보따리`]
@@ -37,7 +38,8 @@ export default function DecoratePage() {
       />
       <Style.ContentWrapper>
         {step === 0 && <WrappingStep moveToNextStep={moveToNextStep} />}
-        {step === 1 && <SubmitStep />}
+        {step === 1 && <SubmitStep moveToNextStep={moveToNextStep} />}
+        {step === 2 && <CompleteStep />}
       </Style.ContentWrapper>
     </Style.Box>
   )

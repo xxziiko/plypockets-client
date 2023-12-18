@@ -1,8 +1,8 @@
 import styled, { keyframes, css } from 'styled-components'
 import SnowflakeIcon from '@/icons/SnowflakeIcon'
 
-export default function SnowBox(props) {
-  const { width = 40, height = 38 } = props
+export default function SnowBox({ color = '#FFB7B7' }) {
+  // const { width = 40, height = 38 } = props
   const snowArr = Array.from({ length: 10 })
 
   const renderSnowflake = (index) => {
@@ -18,7 +18,7 @@ export default function SnowBox(props) {
 
     return (
       <ImageBox key={index} styles={snowflakeStyle}>
-        <SnowflakeIcon />
+        <SnowflakeIcon color={color} />
       </ImageBox>
     )
   }

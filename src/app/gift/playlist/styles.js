@@ -11,9 +11,10 @@ const Box = styled.div`
 const ContentWrapper = styled.div`
   position: relative;
   flex: 1;
+  width: 100%;
   padding: 0 32px;
   background-color: ${({ theme }) => theme.colors.white};
-  background-image: url('/img/playlist-background.jpg');
+  background-image: url('/img/playlist-search-background.png');
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: contain;

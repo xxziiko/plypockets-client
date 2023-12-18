@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
+
+import { useGiftStore } from '@/stores/gift'
 
 import {
   wrapperList,
@@ -23,11 +24,7 @@ function SelectableSection({ children, name, isSelected, setIsSelected }) {
 }
 
 export default function WrappingStep({ moveToNextStep }) {
-  const [selected, setSelected] = useState({
-    wrapper: null,
-    decoration: null,
-    color: null,
-  })
+  const { giftWrapper: selected, setGiftWrapper: setSelected } = useGiftStore()
 
   const width = 80
   const height = 80
@@ -45,16 +42,16 @@ export default function WrappingStep({ moveToNextStep }) {
                 key={name}
                 name={name}
                 setIsSelected={(value) =>
-                  setSelected({ ...selected, wrapper: value })
+                  setSelected({ ...selected, cover: value })
                 }
-                isSelected={selected.wrapper === name}
+                isSelected={selected.cover === name}
               >
                 <ImageWrapper>
                   <Image
                     src={`/img/gift-box/${name}.png`}
                     width={width}
                     height={height}
-                    alt="wrapper"
+                    alt="cover"
                   />
                 </ImageWrapper>
               </SelectableSection>
@@ -122,8 +119,11 @@ export default function WrappingStep({ moveToNextStep }) {
 }
 
 const Box = styled.div`
+  position: relative;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 0 32px;
 `
 
@@ -155,12 +155,12 @@ const ImageWrapper = styled.div`
 `
 
 const ButtonWrapper = styled.div`
+  margin-bottom: 48px;
   display: flex;
   justify-content: center;
 `
 
 const Button = styled.button`
-  margin-bottom: 48px;
   width: 312px;
   height: 56px;
   color: ${({ disabled, theme }) =>
