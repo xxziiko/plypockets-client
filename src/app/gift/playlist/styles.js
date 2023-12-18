@@ -9,7 +9,6 @@ const Box = styled.div`
 `
 
 const ContentWrapper = styled.div`
-  position: relative;
   flex: 1;
   width: 100%;
   padding: 0 32px;
@@ -32,8 +31,12 @@ const InputContainer = styled.div`
 const InputBottomText = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding: 8px;
   width: 100%;
+
+  & > button {
+    display: flex;
+    padding: 8px;
+  }
 
   p {
     margin-right: 4px;

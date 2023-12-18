@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { useFetchTodayHot100, useFetchKoreanHot100 } from '@/api/services/hooks'
+import { useGiftStore } from '@/stores/gift'
 
 import { GiftHeader } from '@/components'
 
@@ -47,6 +48,7 @@ export default function PlaylistPage() {
     api: useFetchKoreanHot100,
     initialNum: 5,
   })
+  const { nickname } = useGiftStore()
   const router = useRouter()
 
   const [selectedSong, setSelectedSong] = useState(null)
@@ -69,11 +71,14 @@ export default function PlaylistPage() {
 
   return (
     <Style.Box>
+      <ScrollUpButton />
       <GiftHeader
         title="노래 선물하기"
         subTitle="당신이 선물하고 싶은 노래는?"
         colors={{ button: theme.colors.bgGreen }}
-        buttonAction={() => router.back()}
+        buttonAction={() =>
+          router.push(`/${nickname}`, undefined, { shallow: true })
+        }
         step={1}
       />
       <Style.InputContainer>
@@ -89,16 +94,20 @@ export default function PlaylistPage() {
           </span>
         </Style.InputWrapper>
         <Style.InputBottomText>
-          <p>노래 선택 건너뛰기</p>
-          <SkipIcon />
+          <button
+            onClick={() =>
+              router.push('/gift/writing', undefined, { shallow: true })
+            }
+          >
+            <p>노래 선택 건너뛰기</p>
+            <SkipIcon />
+          </button>
         </Style.InputBottomText>
       </Style.InputContainer>
       {selectedSong ? (
         <SelectedSong data={selectedSong} />
       ) : (
         <Style.ContentWrapper>
-          <ScrollUpButton />
-
           <Style.PlayListContainer>
             <Style.PlayListContainerTitle>
               지금 많이 공유되고 있는 노래 50개를 가져왔어요!
