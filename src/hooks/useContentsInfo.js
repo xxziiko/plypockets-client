@@ -5,8 +5,12 @@ import {
   checkIsVote,
   sendContentsVotes,
 } from '@/api/services/contents'
+import { useUserInfoStore } from '@/stores/userInfo'
 
-export const useContentsInfo = (contentId, userId) => {
+export const useContentsInfo = (contentId) => {
+  const { userInfo } = useUserInfoStore()
+  const { userId, nickname } = userInfo
+
   const [viewCount, setViewCount] = useState(0)
   const [likeCount, setLikeCount] = useState(0)
   const [voteCount, setVoteCount] = useState(0)

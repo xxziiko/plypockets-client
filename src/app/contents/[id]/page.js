@@ -63,16 +63,13 @@ import { useUserInfoStore } from '@/stores/userInfo'
 export default function ContentDetailPage({ params }) {
   const router = useRouter()
 
-  const { userInfo } = useUserInfoStore()
   const { setIsCopyClipboard } = useButtonStore()
 
   const { id } = params
 
   const path = usePathname()
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}${path}`
-  const { userId } = userInfo
 
-  // TODO: get data from server
   const {
     viewCount,
     likeCount,
@@ -81,10 +78,7 @@ export default function ContentDetailPage({ params }) {
     choice,
     handleLike,
     handleSendVote,
-  } = useContentsInfo(id, userId)
-  // const viewCount = 627
-  // const likeCount = 627
-  // const voteCount = 627
+  } = useContentsInfo(id)
 
   const contentData = contentsDatas[id - 1]
   const faqData = faqDatas[id - 1]
