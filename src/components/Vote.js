@@ -14,8 +14,6 @@ export const Vote = (props) => {
     voteResult,
   } = props
 
-  console.log()
-
   const [clicked, setClicked] = useState(null)
 
   const handleButtonClick = (idx) => {

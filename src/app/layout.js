@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
             </Layout>
 
             {[0, 1, 2].map((value) => (
-              <Mountain idx={value}>
+              <Mountain key={value} idx={value}>
                 <svg
                   width="594"
                   height="470"

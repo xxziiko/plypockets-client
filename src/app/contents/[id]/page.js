@@ -206,7 +206,7 @@ export default function ContentDetailPage({ params }) {
       {/* paragraph section */}
       <FlexBox>
         {contentData.paragraphs.map((paragraph, index) => {
-          return <ContentsParagraph key={index} {...paragraph} />
+          return <ContentsParagraph key={paragraph.title} {...paragraph} />
         })}
       </FlexBox>
 
@@ -324,7 +324,7 @@ export default function ContentDetailPage({ params }) {
           }}
         >
           {keywords.map((keyword, index) => (
-            <KeywordBox key={index}>
+            <KeywordBox key={keyword}>
               <Typography
                 size={'12px'}
                 weight={500}
@@ -362,8 +362,8 @@ export default function ContentDetailPage({ params }) {
         <RowScrollBox>
           {contentsCardDatas
             .filter((data) => Number(id) !== data.id)
-            .map((data) => (
-              <ContentsCard {...data} />
+            .map((data, idx) => (
+              <ContentsCard key={data.id} {...data} />
             ))}
         </RowScrollBox>
       </ContainerBox>

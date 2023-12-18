@@ -12,6 +12,8 @@ import { DefaultButton } from '@/components'
 
 import { contentsCardDatas } from '@/constants'
 
+import { redirectUrl } from '@/constants/urls'
+
 export const Aside = () => {
   const [cardIndex, setCardIndex] = useState(0)
 
@@ -77,6 +79,7 @@ export const Aside = () => {
           command="선물 보따리 구매하러 가기"
           isShowIcon
           backgroundColor="#F84A68"
+          onClick={() => window.open(redirectUrl.purchaseUrl)}
         />
       </Box>
 
@@ -122,9 +125,11 @@ export const Aside = () => {
             </svg>
           </IconWrapper>
 
-          {contentsCardDatas.slice(cardIndex, cardIndex + 3).map((data) => (
-            <ContentsCard {...data} />
-          ))}
+          {contentsCardDatas
+            .slice(cardIndex, cardIndex + 3)
+            .map((data, idx) => (
+              <ContentsCard key={data.id} {...data} />
+            ))}
 
           <IconWrapper onClick={() => handleClickArrow(cardIndex + 1)}>
             <svg
