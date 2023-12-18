@@ -74,7 +74,7 @@ export const Vote = (props) => {
               onClick={() => handleButtonClick(idx)}
               default={isDefault}
               choice={idx === choice}
-              disabled={choice !== null}
+              disabled={hasVoted}
             >
               <Typography
                 size={'14px'}
@@ -101,11 +101,11 @@ export const Vote = (props) => {
       </Box>
 
       <DefaultButton
-        command={choice !== null ? '투표 완료' : '투표 하기'}
+        command={hasVoted ? '투표 완료' : '투표 하기'}
         color={clicked === null ? '#A4A4A4' : '#ffffff'}
         backgroundColor={clicked === null ? '#E2E2E2' : '#00916F'}
         isShowIcon={false}
-        isButtonDisable={clicked === null}
+        isButtonDisable={hasVoted || clicked === null}
         onClick={handleSubmit}
       />
     </Container>

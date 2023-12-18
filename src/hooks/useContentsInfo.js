@@ -4,8 +4,11 @@ import {
   sendContentsLikes,
   checkIsVote,
   sendContentsVotes,
+  getContentsVoteResult,
 } from '@/api/services/contents'
 import { useUserInfoStore } from '@/stores/userInfo'
+
+import { getCookie, setCookie } from '@/lib/cookie'
 
 export const useContentsInfo = (contentId) => {
   const { userInfo } = useUserInfoStore()
@@ -17,6 +20,9 @@ export const useContentsInfo = (contentId) => {
   const [hasVoted, setHasVoted] = useState(false)
   const [choice, setChoice] = useState(null)
 
+  const hasVotedCookieName = `hasVotedForContent${contentId}`
+  const choiceCookieName = `choiceForContent${contentId}`
+
   const getDefaultState = async () => {
     try {
       const contentsData = await getContentsInfo(contentId)
@@ -26,13 +32,22 @@ export const useContentsInfo = (contentId) => {
       setLikeCount(likeCnt)
       setVoteCount(totalVoteCnt)
 
-      // TODO: userId check
-      // if (userId === 0) return
-      const data = await checkIsVote({ contentId, userId })
-      console.log(data)
-      const { hasVoted, choice } = data.results
-      setHasVoted(hasVoted)
-      setChoice(choice)
+      if (nickname.length > 0) {
+        const data = await checkIsVote({ contentId, userId })
+        const { hasVoted, choice } = data.results
+        setHasVoted(hasVoted)
+        setChoice(choice)
+      } else {
+        const hasVotedCookie = getCookie(hasVotedCookieName)
+        const choiceCookie = getCookie(choiceCookieName)
+
+        if (hasVotedCookie) {
+          setHasVoted(hasVotedCookie)
+        }
+        if (choiceCookie) {
+          setChoice(Number(choiceCookie))
+        }
+      }
     } catch (err) {
       console.error(err)
     }
@@ -55,10 +70,16 @@ export const useContentsInfo = (contentId) => {
 
   const handleSendVote = async (choice) => {
     try {
-      const data = await sendContentsVotes({ contentId, userId, choice })
-      console.log('handleSendVote', data)
-      const { voteCnt } = data.results
-      setVoteCount(voteCnt)
+      if (nickname.length > 0) {
+        const data = await sendContentsVotes({ contentId, userId, choice })
+        const { voteCnt } = data.results
+        setVoteCount(voteCnt)
+      } else {
+        setHasVoted(true)
+        setChoice(choice)
+        setCookie(hasVotedCookieName, true, 1)
+        setCookie(choiceCookieName, choice, 1)
+      }
     } catch (err) {
       console.error(err)
     }

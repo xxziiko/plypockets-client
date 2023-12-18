@@ -27,3 +27,9 @@ export const callContentsVotes = (contentId, userId, choice) => {
     .then((response) => response)
     .catch((error) => error)
 }
+
+export const callContentsVoteResult = (contentId) => {
+  return AxiosInstance.get(`/votes/${contentId}`)
+    .then((response) => response)
+    .catch((error) => error)
+}
