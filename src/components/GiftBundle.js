@@ -44,11 +44,11 @@ const GiftBox = styled.div`
   position: absolute;
   bottom: 0;
   display: flex;
+  gap: 0;
   justify-content: right;
   flex-wrap: wrap-reverse;
-  gap: 0;
   width: 100%;
-  height: 450px;
+  max-height: 450px;
   z-index: 1;
   overflow: auto;
 `
