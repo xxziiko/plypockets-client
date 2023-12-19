@@ -66,6 +66,7 @@ const Container = styled.div`
   justify-content: flex-start;
   gap: 16px;
   margin-top: 30px;
+  animation: ${({ theme }) => theme.animation.fadeIn} 0.5s;
 `
 
 const BackgroundImage = styled.div`

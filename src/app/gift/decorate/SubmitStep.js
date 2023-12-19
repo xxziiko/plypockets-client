@@ -53,6 +53,7 @@ const Box = styled.div`
   justify-content: space-between;
   height: 100%;
   align-items: center;
+  animation: ${({ theme }) => theme.animation.fadeIn} 2s;
 `
 
 const InnerBox = styled.div`
@@ -87,7 +88,6 @@ const InputWrapper = styled.div`
     padding: 0 16px;
     width: 100%;
     height: 100%;
-    border: 1px solid black;
   }
 `
 

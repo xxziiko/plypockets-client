@@ -92,9 +92,6 @@ const Main = styled.main`
   width: 100vw;
   height: 100vh;
   z-index: 0;
-  animation: ${({ theme }) => css`
-    ${theme.animation.slideInFromBottom} 1s
-  `};
   ${flexAlign};
   background-color: #ffffff;
 
