@@ -71,7 +71,6 @@ export default function PlaylistPage() {
 
   return (
     <Style.Box>
-      <ScrollUpButton />
       <GiftHeader
         title="노래 선물하기"
         subTitle="당신이 선물하고 싶은 노래는?"
@@ -166,6 +165,7 @@ export default function PlaylistPage() {
           }}
         />
       )}
+      {!isSearching && !selectedSong && <ScrollUpButton />}
     </Style.Box>
   )
 }
