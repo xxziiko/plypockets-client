@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Box = styled.div`
   position: relative;
@@ -6,6 +6,7 @@ const Box = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 `
 
 const ContentWrapper = styled.div`
@@ -128,6 +129,9 @@ const SearchPageBox = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   background-color: ${({ theme }) => theme.colors.brown};
+  animation: ${({ theme }) => css`
+    ${theme.animation.slideInFromBottom} 1s
+  `};
 `
 
 const SearchPageTopBorder = styled.div`

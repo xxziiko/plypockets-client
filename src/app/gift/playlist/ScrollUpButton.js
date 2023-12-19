@@ -59,7 +59,8 @@ const Button = styled.button`
   flex-direction: column;
 
   transition: opacity 0.5s ease-in-out;
-  opacity: ${(props) => (props.visible ? '1' : '0')};
+  // 해당 컴포넌트의 스크롤 영역은 윈도우 전체가 아니기 때문에 사용할 수 없는 속성
+  /* opacity: ${(props) => (props.visible ? '1' : '0')}; */
 
   justify-content: center;
   align-items: center;
