@@ -12,6 +12,8 @@ const Box = styled.div`
 const LetterSection = styled.div`
   flex: 1;
   overflow: hidden;
+  animation: ${({ theme }) => theme.animation.fadeIn} 0.5s;
+
   img {
     position: relative;
     object-fit: contain;

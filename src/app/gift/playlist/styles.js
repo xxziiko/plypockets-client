@@ -19,6 +19,7 @@ const ContentWrapper = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   overflow: scroll;
+  animation: ${({ theme }) => theme.animation.slideInFromBottom} 1s;
 `
 
 const InputContainer = styled.div`

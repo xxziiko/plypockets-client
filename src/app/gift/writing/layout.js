@@ -1,21 +1,60 @@
 'use client'
-import { useRouter } from 'next/navigation'
+
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { GiftHeader } from '@/components'
+import { GiftHeader, Modal } from '@/components'
+import { useGiftStore } from '@/stores/gift'
+import { useRouter } from 'next/navigation'
 
 export default function WritingLayout({ children }) {
+  const { letter } = useGiftStore()
+  const [isAlert, setIsAlert] = useState(false)
   const router = useRouter()
+
+  const onCloseModal = () => {
+    setIsAlert(false)
+  }
+
+  const handleButton = () => {
+    if (!!letter.length) setIsAlert(true)
+    else router.back()
+  }
+
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault()
+      setIsAlert(true)
+    }
+
+    const preventGoBack = () => {
+      history.pushState(null, '', location.href)
+      setIsAlert(true)
+    }
+
+    if (!!letter.length) {
+      history.pushState(null, '', location.href)
+      window.addEventListener('popstate', preventGoBack)
+      window.addEventListener('beforeunload', handleBeforeUnload)
+    }
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+      window.removeEventListener('popstate', preventGoBack)
+    }
+  }, [letter])
+
   return (
-    <Box>
-      <GiftHeader
-        title="편지 작성하기"
-        step={2}
-        buttonAction={() =>
-          router.push(`/gift/playlist`, undefined, { shallow: true })
-        }
-      />
-      {children}
-    </Box>
+    <>
+      <Box>
+        <GiftHeader
+          title="편지 작성하기"
+          step={2}
+          buttonAction={handleButton}
+        />
+        {children}
+      </Box>
+      {isAlert && <Modal onClose={onCloseModal} />}
+    </>
   )
 }
 

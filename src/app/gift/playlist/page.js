@@ -69,15 +69,18 @@ export default function PlaylistPage() {
     }
   }
 
+  const handleButton = () => {
+    if (selectedSong) setSelectedSong(false)
+    else router.push(`/${nickname}`, undefined, { shallow: true })
+  }
+
   return (
     <Style.Box>
       <GiftHeader
         title="노래 선물하기"
         subTitle="당신이 선물하고 싶은 노래는?"
         colors={{ button: theme.colors.bgGreen }}
-        buttonAction={() =>
-          router.push(`/${nickname}`, undefined, { shallow: true })
-        }
+        buttonAction={() => handleButton()}
         step={1}
       />
       <Style.InputContainer>

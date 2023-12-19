@@ -1,7 +1,7 @@
 'use client'
 import { usePathname, useRouter } from 'next/navigation'
-import { MainHeader, SnowBox } from '@/components'
-import styled, { css } from 'styled-components'
+import { MainHeader } from '@/components'
+import styled from 'styled-components'
 import { flexDirection } from '@/styles/common'
 
 export default function MainLayout({ children, params }) {
@@ -33,7 +33,6 @@ export default function MainLayout({ children, params }) {
     <Box>
       <MainHeader title={title} goToBack={goToBack} />
       <Main id="main">{children}</Main>
-      <SnowBox />
     </Box>
   )
 }
@@ -45,14 +44,12 @@ const Box = styled.div`
   background: url('/img/mainBackground.png');
   background-repeat: no-repeat;
   background-size: 100% 100vh;
+  z-index: 0;
 
   ${flexDirection};
 `
 
 const Main = styled.main`
-  animation: ${({ theme }) => css`
-    ${theme.animation.slideInFromBottom} 1s
-  `};
   width: 100%;
   height: 100%;
 `

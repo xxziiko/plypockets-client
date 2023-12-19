@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { flexAlign, flexCenter, flexDirection } from '@/styles/common'
 import {
@@ -10,6 +10,7 @@ import {
   DefaultButton,
   ToastPopUp,
   GiftBundle,
+  SnowBox,
 } from '@/components'
 import { useButtonStore } from '@/stores/buttons'
 import ShareIcon from '@/icons/ShareIcon'
@@ -121,7 +122,7 @@ export default function Main({ params }) {
         nickname={decodedParams}
         isClickable={isClickable}
       />
-
+      <SnowBox />
       {isCopyClipboard && <ToastPopUp />}
     </Box>
   )
@@ -132,9 +133,7 @@ const Box = styled.div`
   justify-content: space-between;
   padding: 0 32px;
   height: 100%;
-  animation: ${({ theme }) => css`
-    ${theme.animation.slideInFromBottom} 1s
-  `};
+  animation: ${({ theme }) => theme.animation.fadeIn} 1s;
 
   ${flexAlign}
 `
