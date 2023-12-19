@@ -12,8 +12,8 @@ export default function GiftBoxItem(props) {
 }
 
 const GiftBox = styled.div`
-  width: 33.3%;
-  height: 105px;
+  width: 120px;
+  height: 120px;
   border: 1.5px solid #fff;
   background-image: url(${(props) => props.boximgurl});
   background-repeat: no-repeat;

@@ -42,12 +42,11 @@ const Box = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  background-image: url('/img/mainBackground.png');
+  background: url('/img/mainBackground.png');
   background-repeat: no-repeat;
   background-size: 100% 100vh;
-  z-index: 0;
 
-  ${flexDirection}
+  ${flexDirection};
 `
 
 const Main = styled.main`

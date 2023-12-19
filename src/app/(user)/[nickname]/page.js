@@ -121,6 +121,7 @@ export default function Main({ params }) {
         nickname={decodedParams}
         isClickable={isClickable}
       />
+
       {isCopyClipboard && <ToastPopUp />}
     </Box>
   )
@@ -155,13 +156,12 @@ const ShareButton = styled.button`
 `
 
 const NoTokenSection = styled.section`
+  position: absolute;
+  bottom: 0;
   align-items: center;
-  justify-content: flex-end;
-  width: 100%;
-  height: 100%;
   padding-bottom: 48px;
   gap: 40px;
-  z-index: 999;
+  z-index: 1;
 
   ${flexDirection}
 `
