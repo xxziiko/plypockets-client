@@ -141,12 +141,7 @@ const ElementWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 36px;
-`
-
-const ColorChipWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
 `
 
 const ImageWrapper = styled.div`
@@ -177,14 +172,10 @@ const SelectorContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80px;
-
-  /* border: 1px solid white; */
+  width: 33%;
 `
 
 const SelectorWrapper = styled.div`
-  /* border: 1px solid white; */
-
   display: flex;
   justify-content: center;
   margin-top: 16px;

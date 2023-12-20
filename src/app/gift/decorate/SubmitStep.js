@@ -31,6 +31,7 @@ export default function SubmitStep({ moveToNextStep }) {
 
         <InputWrapper>
           <input
+            value={friendName}
             onChange={onInputChange}
             maxLength={8}
             placeholder="나의 닉네임은?"

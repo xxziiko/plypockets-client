@@ -15,7 +15,7 @@ export const useGiftStore = create((set) => ({
   setNickname: (state) => set({ nickname: state }),
   setCoverIdx: (state) => set({ coverIdx: state }),
   setDecoIDx: (state) => set({ decoIdx: state }),
-  setLetter: (state) => set({ letter: state }),
-  setFriendName: (state) => set({ friendName: state }),
+  setLetter: (state) => set({ letter: state.substring(0, 300) }),
+  setFriendName: (state) => set({ friendName: state.substring(0, 8) }),
   setSpotifyId: (state) => set({ spotifyId: state }),
 }))

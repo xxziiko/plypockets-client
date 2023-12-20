@@ -25,15 +25,15 @@ export default function CompleteStep() {
           hideIcon
           hideButton
         />
-        <ContentWrapper>
-          <div>
+        <ContentContainer>
+          <ContentWrapper>
             <ImageWrapper>
               <img src={imageUrl} />
             </ImageWrapper>
             <Text>
               소중한 선물이 전달되었어요 <br /> 따듯한 연말 되시길 바라요
             </Text>
-          </div>
+          </ContentWrapper>
           <div>
             <Text style={{ marginBottom: '16px' }}>
               아직 플리 보따리 방이 없으시다면
@@ -51,7 +51,7 @@ export default function CompleteStep() {
               </Button>
             </ButtonWrapper>
           </div>
-        </ContentWrapper>
+        </ContentContainer>
       </Box>
     </>
   )
@@ -76,13 +76,21 @@ const Box = styled.div`
   background-size: contain;
 `
 
-const ContentWrapper = styled.div`
+const ContentContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin-top: 80px;
+`
+
+const ContentWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 440px;
+  align-items: center;
 `
 
 const ImageWrapper = styled.div`

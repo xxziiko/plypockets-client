@@ -37,6 +37,25 @@ export const useFetchSearchSong = (keyword) => {
   return useFetch({ url: `/search/${keyword}`, enabled: !!keyword })
 }
 
+export const useFetchLimitedData = ({ fetchHooks, initialNum }) => {
+  const { data, isLoading, error } = fetchHooks()
+  const [slicedData, setSlicedData] = useState([])
+
+  const slicedArray = (length) => {
+    return data?.slice(0, length || data?.length) || []
+  }
+
+  const getList = (length) => {
+    setSlicedData(slicedArray(length))
+  }
+
+  useEffect(() => {
+    setSlicedData(slicedArray(initialNum))
+  }, [data])
+
+  return { data: slicedData, getList, isLoading, error }
+}
+
 export const usePostGift = () => {
   const { nickname, letter, friendName, spotifyId, giftWrapper } =
     useGiftStore()
