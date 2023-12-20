@@ -52,6 +52,7 @@ const PlayListTitle = styled.p`
   margin-bottom: 8px;
   font-size: 14px;
   color: ${({ color }) => color};
+  font-family: Pretendard;
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -61,6 +62,7 @@ const PlayListTitle = styled.p`
 const PlayListSubTitle = styled.p`
   font-size: 12px;
   color: ${({ color }) => color};
+  font-family: Pretendard;
 
   overflow: hidden;
   text-overflow: ellipsis;

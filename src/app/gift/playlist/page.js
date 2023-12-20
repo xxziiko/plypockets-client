@@ -1,9 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { useFetchTodayHot100, useFetchKoreanHot100 } from '@/api/services/hooks'
+import {
+  useFetchTodayHot100,
+  useFetchKoreanHot100,
+  useFetchLimitedData,
+} from '@/api/services/hooks'
 import { useGiftStore } from '@/stores/gift'
 
 import { GiftHeader } from '@/components'
@@ -20,36 +24,19 @@ import SelectedSong from './SelectedSong'
 
 import Style from './styles'
 
-export const useSlice = ({ api, initialNum }) => {
-  const { data, isLoading, error } = api()
-  const [slicedData, setSlicedData] = useState([])
-
-  const slicedArray = (length) => {
-    return data?.slice(0, length || data?.length) || []
-  }
-
-  const getList = (length) => {
-    setSlicedData(slicedArray(length))
-  }
-
-  useEffect(() => {
-    setSlicedData(slicedArray(initialNum))
-  }, [data])
-
-  return { data: slicedData, getList, isLoading, error }
-}
-
 export default function PlaylistPage() {
-  const { data: hot100list, getList: getHot100List } = useSlice({
-    api: useFetchTodayHot100,
+  const { data: hot100list, getList: getHot100List } = useFetchLimitedData({
+    fetchHooks: useFetchTodayHot100,
     initialNum: 5,
   })
-  const { data: koreanHot100List, getList: getKoreanHot100List } = useSlice({
-    api: useFetchKoreanHot100,
-    initialNum: 5,
-  })
+  const { data: koreanHot100List, getList: getKoreanHot100List } =
+    useFetchLimitedData({
+      fetchHooks: useFetchKoreanHot100,
+      initialNum: 5,
+    })
   const { nickname } = useGiftStore()
   const router = useRouter()
+  const scrollRef = useRef()
 
   const [selectedSong, setSelectedSong] = useState(null)
   const [isSearching, setIsSearching] = useState(false)
@@ -109,7 +96,7 @@ export default function PlaylistPage() {
       {selectedSong ? (
         <SelectedSong data={selectedSong} />
       ) : (
-        <Style.ContentWrapper>
+        <Style.ContentWrapper ref={scrollRef}>
           <Style.PlayListContainer>
             <Style.PlayListContainerTitle>
               지금 많이 공유되고 있는 노래 50개를 가져왔어요!
@@ -168,7 +155,9 @@ export default function PlaylistPage() {
           }}
         />
       )}
-      {!isSearching && !selectedSong && <ScrollUpButton />}
+      {!isSearching && !selectedSong && (
+        <ScrollUpButton scrollRef={scrollRef.current} />
+      )}
     </Style.Box>
   )
 }
