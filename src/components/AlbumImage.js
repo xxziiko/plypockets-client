@@ -6,7 +6,9 @@ export default function AlbumImage(props) {
 
   return (
     <ImgBox width={width} height={height}>
-      <Img src={imgUrl} width={width} height={height} alt="album-img" />
+      {imgUrl && (
+        <Img src={imgUrl} width={width} height={height} alt="album-img" />
+      )}
     </ImgBox>
   )
 }
