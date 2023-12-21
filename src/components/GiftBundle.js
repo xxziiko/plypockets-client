@@ -26,28 +26,27 @@ export default function GiftBundle(props) {
   }, [])
   return (
     <GiftBox ref={containerRef}>
-      {data
-        ?.sort((a, b) => new Date(a.createdDate) - new Date(b.createdDate))
-        .map((list, index) => (
-          <GiftBoxItem
-            key={list.playlistId}
-            list={list}
-            onClick={goToDetail}
-            index={index}
-          />
-        ))}
+      {data &&
+        data
+          ?.sort((a, b) => new Date(a.createdDate) - new Date(b.createdDate))
+          ?.map((list, index) => (
+            <GiftBoxItem
+              key={list.playlistId}
+              list={list}
+              onClick={goToDetail}
+              index={index}
+            />
+          ))}
     </GiftBox>
   )
 }
 
 const GiftBox = styled.div`
-  position: absolute;
-  bottom: 0;
   display: flex;
   justify-content: right;
   flex-wrap: wrap-reverse;
   width: 100%;
-  max-height: 85%;
+  max-height: 75%;
   overflow: auto;
   z-index: 0;
 

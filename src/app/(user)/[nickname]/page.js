@@ -33,14 +33,13 @@ export default function Main({ params }) {
   }
 
   const goToPlaylist = () => {
-    router.push('/gift/playlist', undefined, { shallow: true })
+    router.push(`/gift/playlist`, undefined, { shallow: true })
   }
 
   useEffect(() => {
-    if (userInfo?.nickname) {
+    if (userInfo?.nickname === decodedParams) {
       setIsAuth(true)
       getPlaylist(userInfo.userId).then((res) => {
-        // console.log('res', res)
         if (res) {
           setBundles(res.results)
           setIsClickable(true)
@@ -49,7 +48,8 @@ export default function Main({ params }) {
       return
     }
 
-    if (!userInfo?.nickname) {
+    if (!userInfo.nickname) {
+      sessionStorage.removeItem('user-storage')
       setNickname(decodedParams)
       getBoxes(decodedParams).then((res) => {
         // console.log(res)
@@ -59,79 +59,96 @@ export default function Main({ params }) {
   }, [userInfo])
 
   return (
-    <Box>
+    <>
       {isAuth && (
-        <Section>
-          <TextBox>
-            <Typography
-              size={({ theme }) => theme.fontSize.small}
-              weight={600}
-              spcing={-0.64}
-              color={({ theme }) => theme.colors.white}
-            >
-              플리 보따리 방에 담긴 선물
-            </Typography>
-            <Typography
-              size={({ theme }) => theme.fontSize.large}
-              weight={600}
-              spcing={-0.64}
-              color={({ theme }) => theme.colors.white}
-            >
-              {bundles?.length || 0}개
-            </Typography>
-          </TextBox>
+        <>
+          <Box>
+            <Section>
+              <TextBox>
+                <Typography
+                  size={({ theme }) => theme.fontSize.small}
+                  weight={600}
+                  spcing={-0.64}
+                  color={({ theme }) => theme.colors.white}
+                >
+                  플리 보따리 방에 담긴 선물
+                </Typography>
+                <Typography
+                  size={({ theme }) => theme.fontSize.large}
+                  weight={600}
+                  spcing={-0.64}
+                  color={({ theme }) => theme.colors.white}
+                >
+                  {bundles?.length || 0}개
+                </Typography>
+              </TextBox>
 
-          <CopyToClipboard
-            text={`${process.env.NEXT_PUBLIC_BASE_URL}/${userInfo.nickname}`}
-            onCopy={() => setIsCopyClipboard(true)}
-          >
-            <ShareButton>
-              <p>친구에게 링크 공유</p>
-              <ShareIcon color="#323232" />
-            </ShareButton>
-          </CopyToClipboard>
-          {bundles?.length > 0 && (
-            <Typography color={({ theme }) => theme.colors.green} weight={700}>
-              보따리를 눌러 선물을 확인해보세요!
-            </Typography>
-          )}
-        </Section>
+              <CopyToClipboard
+                text={`${process.env.NEXT_PUBLIC_BASE_URL}/${userInfo.nickname}`}
+                onCopy={() => setIsCopyClipboard(true)}
+              >
+                <ShareButton>
+                  <p>친구에게 링크 공유</p>
+                  <ShareIcon color="#323232" />
+                </ShareButton>
+              </CopyToClipboard>
+              {bundles?.length > 0 && (
+                <Typography
+                  color={({ theme }) => theme.colors.green}
+                  weight={700}
+                >
+                  보따리를 눌러 선물을 확인해보세요!
+                </Typography>
+              )}
+            </Section>
+            <GiftBundle
+              data={bundles}
+              nickname={decodedParams}
+              isClickable={isClickable}
+            />
+          </Box>
+        </>
       )}
 
       {!isAuth && (
-        <NoTokenSection>
-          <RoundBox
-            as="button"
-            width="191px"
-            buttonCommand="선물하러 가기"
-            IconColor="#F84A68"
-            onClick={goToPlaylist}
-          />
-          <DefaultButton
-            color="#323232"
-            command="내 플리 보따리 가기"
-            isShowIcon
-            backgroundColor="#fff"
-            onClick={goToMyPack}
-          />
-        </NoTokenSection>
+        <>
+          <Box>
+            <NoTokenSection>
+              <RoundBox
+                as="button"
+                width="191px"
+                buttonCommand="선물하러 가기"
+                IconColor="#F84A68"
+                onClick={goToPlaylist}
+              />
+              <DefaultButton
+                color="#323232"
+                command="내 플리 보따리 가기"
+                isShowIcon
+                backgroundColor="#fff"
+                onClick={goToMyPack}
+              />
+            </NoTokenSection>
+          </Box>
+          <Absolute>
+            <GiftBundle
+              data={bundles}
+              nickname={decodedParams}
+              isClickable={isClickable}
+            />
+          </Absolute>
+        </>
       )}
 
-      <GiftBundle
-        data={bundles}
-        nickname={decodedParams}
-        isClickable={isClickable}
-      />
       <SnowBox />
       {isCopyClipboard && <ToastPopUp />}
-    </Box>
+    </>
   )
 }
 
 const Box = styled.div`
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 32px;
   height: 100%;
   animation: ${({ theme }) => theme.animation.fadeIn} 1s;
 
@@ -151,6 +168,7 @@ const ShareButton = styled.button`
   font-weight: 600;
   letter-spacing: -0.64px;
   z-index: 1;
+
   ${flexCenter}
 `
 
@@ -167,6 +185,16 @@ const NoTokenSection = styled.section`
 
 const Section = styled.section`
   gap: 16px;
+  align-items: center;
+  padding: 0 32px;
 
   ${flexDirection}
+`
+
+const Absolute = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  max-height: 70%;
+  overflow: auto;
 `

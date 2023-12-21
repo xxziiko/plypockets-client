@@ -8,24 +8,32 @@ export default function SlideCard(props) {
 
   return (
     <Card>
-      <div>
-        <AlbumImage imgUrl={list?.imageUrl} width={80} height={80} />
-        <AlbumInfo>
-          <p>{list?.title}</p>
-          <p>{list?.artistName}</p>
-        </AlbumInfo>
-      </div>
+      {list?.imageUrl ? (
+        <>
+          <div>
+            <AlbumInfo>
+              <AlbumImage imgUrl={list.imageUrl} width={80} height={80} />
+              <TitleBox>
+                <p>{list?.title}</p>
+                <p>{list?.artistName}</p>
+              </TitleBox>
+            </AlbumInfo>
+          </div>
 
-      <div>
-        <audio
-          id={`card-${index}`}
-          controls
-          volume="0.5"
-          ref={(ref) => (audioRefs.current[index] = ref)}
-        >
-          <source src={list?.previewUrl} type="audio/mp3" />
-        </audio>
-      </div>
+          <div>
+            <audio
+              id={`card-${index}`}
+              controls
+              volume="0.5"
+              ref={(ref) => (audioRefs.current[index] = ref)}
+            >
+              <source src={list.previewUrl} type="audio/mp3" />
+            </audio>
+          </div>
+        </>
+      ) : (
+        <Box />
+      )}
 
       <FriendName>{list.friendname}</FriendName>
       <Date>
@@ -66,9 +74,9 @@ const Content = styled.div`
 `
 
 const AlbumInfo = styled.div`
+  gap: 4px;
   flex-direction: column;
   flex: 1 0 0;
-  padding-top: 4px;
   overflow: hidden;
   color: var(--main_black, #111);
   text-overflow: ellipsis;
@@ -105,4 +113,12 @@ const Date = styled.div`
 const BordText = styled.p`
   color: var(--text_basic, var(--text_basic, #323232));
   font-weight: 700;
+`
+
+const TitleBox = styled.div`
+  text-align: center;
+`
+
+const Box = styled.div`
+  height: 254px;
 `

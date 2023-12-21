@@ -18,9 +18,9 @@ const GlobalStyles = createGlobalStyle`
 
         background-color: #3c2929;
 				color: '#212b36';
-				font-size: 14px;
+				font-size: 16px;
 				font-weight: 400px;
-        font-family: Pretendard;
+        font-family: Pretendard !important;
     }
     a{
         color : inherit;
