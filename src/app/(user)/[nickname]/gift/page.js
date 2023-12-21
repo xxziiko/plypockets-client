@@ -52,7 +52,7 @@ export default function ProductDetail() {
   useEffect(() => {
     if (userInfo?.userId) {
       getPlaylist(userInfo.userId).then((res) => {
-        console.log('res', res)
+        // console.log('res', res)
         if (res) setBundles(res.results)
       })
     }

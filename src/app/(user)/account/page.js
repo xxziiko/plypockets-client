@@ -24,7 +24,7 @@ export default function Login() {
   const router = useRouter()
 
   const goToAccount = () => {
-    console.log('userinfo', userInputValue)
+    // console.log('userinfo', userInputValue)
     sendPostLogin(userInputValue)
       .then((res) => {
         setUserInfo({ userInfo: res })
