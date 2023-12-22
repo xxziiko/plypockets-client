@@ -9,7 +9,7 @@ export default function SlideCard(props) {
 
   return (
     <Card>
-      <>
+      <div>
         <AlbumInfo>
           <AlbumImage
             imgUrl={
@@ -36,32 +36,32 @@ export default function SlideCard(props) {
             )}
           </div>
         </AlbumInfo>
+      </div>
 
-        {!list?.imageUrl && (
-          <AudioBox>
-            <TreeIcon />
-          </AudioBox>
-        )}
+      {!list?.imageUrl && (
+        <AudioBox>
+          <TreeIcon />
+        </AudioBox>
+      )}
 
-        {list?.imageUrl && list?.previewUrl && (
-          <div>
-            <audio
-              id={`card-${index}`}
-              controls
-              volume="0.5"
-              ref={(ref) => (audioRefs.current[index] = ref)}
-            >
-              <source src={list.previewUrl} type="audio/mp3" />
-            </audio>
-          </div>
-        )}
+      {list?.imageUrl && list?.previewUrl && (
+        <div>
+          <audio
+            id={`card-${index}`}
+            controls
+            volume="0.5"
+            ref={(ref) => (audioRefs.current[index] = ref)}
+          >
+            <source src={list.previewUrl} type="audio/mp3" />
+          </audio>
+        </div>
+      )}
 
-        {list?.imageUrl && !list?.previewUrl && (
-          <AudioBox>
-            <DefaultText>이 노래는 미리 들을 수 없어요!</DefaultText>
-          </AudioBox>
-        )}
-      </>
+      {list?.imageUrl && !list?.previewUrl && (
+        <AudioBox>
+          <DefaultText>이 노래는 미리 들을 수 없어요!</DefaultText>
+        </AudioBox>
+      )}
 
       <FriendName>{list.friendname}</FriendName>
       <DefaultText>
