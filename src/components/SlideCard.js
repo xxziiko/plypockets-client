@@ -2,54 +2,76 @@ import styled from 'styled-components'
 import { flexAlign, flexCenter } from '@/styles/common'
 import AlbumImage from './AlbumImage'
 import dayjs from 'dayjs'
+import TreeIcon from '@/icons/TreeIcon'
 
 export default function SlideCard(props) {
   const { list, audioRefs, index } = props
 
   return (
     <Card>
-      {list?.imageUrl ? (
-        <>
-          <div>
-            <AlbumInfo>
-              <AlbumImage imgUrl={list.imageUrl} width={80} height={80} />
-              <TitleBox>
-                <p>{list?.title}</p>
-                <p>{list?.artistName}</p>
-              </TitleBox>
-            </AlbumInfo>
-          </div>
+      <>
+        <AlbumInfo>
+          <AlbumImage
+            imgUrl={
+              !list?.imageUrl ? '/img/not_found_album.png' : list.imageUrl
+            }
+            width={80}
+            height={80}
+          />
 
-          {list?.previewUrl ? (
-            <div>
-              <audio
-                id={`card-${index}`}
-                controls
-                volume="0.5"
-                ref={(ref) => (audioRefs.current[index] = ref)}
-              >
-                <source src={list.previewUrl} type="audio/mp3" />
-              </audio>
-            </div>
-          ) : (
-            <AudioBox>미리듣기를 제공하지 않는 노래</AudioBox>
-          )}
-        </>
-      ) : (
-        <>
-          <Box>노래를 선물하지 않음</Box>
-        </>
-      )}
+          <div>
+            {!list?.imageUrl ? (
+              <TitleBox>
+                <DefaultText>
+                  노래는 없지만 따뜻한 마음이 담겨있어요
+                </DefaultText>
+              </TitleBox>
+            ) : (
+              <TitleBox>
+                <DefaultText style={{ fontWeight: 500 }}>
+                  {list?.title}
+                </DefaultText>
+                <DefaultText>{list?.artistName}</DefaultText>
+              </TitleBox>
+            )}
+          </div>
+        </AlbumInfo>
+
+        {!list?.imageUrl && (
+          <AudioBox>
+            <TreeIcon />
+          </AudioBox>
+        )}
+
+        {list?.imageUrl && list?.previewUrl && (
+          <div>
+            <audio
+              id={`card-${index}`}
+              controls
+              volume="0.5"
+              ref={(ref) => (audioRefs.current[index] = ref)}
+            >
+              <source src={list.previewUrl} type="audio/mp3" />
+            </audio>
+          </div>
+        )}
+
+        {list?.imageUrl && !list?.previewUrl && (
+          <AudioBox>
+            <DefaultText>이 노래는 미리 들을 수 없어요!</DefaultText>
+          </AudioBox>
+        )}
+      </>
 
       <FriendName>{list.friendname}</FriendName>
-      <Date>
+      <DefaultText>
         <BordText>선물받은 시간</BordText>
 
         {list?.createdDate &&
           dayjs(list.createdDate)
             .locale('ko')
             .format('YYYY년 MM월 DD일 HH시 mm분')}
-      </Date>
+      </DefaultText>
       <Content>{list.letter}</Content>
     </Card>
   )
@@ -104,7 +126,7 @@ const FriendName = styled.p`
   ${flexCenter}
 `
 
-const Date = styled.div`
+const DefaultText = styled.div`
   color: var(--text_basic, var(--text_basic, #323232));
   font-size: 12px;
   font-style: normal;
@@ -134,5 +156,4 @@ const AudioBox = styled.div`
   ${flexCenter}
   width: 100%;
   height: 120px;
-  font-size: 12px;
 `

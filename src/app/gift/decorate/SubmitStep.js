@@ -37,7 +37,7 @@ export default function SubmitStep({ moveToNextStep }) {
             placeholder="나의 닉네임은?"
           />
         </InputWrapper>
-        <InputTypo>한글 혹은 영어로 된 3~8자 닉네임을 설정해주세요.</InputTypo>
+        <InputTypo>한글 혹은 영어로 된 2~8자 닉네임을 설정해주세요.</InputTypo>
       </InnerBox>
       <ButtonWrapper>
         <Button disabled={friendName.length < 2} onClick={onSubmitHandler}>

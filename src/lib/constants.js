@@ -9,7 +9,7 @@ export const ERROR_MESSAGE = {
       color: ({ theme }) => theme.colors.green,
     },
     invalid: {
-      message: '한글 혹은 영어로 된 2 ~ 16자 닉네임을 설정해주세요.',
+      message: '한글 혹은 영어로 된 2 ~ 8자 닉네임을 설정해주세요.',
       color: ({ theme }) => theme.colors.red,
     },
     duplicated: {

@@ -11,7 +11,7 @@ import GiftIcon from '@/icons/GiftIcon'
 
 export default function CompleteStep() {
   const router = useRouter()
-  const { giftWrapper: gift } = useGiftStore()
+  const { giftWrapper: gift, nickname } = useGiftStore()
   const imageUrl = `${baseGiftImageUrl}${gift.cover}_${gift.decoration}_${gift.color}.jpg`
 
   return (
@@ -20,7 +20,7 @@ export default function CompleteStep() {
         <SnowBox color={({ theme }) => theme.colors.bgGreen} />
         <GiftHeader
           colors={{ backgroundColor: 'transparent' }}
-          title={`샌디의 \n플리 보따리`}
+          title={`${nickname}의 \n플리 보따리`}
           subTitle={`당신이 보내준 보따리 덕분에 \n올 겨울이 따듯해졌어요.`}
           hideIcon
           hideButton

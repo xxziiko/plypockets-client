@@ -47,9 +47,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     setIsViewText(true)
-  }, [])
 
-  useEffect(() => {
     if (userInfo?.userId) {
       getPlaylist(userInfo.userId).then((res) => {
         // console.log('res', res)
