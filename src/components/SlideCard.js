@@ -2,13 +2,10 @@ import styled from 'styled-components'
 import { flexAlign, flexCenter, flexDirection } from '@/styles/common'
 import AlbumImage from './AlbumImage'
 import dayjs from 'dayjs'
-import TreeIcon from '@/icons/TreeIcon'
 import ProgressIcon from '@/icons/ProgressIcon'
 
 export default function SlideCard(props) {
   const { list, audioRefs, index } = props
-
-  console.log('list', list)
 
   return (
     <Card>
@@ -100,8 +97,6 @@ const Content = styled.div`
   height: 100%;
   overflow: auto;
   color: var(--text_basic, var(--text_basic, #323232));
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
   font-size: 12px;
   font-weight: 500;
   line-height: 150%; /* 18px */
@@ -156,13 +151,8 @@ const TitleBox = styled.div`
   ${flexCenter}
 `
 
-const Box = styled.div`
-  ${flexCenter}
-  height: 374px;
-  font-size: 12px;
-`
 const AudioBox = styled.div`
   ${flexCenter}
   width: 100%;
-  height: 120px;
+  height: 100px;
 `

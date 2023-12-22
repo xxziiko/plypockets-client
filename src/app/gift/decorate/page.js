@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { GiftHeader } from '@/components'
@@ -16,6 +16,7 @@ export default function DecoratePage() {
   const router = useRouter()
   const { nickname } = useGiftStore()
   const [step, setStep] = useState(0)
+  const [hideIcon, setHideIcon] = useState(false)
 
   const titles = [`선물 포장하기`, `${nickname}의 \n플리 보따리`]
   const subTitles = [
@@ -27,12 +28,16 @@ export default function DecoratePage() {
     setStep(step + 1)
   }
 
+  useEffect(() => {
+    step === 1 && setHideIcon(true)
+  }, [step])
+
   return (
     <Style.Box>
       <GiftHeader
         title={titles[step]}
         subTitle={subTitles[step]}
-        hideIcon={step === 1}
+        hideIcon={hideIcon}
         colors={{
           backgroundColor: theme.colors.brown,
           title: theme.colors.white,

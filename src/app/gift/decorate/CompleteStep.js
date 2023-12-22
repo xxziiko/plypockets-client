@@ -74,6 +74,7 @@ const Box = styled.div`
   background-repeat: no-repeat;
   background-position: center bottom;
   background-size: contain;
+  animation: ${({ theme }) => theme.animation.fadeIn} 2s;
 `
 
 const ContentContainer = styled.div`

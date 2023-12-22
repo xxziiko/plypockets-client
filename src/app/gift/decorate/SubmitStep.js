@@ -54,7 +54,7 @@ const Box = styled.div`
   justify-content: space-between;
   height: 100%;
   align-items: center;
-  animation: ${({ theme }) => theme.animation.fadeIn} 2s;
+  animation: ${({ theme }) => theme.animation.fadeIn} 1s;
 `
 
 const InnerBox = styled.div`

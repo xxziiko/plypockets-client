@@ -23,7 +23,6 @@ AxiosInstance.interceptors.response.use(
   },
   (error) => {
     if (!error.response) {
-      console.log(error)
       window.location.href = '/error'
     }
 
