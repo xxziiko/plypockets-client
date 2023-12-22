@@ -48,8 +48,8 @@ export default function Main({ params }) {
       return
     }
 
+    sessionStorage.removeItem('user-storage')
     if (!userInfo.nickname) {
-      sessionStorage.removeItem('user-storage')
       setNickname(decodedParams)
       getBoxes(decodedParams).then((res) => {
         // console.log(res)
