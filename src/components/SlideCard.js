@@ -1,11 +1,14 @@
 import styled from 'styled-components'
-import { flexAlign, flexCenter } from '@/styles/common'
+import { flexAlign, flexCenter, flexDirection } from '@/styles/common'
 import AlbumImage from './AlbumImage'
 import dayjs from 'dayjs'
 import TreeIcon from '@/icons/TreeIcon'
+import ProgressIcon from '@/icons/ProgressIcon'
 
 export default function SlideCard(props) {
   const { list, audioRefs, index } = props
+
+  console.log('list', list)
 
   return (
     <Card>
@@ -28,7 +31,7 @@ export default function SlideCard(props) {
               </TitleBox>
             ) : (
               <TitleBox>
-                <DefaultText style={{ fontWeight: 500 }}>
+                <DefaultText style={{ fontSize: '14px' }}>
                   {list?.title}
                 </DefaultText>
                 <DefaultText>{list?.artistName}</DefaultText>
@@ -40,7 +43,11 @@ export default function SlideCard(props) {
 
       {!list?.imageUrl && (
         <AudioBox>
-          <TreeIcon />
+          <ProgressIcon
+            firstStep="#00916F"
+            secondStep="#00916F"
+            lastStep="#F84A68"
+          />
         </AudioBox>
       )}
 
@@ -144,7 +151,9 @@ const BordText = styled.p`
 `
 
 const TitleBox = styled.div`
-  text-align: center;
+  flex-direction: column;
+  min-height: 30px;
+  ${flexCenter}
 `
 
 const Box = styled.div`
