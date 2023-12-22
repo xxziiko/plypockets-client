@@ -20,19 +20,25 @@ export default function SlideCard(props) {
             </AlbumInfo>
           </div>
 
-          <div>
-            <audio
-              id={`card-${index}`}
-              controls
-              volume="0.5"
-              ref={(ref) => (audioRefs.current[index] = ref)}
-            >
-              <source src={list.previewUrl} type="audio/mp3" />
-            </audio>
-          </div>
+          {list?.previewUrl ? (
+            <div>
+              <audio
+                id={`card-${index}`}
+                controls
+                volume="0.5"
+                ref={(ref) => (audioRefs.current[index] = ref)}
+              >
+                <source src={list.previewUrl} type="audio/mp3" />
+              </audio>
+            </div>
+          ) : (
+            <AudioBox>미리듣기를 제공하지 않는 노래</AudioBox>
+          )}
         </>
       ) : (
-        <Box />
+        <>
+          <Box>노래를 선물하지 않음</Box>
+        </>
       )}
 
       <FriendName>{list.friendname}</FriendName>
@@ -120,5 +126,13 @@ const TitleBox = styled.div`
 `
 
 const Box = styled.div`
-  height: 254px;
+  ${flexCenter}
+  height: 374px;
+  font-size: 12px;
+`
+const AudioBox = styled.div`
+  ${flexCenter}
+  width: 100%;
+  height: 120px;
+  font-size: 12px;
 `
