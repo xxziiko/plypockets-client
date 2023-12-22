@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { useRouter } from 'next/navigation'
@@ -5,10 +6,12 @@ import { useGiftStore } from '@/stores/gift'
 
 import { Typography } from '@/components'
 import { DefaultButton } from '@/components'
+import { flexAlign, flexCenter } from '@/styles/common'
 
 const SelectedSong = ({ data }) => {
   const router = useRouter()
   const { setSpotifyId } = useGiftStore()
+  const audioRefs = useRef()
 
   const { spotifyId, artistName, title, albumName, imageUrl, previewUrl } = data
 
@@ -17,6 +20,13 @@ const SelectedSong = ({ data }) => {
     router.push('/gift/writing', undefined, { shallow: true })
   }
 
+  useEffect(() => {
+    if (audioRefs.current && previewUrl) {
+      audioRefs.current.volume = 0.5
+      audioRefs.current?.play()
+    }
+  }, [spotifyId])
+
   return (
     <Container>
       <BackgroundImage imageUrl={imageUrl} />
@@ -24,7 +34,6 @@ const SelectedSong = ({ data }) => {
       <Typography color={'#111'} fontSize={'14px'} weight={500} spacing={-0.56}>
         {title}
       </Typography>
-
       <Typography
         color={'#323232'}
         fontSize={'12px'}
@@ -34,14 +43,26 @@ const SelectedSong = ({ data }) => {
         {artistName}
       </Typography>
 
-      <audio controls autoplay>
-        <source src={previewUrl} type="audio/mpeg" />
-      </audio>
+      {previewUrl ? (
+        <audio controls ref={audioRefs}>
+          <source src={previewUrl} type="audio/mpeg" volume="0.5" />
+        </audio>
+      ) : (
+        <AudioBox>
+          <DefaultText>이 노래는 미리 들을 수 없어요!</DefaultText>
+        </AudioBox>
+      )}
 
-      <Typography color={'#111'} fontSize={'16px'} weight={700} spacing={-0.64}>
-        {albumName}
-      </Typography>
-
+      <AlbumInfo>
+        <Typography
+          color={'#111'}
+          fontSize={'16px'}
+          weight={700}
+          spacing={-0.64}
+        >
+          {albumName}
+        </Typography>
+      </AlbumInfo>
       <ButtonWrapper>
         <DefaultButton
           command="다음으로"
@@ -99,4 +120,25 @@ const ButtonWrapper = styled.div`
   position: absolute;
   bottom: 48px;
   display: flex;
+`
+
+const AlbumInfo = styled.div`
+  text-align: center;
+  width: 80%;
+`
+const AudioBox = styled.div`
+  ${flexCenter}
+  width: 100%;
+  /* height: 80px; */
+`
+const DefaultText = styled.div`
+  color: var(--text_basic, var(--text_basic, #323232));
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.48px;
+  gap: 8px;
+
+  ${flexAlign}
 `

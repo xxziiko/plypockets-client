@@ -22,15 +22,6 @@ export default function ProductDetail() {
 
     setCurrentIndex(newIndex)
     pauseAudio(previousIdx)
-
-    // 주석 해제 시 자동재생
-    // playAudio(newIndex)
-  }
-
-  const playAudio = (index) => {
-    if (audioRefs.current[index]) {
-      audioRefs.current[index].play()
-    }
   }
 
   const pauseAudio = (index) => {
