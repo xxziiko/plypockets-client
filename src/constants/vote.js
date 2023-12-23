@@ -1,6 +1,6 @@
 export const voteDatas = [
   {
-    id: 1,
+    id: 2,
     topic:
       '글을 읽으며 가장 끌리는 와인은 무엇이었나요? 가장 마시고 싶은 와인에 투표해 보세요!',
     datas: [
@@ -12,7 +12,7 @@ export const voteDatas = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     topic:
       '글을 읽으며 가장 궁금한 장식품은 무엇이었나요? 크리스마스에 집에 두고 싶은 아이템을 골라보세요!',
     datas: [
@@ -24,7 +24,7 @@ export const voteDatas = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     topic:
       '글을 읽으며 가장 기대되는 순간은 언제였나요? 이건 해봐도 좋겠다! 싶은 계획을 골라보세요!',
     datas: [

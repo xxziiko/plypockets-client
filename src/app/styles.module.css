@@ -1,0 +1,65 @@
+.layout {
+  width: 100%;
+  max-width: 1200px;
+  height: 100dvh;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 949px) {
+  .layout {
+    justify-content: center;
+  }
+  .mountain {
+    display: none;
+  }
+}
+
+.main {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-width: 360px;
+  max-width: 390px;
+  width: 100vw;
+  height: 100%;
+  z-index: 0;
+  animation: slideInFromBottom 1s;
+  background-color: rgb(255, 255, 255);
+}
+
+.main::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .main {
+    margin-right: 32px;
+    z-index: 0;
+  }
+}
+
+.mountain {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  z-index: -100;
+  height: 275px;
+  width: 565px;
+}

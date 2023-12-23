@@ -1,7 +1,8 @@
 'use client'
 
 import { usePathname, useRouter } from 'next/navigation'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
 import {
   DefaultButton,
   RoundBox,
@@ -35,30 +36,11 @@ import { useContentsInfo } from '@/hooks/useContentsInfo'
 import { useButtonStore } from '@/stores/buttons'
 import { useUserInfoStore } from '@/stores/userInfo'
 
-// TODO: metadata
+import Footer from '@/components/Footer'
 
-// export async function generateMetadata({ params, searchParams }, parent) {
-//   const { id } = params
-//   const url = usePathname(`/contents/${id}`)
+import ToastPopUp from '@/components/ToastPopUp'
 
-//   const contentData = contentsDatas[id - 1]
-//   const faqData = faqDatas[id - 1]
-//   const { keywords } = keywordDatas[id - 1]
-
-//   return {
-//     title: contentData.title,
-//     description: contentData.subTitle,
-//     keywords: keywords,
-//     author: contentData.author,
-//     openGraph: {
-//       title: contentData.title,
-//       description: contentData.subTitle,
-//       url: url,
-//       image: contentData.paragraphs[0].image,
-//       type: 'website',
-//     },
-//   }
-// }
+import ScrollUpButton from '@/components/ScrollUpButton'
 
 export default function ContentDetailPage({ params }) {
   const router = useRouter()
@@ -81,12 +63,11 @@ export default function ContentDetailPage({ params }) {
     handleSendVote,
   } = useContentsInfo(id)
 
-  const contentData = contentsDatas[id - 1]
-  const faqData = faqDatas[id - 1]
-  const { keywords } = keywordDatas[id - 1]
+  const contentData = contentsDatas.find((data) => data.id === Number(id))
+  const faqData = faqDatas.find((data) => data.id === Number(id))
+  const { keywords } = keywordDatas.find((data) => data.id === Number(id))
 
-  const voteData =
-    Number(id) < voteDatas.length + 1 ? voteDatas[id - 1] : undefined
+  const voteData = voteDatas.find((data) => data.id === Number(id))
 
   const handleGoBack = () => {
     // TODO: go back
@@ -94,8 +75,7 @@ export default function ContentDetailPage({ params }) {
   }
 
   return (
-    <>
-      {/* title section */}
+    <Main>
       <ContainerBox style={{ flexDirection: 'row' }}>
         {/* title */}
         <FlexBox style={{ paddingRight: '28px' }}>
@@ -117,8 +97,6 @@ export default function ContentDetailPage({ params }) {
           </span>
         </FlexBox>
       </ContainerBox>
-
-      {/* subTitle, author section */}
       <ContainerBox
         style={{
           paddingTop: '8px',
@@ -332,7 +310,7 @@ export default function ContentDetailPage({ params }) {
                 spacing={-0.48}
                 color={'#888888'}
               >
-                {keyword}
+                {`#${keyword}`}
               </Typography>
             </KeywordBox>
           ))}
@@ -368,7 +346,10 @@ export default function ContentDetailPage({ params }) {
             ))}
         </RowScrollBox>
       </ContainerBox>
-    </>
+      <Footer />
+      <ScrollUpButton />
+      <ToastPopUp />
+    </Main>
   )
 }
 
@@ -393,10 +374,29 @@ const dateFormat = (date) => {
   return `${year}년 ${month}월 ${day}일`
 }
 
+const Main = styled.main`
+  position: relative;
+  ${flexDirection}
+
+  background-color: #f9f9f9;
+
+  width: 100%;
+  color: ${({ theme }) => theme.colors.black};
+  animation: ${({ theme }) => css`
+    ${theme.animation.slideInFromBottom} 1s
+  `};
+  padding-top: 32px;
+
+  width: 100%;
+`
+
 const ContainerBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 32px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 const FlexBox = styled.div`

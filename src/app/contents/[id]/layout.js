@@ -1,50 +1,34 @@
-'use client'
+import {
+  contentsDatas,
+  faqDatas,
+  keywordDatas,
+  voteDatas,
+  contentsCardDatas,
+} from '@/constants'
 
-import styled, { css } from 'styled-components'
-import { flexDirection } from '@/styles/common'
+export async function generateMetadata({ params, searchParams }, parent) {
+  const { id } = params
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/contents/${id}`
 
-import Footer from '@/components/Footer'
+  const contentData = contentsDatas.find((data) => data.id === Number(id))
+  const faqData = faqDatas.find((data) => data.id === Number(id))
+  const { keywords } = keywordDatas.find((data) => data.id === Number(id))
 
-import ToastPopUp from '@/components/ToastPopUp'
-
-import ScrollUpButton from '@/components/ScrollUpButton'
-// meta tag for SEO
-
-export default function ContentDetailLayout({ children }) {
-  return (
-    <>
-      <Main>
-        {children}
-        <Footer />
-        <ScrollUpButton />
-        <ToastPopUp />
-      </Main>
-    </>
-  )
+  return {
+    title: contentData.title,
+    description: contentData.subTitle,
+    keywords: keywords,
+    author: contentData.author,
+    openGraph: {
+      title: contentData.title,
+      description: contentData.subTitle,
+      url: url,
+      image: contentData.paragraphs[0].image,
+      type: 'website',
+    },
+  }
 }
 
-const Container = styled.div`
-  position: relative;
-  ${flexDirection}
-
-  background-color: #f9f9f9;
-
-  width: 100%;
-  color: ${({ theme }) => theme.colors.black};
-`
-
-const Main = styled.main`
-  position: relative;
-  ${flexDirection}
-
-  background-color: #f9f9f9;
-
-  width: 100%;
-  color: ${({ theme }) => theme.colors.black};
-  animation: ${({ theme }) => css`
-    ${theme.animation.slideInFromBottom} 1s
-  `};
-  padding-top: 32px;
-
-  width: 100%;
-`
+export default function ContentDetailLayout({ children }) {
+  return <>{children}</>
+}
