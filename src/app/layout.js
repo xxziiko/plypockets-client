@@ -5,6 +5,7 @@ import { Suspense } from 'react'
 
 import Provider from '@/lib/provider'
 import Aside from '@/components/aside'
+import Mountains from '@/components/Mountains'
 
 import Analytics from '@/components/gtmComponent'
 
@@ -26,7 +27,7 @@ export default function RootLayout({ children }) {
           <div className={styles.layout}>
             <main className={styles.main}>{children}</main>
           </div>
-          <Mountain />
+          <Mountains />
         </Provider>
       </body>
     </html>

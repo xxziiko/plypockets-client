@@ -1,6 +1,6 @@
 export const faqDatas = [
   {
-    id: 1,
+    id: 2,
     datas: [
       {
         question: '와인을 선택할 때 어떤 기준을 고려해야 할까요?',
@@ -32,7 +32,7 @@ export const faqDatas = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     datas: [
       {
         question:
@@ -59,7 +59,7 @@ export const faqDatas = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     datas: [
       {
         question: '혼자 보내는 크리스마스 파티를 어떻게 계획할 수 있을까요?',
@@ -87,7 +87,7 @@ export const faqDatas = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     datas: [
       {
         question: '크리스마스 카드에 어떤 내용을 포함해야 할까요?',
@@ -112,7 +112,7 @@ export const faqDatas = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     datas: [
       {
         question: '외향적인 사람들은 크리스마스를 어떻게 보내면 좋을까요?',
@@ -143,7 +143,7 @@ export const faqDatas = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     datas: [
       {
         question: '집에서 크리스마스를 보내는 것이 지루하지 않을까요?',

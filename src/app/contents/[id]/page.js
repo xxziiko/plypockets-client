@@ -81,12 +81,16 @@ export default function ContentDetailPage({ params }) {
     handleSendVote,
   } = useContentsInfo(id)
 
-  const contentData = contentsDatas[id - 1]
-  const faqData = faqDatas[id - 1]
-  const { keywords } = keywordDatas[id - 1]
+  const contentData = contentsDatas.find((data) => data.id === Number(id))
+  const faqData = faqDatas.find((data) => data.id === Number(id))
+  const { keywords } = keywordDatas.find((data) => data.id === Number(id))
 
-  const voteData =
-    Number(id) < voteDatas.length + 1 ? voteDatas[id - 1] : undefined
+  const voteData = voteDatas.find((data) => data.id === Number(id))
+
+  console.log('contentData', contentData)
+  console.log('faqData', faqData)
+  console.log('keywords', keywords)
+  console.log('voteData', voteData)
 
   const handleGoBack = () => {
     // TODO: go back
@@ -397,6 +401,9 @@ const ContainerBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 32px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 const FlexBox = styled.div`

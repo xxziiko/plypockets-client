@@ -1,6 +1,6 @@
 export const keywordDatas = [
   {
-    id: 1,
+    id: 2,
     keywords: [
       '#크리스마스_와인',
       '#기념일',
@@ -14,7 +14,7 @@ export const keywordDatas = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     keywords: [
       '#크리스마스_장식',
       '#기념품',
@@ -27,7 +27,7 @@ export const keywordDatas = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     keywords: [
       '#나홀로크리스마스',
       '#크리스마스_혼자파티',
@@ -37,7 +37,7 @@ export const keywordDatas = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     keywords: [
       '#크리스마스_카드',
       '#크리스마스카드',
@@ -48,7 +48,7 @@ export const keywordDatas = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     keywords: [
       '#크리스마스_파티',
       '#크리스마스_명소',
@@ -60,7 +60,7 @@ export const keywordDatas = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     keywords: [
       '#크리스마스_파티',
       '#크리스마스_명소',
