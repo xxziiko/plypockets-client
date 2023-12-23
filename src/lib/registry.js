@@ -4,6 +4,9 @@ import React, { useState } from 'react'
 import { useServerInsertedHTML } from 'next/navigation'
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
 
+import GlobalStyle from '@/styles/GlobalStyle'
+import theme from '@/styles/theme'
+
 export default function StyledComponentsRegistry({ children }) {
   // Only create stylesheet once with lazy initial state
   // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
