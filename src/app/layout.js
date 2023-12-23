@@ -14,7 +14,7 @@ const seo = {
   title: '올 한해 마무리 크리스마스 플리보따리로',
   description:
     '연말을 따스하게 만들어줄 비밀편지들로 특별한 순간, 소중한 사람에게 전하고 싶은 마음을 선물보따리로 전하세요.',
-  image: 'https://www.plypockets.com/image.jpg',
+  image: process.env.NEXT_PUBLIC_IMAGE_URL + '/og-image.jpg',
   url: 'https://www.plypockets.com',
   site_name: '올 한해 마무리 크리스마스 플리보따리로',
   locale: 'ko_KR',
