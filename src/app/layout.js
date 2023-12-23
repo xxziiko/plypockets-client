@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 import { Suspense } from 'react'
 
 import Provider from '@/lib/provider'
-import Aside from '@/components/aside'
+import Aside from '@/components/Aside'
 import Mountains from '@/components/Mountains'
 
 import Analytics from '@/components/gtmComponent'
