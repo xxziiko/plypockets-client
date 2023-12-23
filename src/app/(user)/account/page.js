@@ -41,7 +41,11 @@ export default function Login() {
 
   const onChange = (e) => {
     const { name, value } = e.target
-    setUserInputValue((prevUserInfo) => ({ ...prevUserInfo, [name]: value }))
+    setUserInputValue((prevUserInfo) => ({
+      ...prevUserInfo,
+      [name]: value.replace(/(\s*)/g, ''),
+    }))
+    // console.log(name, value)
   }
 
   useEffect(() => {
