@@ -9,12 +9,6 @@ import Mountains from '@/components/Mountains'
 
 import Analytics from '@/components/gtmComponent'
 
-import {
-  DESKTOP_WIDTH,
-  MOBILE_MAX_WIDTH,
-  MOBILE_MIN_WIDTH,
-} from '@/lib/constants'
-
 export default function RootLayout({ children }) {
   return (
     <html>
