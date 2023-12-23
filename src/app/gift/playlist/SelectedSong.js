@@ -44,9 +44,11 @@ const SelectedSong = ({ data }) => {
       </Typography>
 
       {previewUrl ? (
-        <audio controls ref={audioRefs}>
-          <source src={previewUrl} type="audio/mpeg" volume="0.5" />
-        </audio>
+        <div>
+          <audio controls ref={audioRefs}>
+            <source src={previewUrl} type="audio/mpeg" volume="0.5" />
+          </audio>
+        </div>
       ) : (
         <AudioBox>
           <DefaultText>이 노래는 미리 들을 수 없어요!</DefaultText>
@@ -87,6 +89,7 @@ const Container = styled.div`
   justify-content: flex-start;
   gap: 16px;
   margin-top: 30px;
+  overflow-y: auto;
   animation: ${({ theme }) => theme.animation.fadeIn} 0.5s;
 `
 
@@ -117,8 +120,6 @@ const AlbumImage = styled.img`
 `
 
 const ButtonWrapper = styled.div`
-  position: absolute;
-  bottom: 48px;
   display: flex;
 `
 
