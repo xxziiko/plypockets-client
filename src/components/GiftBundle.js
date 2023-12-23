@@ -47,7 +47,7 @@ const GiftBox = styled.div`
   flex-wrap: wrap-reverse;
   width: 100%;
   max-height: 75%;
-  overflow: auto;
+  overflow-y: scroll;
   z-index: 0;
 
   /* border: 1px solid red; */

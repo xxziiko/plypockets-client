@@ -77,6 +77,7 @@ const Input = styled.input`
   width: 100%;
   height: 40px;
   flex-shrink: 0;
+  font-size: 16px;
   cursor: ${(props) => (props.readOnly ? 'pointer' : 'text')};
 
   &::placeholder {
