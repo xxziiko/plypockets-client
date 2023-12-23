@@ -23,8 +23,8 @@ export default function Main({ params }) {
   const { setIsCopyClipboard, isCopyClipboard } = useButtonStore()
   const { setNickname } = useGiftStore()
   const router = useRouter()
-  const decodedParams = decodeURI(params.nickname)
   const [isAuth, setIsAuth] = useState(false)
+  const [decodedParams, setDecodedParams] = useState('')
   const [isClickable, setIsClickable] = useState(false)
   const [bundles, setBundles] = useState([])
 
@@ -37,7 +37,9 @@ export default function Main({ params }) {
   }
 
   useEffect(() => {
-    if (userInfo?.nickname === decodedParams) {
+    setDecodedParams(decodeURI(params.nickname))
+
+    if (userInfo?.nickname === decodeURI(params.nickname)) {
       setIsAuth(true)
       getPlaylist(userInfo.userId).then((res) => {
         if (res) {
@@ -49,10 +51,10 @@ export default function Main({ params }) {
     }
 
     sessionStorage.removeItem('user-storage')
-    if (!userInfo.nickname) {
-      setNickname(decodedParams)
-      getBoxes(decodedParams).then((res) => {
-        // console.log(res)
+
+    if (!userInfo?.nickname) {
+      setNickname(decodeURI(params.nickname))
+      getBoxes(decodeURI(params.nickname)).then((res) => {
         if (res) setBundles(res.results)
       })
     }
