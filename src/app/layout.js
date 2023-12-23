@@ -1,15 +1,15 @@
 import { Suspense } from 'react'
 
 import Provider from '@/lib/provider'
-// import { flexAlign } from '@/styles/common'
+import { flexAlign } from '@/styles/common'
 
 import Analytics from '@/components/gtmComponent'
 
-// import {
-//   DESKTOP_WIDTH,
-//   MOBILE_MAX_WIDTH,
-//   MOBILE_MIN_WIDTH,
-// } from '@/lib/constants'
+import {
+  DESKTOP_WIDTH,
+  MOBILE_MAX_WIDTH,
+  MOBILE_MIN_WIDTH,
+} from '@/lib/constants'
 
 export default function RootLayout({ children }) {
   return (
@@ -57,67 +57,73 @@ export default function RootLayout({ children }) {
   )
 }
 
-// const Html = styled.html`
-//   display: flex;
-//   justify-content: center;
-// `
+export const DESKTOP_WIDTH = 950
+export const MOBILE_MIN_WIDTH = 360
+export const MOBILE_MAX_WIDTH = 390
 
-// const Body = styled.body`
-//   width: 100vw;
-//   position: relative;
-//   display: flex;
-//   justify-content: center;
-//   overflow-y: auto;
-// `
+const Html = styled.html`
+  display: flex;
+  justify-content: center;
+`
 
-// const Layout = styled.div`
-//   width: 100%;
-//   max-width: 1200px;
-//   height: 100vh;
-//   display: flex;
-//   justify-content: flex-end;
-//   @media screen and (max-width: ${DESKTOP_WIDTH - 1}px) {
-//     justify-content: center;
-//   }
-// `
+const Body = styled.body`
+  width: 100vw;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+`
 
-// const Main = styled.main`
-//   position: relative;
-//   flex-direction: column;
-//   min-width: ${MOBILE_MIN_WIDTH}px;
-//   max-width: ${MOBILE_MAX_WIDTH}px;
-//   @media screen and (min-width: ${DESKTOP_WIDTH}px) {
-//     margin-right: 32px;
-//     z-index: 0;
-//   }
+const Layout = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  @media screen and (max-width: ${DESKTOP_WIDTH - 1}px) {
+    justify-content: center;
+  }
+`
 
-//   width: 100vw;
-//   height: 100vh;
-//   z-index: 0;
-//   animation: ${({ theme }) => css`
-//     ${theme.animation.slideInFromBottom} 1s
-//   `};
-//   ${flexAlign};
-//   background-color: #ffffff;
+const Main = styled.main`
+  position: relative;
+  display: flex;
+  align-items: center;
 
-//   ::-webkit-scrollbar {
-//     display: none;
-//   }
-// `
+  flex-direction: column;
+  min-width: ${MOBILE_MIN_WIDTH}px;
+  max-width: ${MOBILE_MAX_WIDTH}px;
+  @media screen and (min-width: ${DESKTOP_WIDTH}px) {
+    margin-right: 32px;
+    z-index: 0;
+  }
 
-// const Mountain = styled.div`
-//   position: fixed;
-//   bottom: 0;
-//   left: 50%;
-//   margin-left: ${({ idx }) => idx * (583 / 2) - 250}px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  animation: ${({ theme }) => css`
+    ${theme.animation.slideInFromBottom} 1s
+  `};
+  background-color: #ffffff;
 
-//   display: flex;
-//   z-index: -100;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`
 
-//   gap: 0px;
-//   overflow: hidden;
+const Mountain = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  margin-left: ${({ idx }) => idx * (583 / 2) - 250}px;
 
-//   @media screen and (max-width: ${DESKTOP_WIDTH - 1}px) {
-//     display: none;
-//   }
-// `
+  display: flex;
+  z-index: -100;
+
+  gap: 0px;
+  overflow: hidden;
+
+  @media screen and (max-width: ${DESKTOP_WIDTH - 1}px) {
+    display: none;
+  }
+`
