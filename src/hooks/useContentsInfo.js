@@ -29,7 +29,6 @@ export const useContentsInfo = (contentId) => {
     try {
       const contentsData = await getContentsInfo(contentId)
       const { viewCnt, likeCnt, totalVoteCnt } = contentsData.results
-      console.log(contentsData.results)
 
       setViewCount(viewCnt)
       setLikeCount(likeCnt)
