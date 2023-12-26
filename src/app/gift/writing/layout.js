@@ -16,7 +16,7 @@ export default function WritingLayout({ children }) {
   }
 
   const handleButton = () => {
-    if (!!letter.length) setIsAlert(true)
+    if (letter.length) setIsAlert(true)
     else router.back()
   }
 
@@ -31,17 +31,15 @@ export default function WritingLayout({ children }) {
       setIsAlert(true)
     }
 
-    if (!!letter.length) {
-      history.pushState(null, '', location.href)
-      window.addEventListener('popstate', preventGoBack)
-      window.addEventListener('beforeunload', handleBeforeUnload)
-    }
+    history.pushState(null, '', location.href)
+    window.addEventListener('popstate', preventGoBack)
+    window.addEventListener('beforeunload', handleBeforeUnload)
 
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
       window.removeEventListener('popstate', preventGoBack)
     }
-  }, [letter])
+  }, [])
 
   return (
     <>
